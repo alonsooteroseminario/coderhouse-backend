@@ -49,9 +49,9 @@ const main = async () => {
     console.log(await manejadorDeArchivos.guardar("Producto3", 300, "https://romualdfons.com/wp-content/uploads/2017/03/QU%C3%89-ES-UN-DOMINIO.png"));
     console.log("Leer: ", await manejadorDeArchivos.leer());
 
-    setTimeout( async () => {
-        await manejadorDeArchivos.borrar();
-    }, 5000);
+    // setTimeout( async () => {
+    //     await manejadorDeArchivos.borrar();
+    // }, 5000);
     
     // console.log("Leer: ", await manejadorDeArchivos.leer());
 }
