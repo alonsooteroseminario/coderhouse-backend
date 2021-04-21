@@ -5,8 +5,14 @@ class Product {
 
     add (data) {
         if(data.title === "" || typeof data.title === "undefined") return false;
+        if(data.price === "" || typeof data.price === "undefined") return false;
         data.id = PRODUCTS_DB.length + 1;
-        PRODUCTS_DB.push(data);
+        PRODUCTS_DB.push({
+            id: data.id,
+            title: data.title,
+            price: data.price,
+            thumbnail: data.thumbnail,
+        });
         return true;
     }
 

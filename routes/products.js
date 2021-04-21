@@ -27,9 +27,10 @@ router.get("/", (req, res) => {
     });
   });
   
-  router.post("", (req, res) => {
+  router.post("/", (req, res) => {
     const data = req.body;
     if(product.add(data)) {
+      if (data.form === "1") return res.redirect('http://localhost:8080/web');
       res.status(201).json(data);
     }
     res.status(400).send();
