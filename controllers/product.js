@@ -10,7 +10,7 @@ class Product {
         PRODUCTS_DB.push({
             id: data.id,
             title: data.title,
-            price: data.price,
+            price: parseInt(data.price),
             thumbnail: data.thumbnail,
         });
         return true;
@@ -29,10 +29,11 @@ class Product {
         PRODUCTS_DB = PRODUCTS_DB.map( (producto) => {
             if ( producto.id === parseInt(id) ) {
                 producto.title = data.title
-                producto.price = data.price
+                producto.price = parseInt(data.price)
             }
             return producto;
         });
+        return true;
     }
 
     remove(id) {

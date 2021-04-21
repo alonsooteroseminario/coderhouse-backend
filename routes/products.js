@@ -47,8 +47,9 @@ router.get("/", (req, res) => {
   
   router.delete("/:id", (req, res) => {
     const { id } = req.params;
+    const currentProduct = product.getById(id);
+    res.json(currentProduct);
     product.remove(id);
-    res.send();
   });
 
   module.exports = router;
