@@ -1,0 +1,44 @@
+{{#mytitle}}Vista de Productos{{/mytitle}}
+
+<p>Tabla Dinamica</p>
+
+
+{{#if products}}
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">title</th>
+            <th scope="col">price</th>
+            <th scope="col">thumbnail</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {{#each products}}
+
+            <tr>
+                <th scope="row">{{id}}</th>
+                <td>{{#bold}}{{lowercase ../title}}{{/bold}}</td>
+                <td>{{price}}</td>
+                {{#if thumbnail}}
+                <td>
+
+                    <img class="img-thumbnail" src={{{thumbnail}}} alt="" />
+                </td>
+                {{/if}}
+            </tr>
+
+        {{/each}}
+
+        </tbody>
+    </table>
+
+
+
+{{else}}
+
+    <p>No hay products</p>
+
+{{/if}}
