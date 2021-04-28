@@ -5,10 +5,7 @@ const product = new Product();
 
 router.get("/vista", (req, res) => {
   const products = product.get()
-  res.render('vista', {
-    active: "vista",
-    products: products
-  });
+  res.render('main.pug', { active: "main", products: products });
 });
 
 router.get("/", (req, res) => {
