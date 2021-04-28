@@ -1,0 +1,39 @@
+<p>Tabla Dinamica</p>
+
+<% if (products) { %>
+
+    <table class="table">
+        <thead>
+            <tr>
+            <th scope="col">#</th>
+            <th scope="col">title</th>
+            <th scope="col">price</th>
+            <th scope="col">thumbnail</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <% products.forEach( (products) => { %>
+                
+                <tr>
+
+                    <th scope="row"><%= products.id %></th>
+                    <td><%= products.title %></td>
+                    <td><%= products.price %></td>
+                    <td>
+                        <img class="img-thumbnail" src="<%= products.thumbnail %>" alt="" />
+                    </td>
+    
+                </tr>
+
+
+            <% }); %>
+
+        </tbody>
+    </table>
+
+<% } else { %>
+
+    <p>No hay products</p>
+
+<% } %>

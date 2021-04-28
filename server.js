@@ -1,12 +1,12 @@
 const express = require("express");
-const pug = require('pug');
+const ejs = require('ejs');
 const port = 8080;
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
 const app = express();
 
 app.set('views', './views');
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
 
 app.use(express.json());
