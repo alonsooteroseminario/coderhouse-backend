@@ -1,0 +1,13 @@
+<h1>Productos</h1>
+
+    {{#if products.length}}
+        <div id='productos'>
+            {{#each products}}
+            <p>{{this.title}}</p>
+            {{/each}}
+        </div>
+    {{else}}
+        <p>nada pra mostrar</p>
+    {{/if}}
+    <input id ='miBoton' type="button" value='boton' >
+
