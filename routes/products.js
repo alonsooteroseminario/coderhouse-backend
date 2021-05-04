@@ -1,7 +1,5 @@
 const express = require('express');
-// import express from 'express';
 const router = express.Router();
-// import Product from '../controllers/product';
 const Product = require("../controllers/product");
 const product = new Product();
 
@@ -37,7 +35,7 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
     const data = req.body;
     if(product.add(data)) {
-      if (data.form === "1") return res.redirect('http://localhost:8080/api/nuevo-producto');
+      if (data.form === "1") return res.redirect('http://localhost:8080/');
       res.status(201).json(data);
     }
     res.status(400).send();
