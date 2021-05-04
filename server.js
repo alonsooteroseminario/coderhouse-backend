@@ -1,9 +1,13 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
-const port = 8080;
 const productRoutes = require("./routes/products");
-const frontRoutes = require('./routes/front');
+// const frontRoutes = require('./routes/front');
+const Product = require("./controllers/product");
+const product = new Product();
+
 const app = express();
+const httpServer = require('http').Server(app);
+const io = require('socket.io')(httpServer);
 
 var hbs = exphbs.create({
   extname: "hbs",
@@ -34,10 +38,33 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use("/api/productos", productRoutes);
+// app.use("/", frontRoutes);
 
-app.use("/api/nuevo-producto", frontRoutes);
+const productos = [];
 
-const server = app.listen(port, () => {
+io.on('connection', (socket) => {
+  console.log('Cliente conectado');
+  const productos = product.get()
+  // socket.emit('productos', products);
+  // socket.on('boton', () => {
+  //   socket.emit('productos', products);
+  // })
+
+  //envie mensajes cuando se conecta
+  socket.emit('mensajes', productos);
+  socket.on('mensaje', data => {
+    productos.push({ 
+      socketid: socket.id,
+      title: data.title,
+      price: data.price,
+      thumbnail: data.thumbnail
+    });
+    io.sockets.emit('mensajes', productos);
+  })
+})
+
+const port = 8080;
+const server = httpServer.listen(port, () => {
   console.log('El servidor esta corriendo en el puerto: ' + server.address().port);
 });
 server.on('error', err => console.log('Error message: ' + err));
