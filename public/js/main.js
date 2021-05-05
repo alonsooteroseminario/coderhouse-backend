@@ -5,13 +5,24 @@ const productoTemplate = Handlebars.compile(prodStrTemplate);
 
 
 document.getElementById('miBoton').addEventListener('click', () => {
-    socket.emit('boton')
+    const producto = {
+        title: document.getElementById('input-title').value,
+        price: document.getElementById('input-price').value,
+        thumbnail: document.getElementById('input-thumbnail').value
+      };
+      socket.emit('boton', producto);
+  
+      document.getElementById('input-title').value = ''
+      document.getElementById('input-price').value = ''
+      document.getElementById('input-thumbnail').value = ''
+      document.getElementById('input-title').focus()
 })
 
-socket.on('productos', async (productos) => {
+
+socket.on('productos', data => {
     const productosHtml = []
-    if (productos.length) {
-        for (const {title, price} of productos) {
+    if (data.length) {
+        for (const {title, price} of data) {
             const elhtml = productoTemplate( {title, price} );
             productosHtml.push(elhtml);
         }
@@ -22,3 +33,17 @@ socket.on('productos', async (productos) => {
         document.getElementById('productos').innerHTML = '<p>nada pra mostrar</p>';
     }
 })
+
+// function addData(e) {
+//     const producto = {
+//       title: document.getElementById('input-title').value,
+//       price: document.getElementById('input-price').value
+//     };
+//     socket.emit('boton', producto);
+
+//     document.getElementById('input-title').value = ''
+//     document.getElementById('input-price').value = ''
+//     document.getElementById('input-title').focus()
+
+//     return false;
+// }

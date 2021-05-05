@@ -1,9 +1,9 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
-const frontRoutes = require('./routes/front');
-const Product = require("./controllers/product");
-const product = new Product();
+// const frontRoutes = require('./routes/front');
+// const Product = require("./controllers/product");
+// const product = new Product();
 
 
 const app = express();
@@ -40,19 +40,22 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 app.use("/api/productos", productRoutes);
-app.use("/api/nuevo-producto", frontRoutes);
+// app.use("/api/nuevo-producto", frontRoutes);
+
+const listaProductos = []
+
+app.get('/api/nuevo-producto', (req, res) => {
+  res.render('nuevo-producto')
+})
 
 
-let mostrados = 0;
-
-io.on('connection', () => {
-  const productos = product.get()
+io.on('connection', socket => {
   console.log('Cliente conectado');
-  socket.emit('productos', productos.slice(0, mostrados))
+  socket.emit('productos', listaProductos)
 
-  socket.on('boton', () => {
-    socket.emit('productos', productos.slice(0, mostrados))
-    mostrados++;
+  socket.on('boton', data => {
+    listaProductos.push(data);
+    io.sockets.emit('productos', listaProductos)
   })
 })
 
