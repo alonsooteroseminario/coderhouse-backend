@@ -1,18 +1,24 @@
 const socket = io.connect();
-const Product = require("../../controllers/product");
-const product = new Product();
 
-const productos = [];
-const input_title = document.getElementById("input_title");
-const input_price = document.getElementById("input_price");
-const input_thumbnail = document.getElementById("input_image");
+const prodStrTemplate = "<li>title: {{title}} - price: {{price}}</li>";
+const productoTemplate = Handlebars.compile(prodStrTemplate);
 
-document.querySelector("button").addEventListener("click", () => {
-    const productos = product.get();
-    socket.emit('mensaje', productos);
+
+document.getElementById('miBoton').addEventListener('click', () => {
+    socket.emit('boton')
 })
 
-socket.on('mensajes', msjs => {
-    const mensajeHTML = msjs.map(msj => `SocketId: ${msj.socketid} -> Mensaje: ${msj.title} + ${msj.price} + ${msj.thumbnail}`).join('<br>')
-    document.querySelector('p').innerHTML = mensajeHTML;
+socket.on('productos', async (productos) => {
+    const productosHtml = []
+    if (productos.length) {
+        for (const {title, price} of productos) {
+            const elhtml = productoTemplate( {title, price} );
+            productosHtml.push(elhtml);
+        }
+        const elhtml = `<ul>${productosHtml.join('')}</ul>`
+        document.getElementById('productos').innerHTML = elhtml;
+    }
+    else{
+        document.getElementById('productos').innerHTML = '<p>nada pra mostrar</p>';
+    }
 })

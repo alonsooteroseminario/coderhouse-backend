@@ -1,0 +1,22 @@
+<form action="/api/productos" method="post" role="form">
+    <div class="form-group">
+        <label for="name">Title</label>
+        <input id="input-title" class="form-control" type="text" name="title">
+    </div>
+    <div class="form-group">
+        <label for="name">Price</label>
+        <input id="input-price" class="form-control" type="number" name="price">
+    </div>
+    <div>
+        <label for="name">Image</label>
+        <input id="input-thumbnail" class="form-control" type="text" name="thumbnail">
+    </div>
+    <input type="hidden" name="form" value="1" />
+    <button id ='miBoton' type="submit" class="btn btn-default">ENVIAR</button>
+</form>>
+{{#if productos}}
+    <h1>Productos</h1>
+    <div id='productos'></div>
+{{else}}
+    <p>No hay products</p>
+{{/if}}

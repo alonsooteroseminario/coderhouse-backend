@@ -21,7 +21,7 @@ router.get("/", (req, res) => {
     res.json(products);
   });
   
-router.get("/:id", (req, res) => {
+  router.get("/:id", (req, res) => {
     const { id } = req.params;
     const currentProduct = product.getById(id)
     if (currentProduct) {
@@ -32,16 +32,16 @@ router.get("/:id", (req, res) => {
     });
   });
   
-router.post("/", (req, res) => {
+  router.post("/", (req, res) => {
     const data = req.body;
     if(product.add(data)) {
-      if (data.form === "1") return res.redirect('http://localhost:8080/');
+      if (data.form === "1") return res.redirect('http://localhost:8080/api/nuevo-producto');
       res.status(201).json(data);
     }
     res.status(400).send();
   });
   
-router.put("/:id", (req, res) => {
+  router.put("/:id", (req, res) => {
     const data = req.body;
     const { id } = req.params;
     if(product.update(id, data)) {
@@ -50,11 +50,11 @@ router.put("/:id", (req, res) => {
     res.status(400).send();
   });
   
-router.delete("/:id", (req, res) => {
+  router.delete("/:id", (req, res) => {
     const { id } = req.params;
     const currentProduct = product.getById(id);
     res.json(currentProduct);
     product.remove(id);
   });
 
-module.exports = router;
+  module.exports = router;
