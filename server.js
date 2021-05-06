@@ -58,7 +58,11 @@ io.on('connection', (socket) => {
     io.sockets.emit('productos', listaProductos.slice(0, mostrados))
   })
 
-
+  socket.emit('messages', messages)
+  socket.on('new-message', data => {
+    messages.push(data)
+    io.sockets.emit('messages', messages)
+  })
 })
 
 

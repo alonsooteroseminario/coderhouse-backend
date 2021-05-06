@@ -52,3 +52,34 @@ socket.on('productos', data => {
     }
 })
 
+socket.on('messages', data => {
+    // console.log(data);
+    render(data);
+});
+
+
+  
+function render(data) {
+
+    const html = data.map((elem, index) => {
+        const hora = new Date();
+        return(`<div style="color:rgb(128,64,0);">
+                <strong style="color:rgb(0,0,255);">${elem.author}</strong>
+                [(${hora.toLocaleDateString()} ${hora.toLocaleTimeString()})]:
+                <em style="color:rgb(0,143,57);">${elem.text}</em> </div>`)
+    }).join(" ");
+    document.getElementById('messages').innerHTML = html;
+}
+
+function addMessage(e) {
+    const mensaje = {
+      author: document.getElementById('username').value,
+      text: document.getElementById('texto').value
+    };
+    socket.emit('new-message', mensaje);
+
+    document.getElementById('texto').value = ''
+    document.getElementById('texto').focus()
+
+    return false;
+}

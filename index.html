@@ -41,7 +41,18 @@
 
     <div id='productos'></div>
 
-
+    <div class="container-fluid mt-3">
+        <h1>Mi App Chat</h1>
+        <hr>
+    
+        <div id="messages"></div>
+    
+        <form class="form-inline" onsubmit="return addMessage(this)" autocomplete="off">
+          <input type="email" id="username" class="form-control my-2 mr-2" placeholder="Tu Nombre">
+          <input type="text" id="texto" class="form-control my-2 mr-2" placeholder="Cuéntanos algo...">
+          <input class="btn btn-primary my-2" type="submit" value="Enviar!">
+        </form>
+      </div>
 
     <script src="/index.js"></script>
 </body>
