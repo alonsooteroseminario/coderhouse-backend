@@ -1,10 +1,7 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
-// const frontRoutes = require('./routes/front');
-// const Product = require("./controllers/product");
-// const product = new Product();
-
+const frontRoutes = require('./routes/front');
 
 const app = express();
 const httpServer = require('http').Server(app);
@@ -37,26 +34,31 @@ app.set('view engine', 'hbs');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(express.static("./public"));
 
 app.use("/api/productos", productRoutes);
-// app.use("/api/nuevo-producto", frontRoutes);
+app.use("/api/nuevo-producto", frontRoutes);
 
+let mostrados = 0
 const listaProductos = []
+const messages = []
 
-app.get('/api/nuevo-producto', (req, res) => {
-  res.render('nuevo-producto')
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root:__dirname })
 })
 
-
-io.on('connection', socket => {
+io.on('connection', (socket) => {
   console.log('Cliente conectado');
   socket.emit('productos', listaProductos)
 
-  socket.on('boton', data => {
+  socket.on('boton', (data) => {
     listaProductos.push(data);
-    io.sockets.emit('productos', listaProductos)
+    console.log('boton presionado');
+    mostrados++
+    io.sockets.emit('productos', listaProductos.slice(0, mostrados))
   })
+
+
 })
 
 
