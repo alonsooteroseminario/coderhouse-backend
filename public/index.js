@@ -78,6 +78,10 @@ function addMessage(e) {
     };
     socket.emit('new-message', mensaje);
 
+    //aqui se debe guardar el nuevoMensaje
+    
+
+
     document.getElementById('texto').value = ''
     document.getElementById('texto').focus()
 

@@ -2,6 +2,8 @@ const express = require("express");
 const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
+const Archivo = require('./archivo');
+const archivo = new Archivo();
 
 const app = express();
 const httpServer = require('http').Server(app);
@@ -41,7 +43,26 @@ app.use("/api/nuevo-producto", frontRoutes);
 
 let mostrados = 0
 const listaProductos = []
-const messages = []
+
+// aqui hay que leer()
+// const messages = [  {
+//   author: "alonsooteroseminario@gmail.com",
+//   text: "Hola, ¿cómo estás?",
+//   id: 1,
+// },
+// {
+//   author: "luis_alo13@hotmail.com",
+//   text: "Todo super bien, ¿tú, como estás?",
+//   id: 2,
+// },
+// {
+//   author: "alonsooteroseminario@gmail.com",
+//   text: "Genial, yo también muy bien",
+//   id: 3,
+// }];
+
+let messages = [];
+messages = archivo.leer();
 
 app.get('/', (req, res) => {
   res.sendFile('index.html', { root:__dirname })
@@ -59,8 +80,12 @@ io.on('connection', (socket) => {
   })
 
   socket.emit('messages', messages)
+
+
   socket.on('new-message', data => {
     messages.push(data)
+    // aqui hay que guardar(data.author, data.text)
+    archivo.guardar(data.author, data.text)
     io.sockets.emit('messages', messages)
   })
 })
