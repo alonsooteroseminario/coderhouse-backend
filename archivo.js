@@ -23,12 +23,13 @@ class Archivo {
 
     async guardar (author, text) {
         try {
-            const mensajes = await this.leer()
+            let mensajes = await this.leer()
             const nuevoMensaje = {
                 author,
                 text,
-                id: mensajes.length + 1,
+                id: mensajes.length + 1
             };
+            nuevoMensaje.date = new Date().toLocaleString();
             mensajes.push(nuevoMensaje);
             await fs.promises.writeFile(this.filepath, JSON.stringify(mensajes, null, 2));
             return `Se ha agregado el author ${author}`;
@@ -41,22 +42,4 @@ class Archivo {
 }
 
 module.exports = Archivo;
-
-// const mainLeer = async () => {
-//     const manejadorDeArchivos = new Archivo();
-//     const salida = await manejadorDeArchivos.leer();
-//     console.log("Leer: ", salida);
-//     return salida;
-// }
-
-// const mainGuardar = async (author, text) => {
-//     const manejadorDeArchivos = new Archivo();
-
-//     console.log(await manejadorDeArchivos.guardar(author, text));
-//     // console.log("Leer: ", await manejadorDeArchivos.leer());
-// }
-
-// module.exports = {
-//     mainLeer, 
-//     mainGuardar
-// };
+// export default Archivo;

@@ -62,10 +62,9 @@ socket.on('messages', data => {
 function render(data) {
 
     const html = data.map((elem, index) => {
-        const hora = new Date();
         return(`<div style="color:rgb(128,64,0);">
                 <strong style="color:rgb(0,0,255);">${elem.author}</strong>
-                [(${hora.toLocaleDateString()} ${hora.toLocaleTimeString()})]:
+                [(${elem.date})]:
                 <em style="color:rgb(0,143,57);">${elem.text}</em> </div>`)
     }).join(" ");
     document.getElementById('messages').innerHTML = html;
@@ -77,11 +76,6 @@ function addMessage(e) {
       text: document.getElementById('texto').value
     };
     socket.emit('new-message', mensaje);
-
-    //aqui se debe guardar el nuevoMensaje
-    
-
-
     document.getElementById('texto').value = ''
     document.getElementById('texto').focus()
 

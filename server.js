@@ -3,11 +3,24 @@ const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
 const Archivo = require('./archivo');
+
+// import express from 'express';
+// import exphbs from 'express-handlebars';
+// import { Server as HttpServer } from 'http';
+// import { Server as IOServer } from 'socket.io';
+// import productRoutes from './routes/products';
+// import frontRoutes from './routes/front';
+// import Archivo from './archivo.js';
+
 const archivo = new Archivo();
 
 const app = express();
 const httpServer = require('http').Server(app);
 const io = require('socket.io')(httpServer);
+// const httpServer = new HttpServer(app);
+// const io = new IOServer(httpServer);
+
+
 
 var hbs = exphbs.create({
   extname: "hbs",
@@ -44,31 +57,11 @@ app.use("/api/nuevo-producto", frontRoutes);
 let mostrados = 0
 const listaProductos = []
 
-// aqui hay que leer()
-// const messages = [  {
-//   author: "alonsooteroseminario@gmail.com",
-//   text: "Hola, ¿cómo estás?",
-//   id: 1,
-// },
-// {
-//   author: "luis_alo13@hotmail.com",
-//   text: "Todo super bien, ¿tú, como estás?",
-//   id: 2,
-// },
-// {
-//   author: "alonsooteroseminario@gmail.com",
-//   text: "Genial, yo también muy bien",
-//   id: 3,
-// }];
-
-let messages = [];
-messages = archivo.leer();
-
 app.get('/', (req, res) => {
   res.sendFile('index.html', { root:__dirname })
 })
 
-io.on('connection', (socket) => {
+io.on('connection', async (socket) => {
   console.log('Cliente conectado');
   socket.emit('productos', listaProductos)
 
@@ -79,14 +72,13 @@ io.on('connection', (socket) => {
     io.sockets.emit('productos', listaProductos.slice(0, mostrados))
   })
 
-  socket.emit('messages', messages)
+  socket.emit('messages', await archivo.leer())
 
 
-  socket.on('new-message', data => {
-    messages.push(data)
-    // aqui hay que guardar(data.author, data.text)
-    archivo.guardar(data.author, data.text)
-    io.sockets.emit('messages', messages)
+  socket.on('new-message', async (data) => {
+
+    await archivo.guardar(data.author, data.text)
+    io.sockets.emit('messages', await archivo.leer())
   })
 })
 
