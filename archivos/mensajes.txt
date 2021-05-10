@@ -34,5 +34,17 @@
     "text": "como estas tu ?",
     "id": 6,
     "date": "5/10/2021, 4:46:15 PM"
+  },
+  {
+    "author": "luis@yahoo.com",
+    "text": "HOLA!",
+    "id": 7,
+    "date": "5/10/2021, 7:35:12 PM"
+  },
+  {
+    "author": "luis@yahoo.com",
+    "text": "COMP ESTAM TPDPS¡",
+    "id": 8,
+    "date": "5/10/2021, 7:35:19 PM"
   }
 ]
