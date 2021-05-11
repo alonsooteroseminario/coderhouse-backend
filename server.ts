@@ -46,7 +46,7 @@ let mostrados:number = 0
 const listaProductos:any = []
 
 app.get('/', (req:any, res:any) => {
-  res.sendFile('index.html', { root:__dirname })
+  res.sendFile('./public/index.html', { root:__dirname })
 })
 
 io.on('connection', async (socket:any) => {
