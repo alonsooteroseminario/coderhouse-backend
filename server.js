@@ -50,12 +50,6 @@ var hbs = exphbs.create({
     helpers: {
         lowercase: function (s) { return s.toLowerCase(); },
         full_name: function (firstname, lastname) { return firstname + " " + lastname; },
-        bold: function (options) {
-            return '<div class = "mybold">' + options.fn(_this) + "</div>";
-        },
-        mytitle: function (options) {
-            return '<h2 class = "sarasa">' + options.fn(_this) + "</h2>";
-        },
         ifeq: function (a, b, options) {
             if (a == b) {
                 return options.fn(this);
