@@ -2,7 +2,7 @@ const express = require("express");
 const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
-const Archivo = require('./archivo');
+const Archivo = require('./controllers/archivo');
 
 const archivo = new Archivo();
 
@@ -40,7 +40,7 @@ let mostrados:number = 0
 const listaProductos:any = []
 
 app.get('/', (req:any, res:any) => {
-  res.sendFile('./public/index.html', { root:__dirname })
+  res.sendFile('./index.html', { root:__dirname })
 })
 
 io.on('connection', async (socket:any) => {

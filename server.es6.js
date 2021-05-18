@@ -1,9 +1,3 @@
-const express = require("express");
-const exphbs = require('express-handlebars');
-const productRoutes = require("./routes/products");
-const frontRoutes = require('./routes/front');
-const Archivo = require('./archivo');
-
 // import express from 'express';
 // import exphbs from 'express-handlebars';
 // import { Server as HttpServer } from 'http';
@@ -11,7 +5,18 @@ const Archivo = require('./archivo');
 // import productRoutes from './routes/products';
 // import frontRoutes from './routes/front';
 // import Archivo from './archivo.js';
+// import ArchivosDB from './DB/archivoDb'
+// import { sqlite3 as configSqlite } from './DB/config'
 
+const express = require("express");
+const exphbs = require('express-handlebars');
+const productRoutes = require("./routes/products");
+const frontRoutes = require('./routes/front');
+const Archivo = require('./controllers/archivo');
+const { sqlite3:configSqlite } = require('./DB/config');
+const ArchivoDB = require('./DB/archivoDb');
+// const configSqlite = sqlite3;
+const archivoDB = new ArchivoDB(configSqlite);
 const archivo = new Archivo();
 
 const app = express();
@@ -20,20 +25,12 @@ const io = require('socket.io')(httpServer);
 // const httpServer = new HttpServer(app);
 // const io = new IOServer(httpServer);
 
-
-
 var hbs = exphbs.create({
   extname: "hbs",
   defaultLayout: 'main.hbs',
   helpers: {
     lowercase: function (s) { return s.toLowerCase(); },
     full_name: (firstname, lastname) => firstname + " " + lastname,
-    bold: options => {
-      return '<div class = "mybold">' + options.fn(this) + "</div>";
-    },
-    mytitle: options => {
-      return '<h2 class = "sarasa">' + options.fn(this) + "</h2>";
-    },
     ifeq: function(a,b,options) {
       if (a==b) { return options.fn(this);}
       return options.inverse(this);
@@ -58,7 +55,7 @@ let mostrados = 0
 const listaProductos = []
 
 app.get('/', (req, res) => {
-  res.sendFile('./public/index.html', { root:__dirname })
+  res.sendFile('./index.html', { root:__dirname })
 })
 
 io.on('connection', async (socket) => {
@@ -72,13 +69,22 @@ io.on('connection', async (socket) => {
     io.sockets.emit('productos', listaProductos.slice(0, mostrados))
   })
 
-  socket.emit('messages', await archivo.leer())
 
+  // socket.emit('messages', await archivo.leer())
+  socket.emit('messages', await archivoDB.crearTabla() );
 
   socket.on('new-message', async (data) => {
-
-    await archivo.guardar(data.author, data.text)
-    io.sockets.emit('messages', await archivo.leer())
+    let listaMensajes = await archivoDB.listar();
+    const nuevoMensaje = {
+      id: listaMensajes.length + 1,
+      author: data.author,
+      text:data.text
+    };
+    nuevoMensaje.date = new Date().toLocaleString();
+    // await archivo.guardar(data.author, data.text)
+    await archivoDB.insertar(nuevoMensaje);
+    // io.sockets.emit('messages', await archivo.leer())
+    io.sockets.emit('messages', await archivoDB.listar())
   })
 })
 
