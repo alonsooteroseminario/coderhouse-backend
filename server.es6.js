@@ -15,7 +15,6 @@ const frontRoutes = require('./routes/front');
 const Archivo = require('./controllers/archivo');
 const { sqlite3:configSqlite } = require('./DB/config');
 const ArchivoDB = require('./DB/archivoDb');
-// const configSqlite = sqlite3;
 const archivoDB = new ArchivoDB(configSqlite);
 const archivo = new Archivo();
 
