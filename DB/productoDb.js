@@ -11,10 +11,9 @@ class ProductoDB {
       .then(() => {
         return this.knex.schema.createTable('productos', table => {
           table.increments('id').primary();
-          table.string('nombre').notNullable();
-          table.string('codigo').notNullable();
-          table.float('precio');
-          table.integer('stock');
+          table.string('title').notNullable();
+          table.float('price');
+          table.integer('thumbnail');
         })
       })
   }
@@ -26,15 +25,29 @@ class ProductoDB {
   listar() {
     return this.knex('productos').select()
   }
+
+  listarPorId(id) {
+    return this.knex.from('productos').where('id', id).select()
+  }
+
   borrarPorId(id) {
     return this.knex.from('productos').where('id', id).del()
   }
-  actualizarStockPorId(id, nuevoStock) {
-    return this.knex.from('productos').where('id', id).update({ stock: nuevoStock })
+  actualizarPorId(id, data) {
+
+    const nuevoTitle = data.title;
+    const nuevoPrice = data.price;
+    const nuevothumbnail = data.thumbnail;
+
+    return this.knex.from('productos').where('id', id).update({
+      title: nuevoTitle,
+      price: nuevoPrice,
+      thumbnail: nuevothumbnail
+    })
   }
   cerrar() {
     return this.knex.destroy()
   }
 }
 
-export default ProductoDB
+module.exports = ProductoDB;
