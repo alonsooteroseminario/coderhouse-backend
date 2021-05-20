@@ -13,10 +13,10 @@ const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
 const Archivo = require('./controllers/archivo');
-const { sqlite3:configSqlite } = require('./DB/config');
-const ArchivoDB = require('./DB/archivoDb');
+const { sqlite3:configSqlite } = require('../DB/config');
+const ArchivoDB = require('../DB/archivoDb');
 const archivoDB = new ArchivoDB(configSqlite);
-const archivo = new Archivo();
+// const archivo = new Archivo();
 
 const app = express();
 const httpServer = require('http').Server(app);
@@ -47,8 +47,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
-app.use("/api/productos", productRoutes);
-app.use("/api/nuevo-producto", frontRoutes);
+app.use("/productos", productRoutes);
+app.use("/nuevo-producto", frontRoutes);
 
 let mostrados = 0
 const listaProductos = []

@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
+    "start": "nodemon src/server.es6.js",
     "ServerES6toJS5": "node_modules/.bin/babel ./server.es6.js -o ./server.js -w",
     "ServerTStoJS5": "node_modules/.bin/tsc ./server.ts -w --esModuleInterop",
     "dev": ".\\node_modules\\.bin\\webpack ./public/index.js ./server.js ./archivo.js ./routes/front.js ./routes/products.js ./controllers/product.js -o ./bundle.js --mode='development' -w",
