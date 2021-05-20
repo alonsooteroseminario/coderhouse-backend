@@ -1,9 +1,8 @@
 // import fs from 'fs';
 const fs = require("fs");
-
 class Archivo {
     constructor() {
-        this.filepath = './archivos/mensajes.txt'
+        this.filepath = '../../archivos/mensajes.txt'
     }
 
     async leer () {
