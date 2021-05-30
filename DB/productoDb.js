@@ -1,5 +1,8 @@
 // import knex from 'knex'
 const knex = require('knex');
+const mongoose = require('mongoose');
+
+const url = 'mongodb://localhost:27017/ecommerce';
 
 class ProductoDB {
   constructor(config) {

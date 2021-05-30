@@ -16,7 +16,6 @@ const Archivo = require('./controllers/archivo');
 const { sqlite3:configSqlite } = require('../DB/config');
 const ArchivoDB = require('../DB/archivoDb');
 const archivoDB = new ArchivoDB(configSqlite);
-// const archivo = new Archivo();
 
 const app = express();
 const httpServer = require('http').Server(app);
@@ -60,7 +59,6 @@ app.get('/', (req, res) => {
 io.on('connection', async (socket) => {
   console.log('Cliente conectado');
   socket.emit('productos', listaProductos)
-
   socket.on('boton', (data) => {
     listaProductos.push(data);
     console.log('boton presionado');
@@ -68,8 +66,6 @@ io.on('connection', async (socket) => {
     io.sockets.emit('productos', listaProductos.slice(0, mostrados))
   })
 
-
-  // socket.emit('messages', await archivo.leer())
   socket.emit('messages', await archivoDB.crearTabla() );
 
   socket.on('new-message', async (data) => {
@@ -77,12 +73,10 @@ io.on('connection', async (socket) => {
     const nuevoMensaje = {
       id: listaMensajes.length + 1,
       author: data.author,
-      text:data.text
+      text:data.text,
+      date: new Date().toLocaleString()
     };
-    nuevoMensaje.date = new Date().toLocaleString();
-    // await archivo.guardar(data.author, data.text)
     await archivoDB.insertar(nuevoMensaje);
-    // io.sockets.emit('messages', await archivo.leer())
     io.sockets.emit('messages', await archivoDB.listar())
   })
 })
