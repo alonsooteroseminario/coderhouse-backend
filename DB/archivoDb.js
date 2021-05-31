@@ -29,12 +29,18 @@ class ArchivoDB {
   }
 
   crearTabla() {
-    return daoMensajes.create({}, (err,res) => {
+    return daoMensajes.create({
+      id: "",
+      author: "",
+      text:"",
+      date: ""
+    }, (err,res) => {
       if (err) {
         console.log(err);
       }else{
         console.log(res);
       }
+      mongoose.disconnect(err => { console.log('desconectado de la base') })
     });
     // return this.knex.schema.dropTableIfExists('mensajes')
     //   .then(() => {
@@ -48,13 +54,14 @@ class ArchivoDB {
   }
 
   insertar(mensaje) {
-    return daoMensajes.create(mensaje, (err,res) => {
+    return daoMensajes.insert(mensaje, (err,res) => {
       if (err) {
-        console.log(err);
-      }else{
-        console.log(res);
+        console.log(err)
+      } else {
+        console.log(res)
       }
-    });
+      mongoose.disconnect(err => { console.log('desconectado de la base') })
+    })
     // return this.knex('mensajes').insert(mensaje)
   }
 
@@ -65,6 +72,7 @@ class ArchivoDB {
       } else {
         console.log(res)
       }
+      mongoose.disconnect(err => { console.log('desconectado de la base') })
     });
     // return this.knex('mensajes').select()
   }
@@ -75,6 +83,7 @@ class ArchivoDB {
       } else {
         console.log(res)
       }
+      mongoose.disconnect(err => { console.log('desconectado de la base') })
     });
     // return this.knex.from('mensajes').where('id', id).del()
   }
@@ -85,6 +94,7 @@ class ArchivoDB {
       } else {
         console.log(res)
       }
+      mongoose.disconnect(err => { console.log('desconectado de la base') })
     });
     // return this.knex.from('mensajes').where('id', id).update({ text: nuevoText })
   }
