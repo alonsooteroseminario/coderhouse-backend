@@ -66,7 +66,8 @@ io.on('connection', async (socket) => {
     io.sockets.emit('productos', listaProductos.slice(0, mostrados))
   })
 
-  socket.emit('messages', await archivoDB.crearTabla() );
+  // socket.emit('messages', await archivoDB.crearTabla() );
+  socket.emit('messages', await archivoDB.listar())
 
   socket.on('new-message', async (data) => {
     let listaMensajes = await archivoDB.listar();
