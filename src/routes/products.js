@@ -2,21 +2,15 @@
 // import Product from '../controllers/product';
 const express = require('express');
 const router = express.Router();
-const { mysql:configMysql } = require('../../DB/config');
-const ProductoDB = require('../../DB/productoDb');
+const { mysql:configMysql } = require('./../DB/config');
+const ProductoDB = require('./../DB/productoDb');
 const productoDB = new ProductoDB(configMysql);
 const Product = require("../controllers/product");
 const product = new Product();
 
 router.get("/", (req, res) => {
-  const products = product.get()
-  productoDB.crearTabla().then(() => {
-    return productoDB.insertar(products)
-  }).then(() => {
-    return productoDB.listar()
-  }).then((listado) => {
-    console.table(listado)
-  })
+  const products = product.get();
+
   res.render('vista', {
     active: "vista",
     products: products
@@ -31,7 +25,7 @@ router.get("/", (req, res) => {
 router.get("/:id", (req, res) => {
     const { id } = req.params;
     const currentProduct = product.getById(id)
-    // const currentProduct = productoDB.listarPorId(id);
+
     if (currentProduct) {
 
       return res.json(currentProduct);
@@ -50,7 +44,7 @@ router.post("/", (req, res) => {
       res.render('nuevo-producto', {
         products: products
       })
-      productoDB.insertar(products)
+
     }
     res.status(400).send();
   });
@@ -59,7 +53,7 @@ router.put("/:id", (req, res) => {
     const data = req.body;
     const { id } = req.params;
     if(product.update(id, data)) {
-      productoDB.actualizarPorId(id, data)
+
       res.status(201).json(data);
     }
     res.status(400).send();
@@ -69,7 +63,7 @@ router.delete("/:id", (req, res) => {
     const { id } = req.params;
     const currentProduct = product.getById(id)
     product.remove(id);
-    productoDB.borrarPorId(id);
+
     res.json(currentProduct);
   });
 
