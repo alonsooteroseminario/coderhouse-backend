@@ -14,7 +14,6 @@ const express = require("express");
 const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
-const Archivo = require('./controllers/archivo');
 const { sqlite3:configSqlite } = require('./DB/config');
 const ArchivoDB = require('./DB/archivoDb');
 const archivoDB = new ArchivoDB(configSqlite);
@@ -70,7 +69,6 @@ io.on('connection', async (socket) => {
     io.sockets.emit('messages', listaMensajes)
   })
 })
-
 
 const port = 8080;
 const server = httpServer.listen(port, () => {

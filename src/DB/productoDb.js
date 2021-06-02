@@ -14,8 +14,7 @@ const esquemaProducto = new mongoose.Schema({
 const daoProductos = mongoose.model('productos', esquemaProducto);
 
 class ProductoDB {
-  constructor(config) {
-    // this.knex = knex(config)
+  constructor() {
     mongoose.connect(url,{
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -30,26 +29,24 @@ class ProductoDB {
   }
 
   crearTabla() {
-    // return this.knex.schema.dropTableIfExists('productos')
-    //   .then(() => {
-    //     return this.knex.schema.createTable('productos', table => {
-    //       table.increments('id').primary();
-    //       table.string('title').notNullable();
-    //       table.float('price');
-    //       table.integer('thumbnail');
-    //     })
-    //   })
-  }
-
-  insertar(producto) {
-    return daoProductos.create(producto, (err,res) => {
+    return daoProductos.create({}, (err,res) => {
       if (err) {
         console.log(err);
       }else{
         console.log(res);
       }
     });
-    // return this.knex('productos').insert(productos)
+  }
+
+  insertar(productos) {
+    return daoProductos.create(productos, (err,res) => {
+      if (err) {
+        console.log(err);
+      }else{
+        console.log(res);
+        return true;
+      }
+    });
   }
 
   listar() {
@@ -60,7 +57,6 @@ class ProductoDB {
         console.log(res)
       }
     });
-    // return this.knex('productos').select()
   }
 
   listarPorId(id) {
@@ -71,7 +67,6 @@ class ProductoDB {
         console.log(res)
       }
     });
-    // return this.knex.from('productos').where('id', id).select()
   }
 
   borrarPorId(id) {
@@ -82,7 +77,6 @@ class ProductoDB {
         console.log(res)
       }
     });
-    // return this.knex.from('productos').where('id', id).del()
   }
   actualizarPorId(id, data) {
 
@@ -99,18 +93,12 @@ class ProductoDB {
         console.log(err)
       } else {
         console.log(res)
+        return true;
       }
     });
-
-    // return this.knex.from('productos').where('id', id).update({
-    //   title: nuevoTitle,
-    //   price: nuevoPrice,
-    //   thumbnail: nuevothumbnail
-    // })
   }
   cerrar() {
     mongoose.disconnect(err => { console.log('desconectado de la base') });
-    // return this.knex.destroy()
   }
 }
 

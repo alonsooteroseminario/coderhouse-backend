@@ -13,7 +13,7 @@ const esquemaMensaje = new mongoose.Schema({
 const daoMensajes = mongoose.model('mensajes', esquemaMensaje)
 
 class ArchivoDB {
-  constructor(config) {
+  constructor() {
     mongoose.connect(url,{
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -42,7 +42,7 @@ class ArchivoDB {
       if (err) {
         console.log(err);
       }else{
-        console.log(res);
+        // console.log(res);
       }
     });
   }
@@ -52,7 +52,7 @@ class ArchivoDB {
       if (err) {
         console.log(err)
       } else {
-        console.log(res)
+        // console.log(res)
       }
     });
   }

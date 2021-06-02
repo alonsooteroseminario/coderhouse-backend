@@ -5,12 +5,12 @@ const router = express.Router();
 const { mysql:configMysql } = require('./../DB/config');
 const ProductoDB = require('./../DB/productoDb');
 const productoDB = new ProductoDB(configMysql);
-const Product = require("../controllers/product");
-const product = new Product();
 
-router.get("/", (req, res) => {
-  const products = product.get();
+let PRODUCTS_DB = [];
 
+router.get("/", async (req, res) => {
+  const products = await productoDB.listar();
+  console.log(products.length)
   res.render('vista', {
     active: "vista",
     products: products
@@ -22,9 +22,9 @@ router.get("/", (req, res) => {
   }
 });
   
-router.get("/:id", (req, res) => {
+router.get("/:id", async (req, res) => {
     const { id } = req.params;
-    const currentProduct = product.getById(id)
+    const currentProduct = await productoDB.listarPorId(id);
 
     if (currentProduct) {
 
@@ -35,35 +35,38 @@ router.get("/:id", (req, res) => {
     });
   });
   
-router.post("/", (req, res) => {
+router.post("/", async (req, res) => {
     const data = req.body;
-    const products = product.get()
-    if(product.add(data)) {
+    const products = await productoDB.listar();
+    data.id = products.length + 1;
+    products.push({
+      id: data.id,
+      title: data.title,
+      price: parseInt(data.price),
+      thumbnail: data.thumbnail,
+    })
+
+    if(await productoDB.insertar(products)) {
       if (data.form === "1") return res.redirect('http://localhost:8080/nuevo-producto');
       res.status(201).json(data);
-      res.render('nuevo-producto', {
-        products: products
-      })
-
+      res.render('nuevo-producto')
     }
     res.status(400).send();
   });
   
-router.put("/:id", (req, res) => {
+router.put("/:id", async (req, res) => {
     const data = req.body;
     const { id } = req.params;
-    if(product.update(id, data)) {
+    if(await productoDB.actualizarPorId(id, data)) {
 
       res.status(201).json(data);
     }
     res.status(400).send();
   });
   
-router.delete("/:id", (req, res) => {
+router.delete("/:id", async (req, res) => {
     const { id } = req.params;
-    const currentProduct = product.getById(id)
-    product.remove(id);
-
+    const currentProduct = await productoDB.borrarPorId(id);
     res.json(currentProduct);
   });
 
