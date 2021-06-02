@@ -7,21 +7,21 @@
 // import Archivo from './archivo.js';
 // import ArchivosDB from './DB/archivoDb'
 // import { sqlite3 as configSqlite } from './DB/config'
+// const httpServer = new HttpServer(app);
+// const io = new IOServer(httpServer);
 
 const express = require("express");
 const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
 const Archivo = require('./controllers/archivo');
-const { sqlite3:configSqlite } = require('../DB/config');
-const ArchivoDB = require('../DB/archivoDb');
+const { sqlite3:configSqlite } = require('./DB/config');
+const ArchivoDB = require('./DB/archivoDb');
 const archivoDB = new ArchivoDB(configSqlite);
 
 const app = express();
 const httpServer = require('http').Server(app);
 const io = require('socket.io')(httpServer);
-// const httpServer = new HttpServer(app);
-// const io = new IOServer(httpServer);
 
 var hbs = exphbs.create({
   extname: "hbs",
@@ -49,24 +49,12 @@ app.use(express.static("./public"));
 app.use("/productos", productRoutes);
 app.use("/nuevo-producto", frontRoutes);
 
-let mostrados = 0
-const listaProductos = []
-
 app.get('/', (req, res) => {
   res.sendFile('./index.html', { root:__dirname })
 })
 
 io.on('connection', async (socket) => {
   console.log('Cliente conectado');
-  socket.emit('productos', listaProductos)
-  socket.on('boton', (data) => {
-    listaProductos.push(data);
-    console.log('boton presionado');
-    mostrados++
-    io.sockets.emit('productos', listaProductos.slice(0, mostrados))
-  })
-
-  // socket.emit('messages', await archivoDB.crearTabla() );
   socket.emit('messages', await archivoDB.listar())
 
   socket.on('new-message', async (data) => {
@@ -77,8 +65,9 @@ io.on('connection', async (socket) => {
       text:data.text,
       date: new Date().toLocaleString()
     };
-    await archivoDB.insertar(nuevoMensaje);
-    io.sockets.emit('messages', await archivoDB.listar())
+    listaMensajes.push(nuevoMensaje)
+    await archivoDB.insertar(listaMensajes);
+    io.sockets.emit('messages', listaMensajes)
   })
 })
 

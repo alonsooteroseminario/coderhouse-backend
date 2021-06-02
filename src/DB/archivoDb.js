@@ -14,7 +14,6 @@ const daoMensajes = mongoose.model('mensajes', esquemaMensaje)
 
 class ArchivoDB {
   constructor(config) {
-    // this.knex = knex(config)
     mongoose.connect(url,{
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -23,7 +22,7 @@ class ArchivoDB {
       if (err) {
         console.log(err);
       }else{
-        console.log('Conectado a la base en constructor');
+        console.log('Conectado a la base en constructor de archivoDb');
       }
     })
   }
@@ -36,15 +35,6 @@ class ArchivoDB {
         console.log(res);
       }
     });
-    // return this.knex.schema.dropTableIfExists('mensajes')
-    //   .then(() => {
-    //     return this.knex.schema.createTable('mensajes', table => {
-    //       table.increments('id').primary();
-    //       table.string('author').notNullable();
-    //       table.string('text');
-    //       table.string('date');
-    //     })
-    //   })
   }
 
   insertar(mensaje) {
@@ -55,7 +45,6 @@ class ArchivoDB {
         console.log(res);
       }
     });
-    // return this.knex('mensajes').insert(mensaje)
   }
 
   listar() {
@@ -66,7 +55,6 @@ class ArchivoDB {
         console.log(res)
       }
     });
-    // return this.knex('mensajes').select()
   }
   borrarPorId(id) {
     return daoMensajes.deleteOne({id: id}, (err,res) => {
@@ -76,7 +64,6 @@ class ArchivoDB {
         console.log(res)
       }
     });
-    // return this.knex.from('mensajes').where('id', id).del()
   }
   actualizarPorId(id, nuevoText) {
     return daoMensajes.updateOne({id: id}, {$set: {text: nuevoText}}, (err,res) => {
@@ -86,11 +73,9 @@ class ArchivoDB {
         console.log(res)
       }
     });
-    // return this.knex.from('mensajes').where('id', id).update({ text: nuevoText })
   }
   cerrar() {
     mongoose.disconnect(err => { console.log('desconectado de la base') });
-    // return this.knex.destroy()
   }
 }
 

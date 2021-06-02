@@ -24,7 +24,7 @@ class ProductoDB {
       if (err) {
         console.log(err);
       }else{
-        console.log('Conectado a la base en constructor');
+        console.log('Conectado a la base en constructor de productoDb');
       }
     })
   }

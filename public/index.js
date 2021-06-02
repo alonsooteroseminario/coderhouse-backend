@@ -53,12 +53,9 @@ socket.on('productos', data => {
 })
 
 socket.on('messages', data => {
-    // console.log(data);
     render(data);
+
 });
-
-
-  
 function render(data) {
 
     const html = data.map((elem, index) => {
