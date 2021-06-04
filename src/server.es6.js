@@ -1,20 +1,7 @@
-// import express from 'express';
-// import exphbs from 'express-handlebars';
-// import { Server as HttpServer } from 'http';
-// import { Server as IOServer } from 'socket.io';
-// import productRoutes from './routes/products';
-// import frontRoutes from './routes/front';
-// import Archivo from './archivo.js';
-// import ArchivosDB from './DB/archivoDb'
-// import { sqlite3 as configSqlite } from './DB/config'
-// const httpServer = new HttpServer(app);
-// const io = new IOServer(httpServer);
-
 const express = require("express");
 const exphbs = require('express-handlebars');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
-const Archivo = require('./controllers/archivo');
 const { sqlite3:configSqlite } = require('./DB/config');
 const ArchivoDB = require('./DB/archivoDb');
 const archivoDB = new ArchivoDB(configSqlite);
@@ -70,7 +57,6 @@ io.on('connection', async (socket) => {
     io.sockets.emit('messages', listaMensajes)
   })
 })
-
 
 const port = 8080;
 const server = httpServer.listen(port, () => {
