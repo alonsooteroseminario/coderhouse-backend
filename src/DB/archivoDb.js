@@ -1,14 +1,12 @@
-// import knex from 'knex'
-// const knex = require('knex');
 const mongoose = require('mongoose');
 
 const url = 'mongodb://localhost:27017/ecommerce';
 
 const esquemaMensaje = new mongoose.Schema({
   id: { type: Number, require: true },
-  author: { type: String, require: true, max: 100 },
-  text: { type: String, require: true, max: 100 },
-  date: { type: String, require: true, max: 100 }
+  author: { type: String, require: true, max: 1000 },
+  text: { type: String, require: true, max: 1000 },
+  date: { type: String, require: true, max: 1000 }
 })
 const daoMensajes = mongoose.model('mensajes', esquemaMensaje)
 
