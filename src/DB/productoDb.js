@@ -56,7 +56,7 @@ class ProductoDB {
       } else {
         console.log(res)
       }
-    });
+    }).lean();
   }
 
   listarPorId(id) {
