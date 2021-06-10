@@ -34,9 +34,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 
 app.use("/productos", productRoutes);
-app.use("/nuevo-producto", frontRoutes);
+app.use("/productos/nuevo-producto", frontRoutes);
 
-app.get('/', (req, res) => {
+app.get('/chat', (req, res) => {
   res.sendFile('./index.html', { root:__dirname })
 })
 

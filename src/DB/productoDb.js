@@ -33,7 +33,7 @@ class ProductoDB {
       if (err) {
         console.log(err);
       }else{
-        console.log(res);
+        // console.log(res);
       }
     });
   }
@@ -43,7 +43,7 @@ class ProductoDB {
       if (err) {
         console.log(err);
       }else{
-        console.log(res);
+        // console.log(res);
         return true;
       }
     });
@@ -54,7 +54,7 @@ class ProductoDB {
       if (err) {
         console.log(err)
       } else {
-        console.log(res)
+        // console.log(res)
       }
     }).lean();
   }
