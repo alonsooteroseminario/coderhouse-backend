@@ -48,7 +48,14 @@ io.on('connection', async (socket) => {
     let listaMensajes = await archivoDB.listar();
     const nuevoMensaje = {
       id: listaMensajes.length + 1,
-      author: data.author,
+      author: {
+        id: data.author.id,
+        nombre: data.author.nombre,
+        apellido: data.author.apellido,
+        edad: data.author.edad,
+        alias: data.author.alias,
+        avatar: data.author.avatar
+      },
       text:data.text,
       date: new Date().toLocaleString()
     };

@@ -25,17 +25,15 @@ class ArchivoDB {
     })
   }
 
-  crearTabla() {
-    return daoMensajes.create({}, (err,res) => {
-      if (err) {
-        console.log(err);
-      }else{
-        console.log(res);
-      }
-    });
-  }
-
   insertar(mensaje) {
+    //normalizar aqui
+
+
+
+
+
+    
+
     return daoMensajes.create(mensaje, (err,res) => {
       if (err) {
         console.log(err);

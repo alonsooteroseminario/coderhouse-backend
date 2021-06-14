@@ -53,14 +53,23 @@ socket.on('productos', data => {
 })
 
 socket.on('messages', data => {
-    render(data);
+    //desnomalizar aqui
 
+
+
+
+    
+
+
+
+
+    render(data);
 });
 function render(data) {
 
     const html = data.map((elem, index) => {
         return(`<div style="color:rgb(128,64,0);">
-                <strong style="color:rgb(0,0,255);">${elem.author}</strong>
+                <strong style="color:rgb(0,0,255);">${elem.author.nombre} ${elem.author.apellido}</strong>
                 [(${elem.date})]:
                 <em style="color:rgb(0,143,57);">${elem.text}</em> </div>`)
     }).join(" ");
@@ -69,8 +78,15 @@ function render(data) {
 
 function addMessage(e) {
     const mensaje = {
-      author: document.getElementById('username').value,
-      text: document.getElementById('texto').value
+      author: {
+        id: document.getElementById('username').value,
+        nombre: document.getElementById('nombre').value,
+        apellido: document.getElementById('apellido').value,
+        edad: document.getElementById('edad').value,
+        alias: document.getElementById('alias').value,
+        avatar: document.getElementById('avatar').value
+      },
+      text: document.getElementById('texto').value,
     };
     socket.emit('new-message', mensaje);
     document.getElementById('texto').value = ''
