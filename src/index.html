@@ -13,24 +13,35 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.7.7/handlebars.min.js" 
         integrity="sha512-RNLkV3d+aLtfcpEyFG8jRbnWHxUqVZozacROI4J2F1sTaDqo1dPQYs01OMi1t1w9Y2FdbSCDSQ2ZVdAC8bzgAg==" 
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/normalizr@3.6.1/dist/normalizr.browser.min.js"></script>
     <script src="/socket.io/socket.io.js"></script>
 
 </head>
 <body>
-    <h1>Desafio 22</h1>
+    <h1>Desafio 23</h1>
     <li><a href="/productos/vista">Vista de productos</a></li>
 
     <div class="container-fluid mt-3">
         <h1>Mi App Chat</h1>
         <hr>
     
-        <div id="messages"></div>
+
     
         <form class="form-inline" onsubmit="return addMessage(this)" autocomplete="off">
           <input type="email" id="username" class="form-control my-2 mr-2" placeholder="Tu Correo electrónico">
+          <input type="text" id="nombre" class="form-control my-2 mr-2" placeholder="Nombre">
+          <input type="text" id="apellido" class="form-control my-2 mr-2" placeholder="Apellido">
+          <input type="text" id="edad" class="form-control my-2 mr-2" placeholder="Edad">
+          <input type="text" id="alias" class="form-control my-2 mr-2" placeholder="Alias">
+          <input type="text" id="avatar" class="form-control my-2 mr-2" placeholder="Avatar">
           <input type="text" id="texto" class="form-control my-2 mr-2" placeholder="Escribe algo...">
           <input class="btn btn-primary my-2" type="submit" value="Enviar!">
         </form>
+
+
+        <div id="messages"></div>
+
+
       </div>
 
     <script src="/index.js"></script>
