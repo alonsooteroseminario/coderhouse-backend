@@ -51,19 +51,27 @@ socket.on('productos', data => {
         document.getElementById('productos').innerHTML = '<p>nada para mostrar</p>';
     }
 })
-
+const user = new schema.Entity('users');
+const text = new schema.Entity("text", {
+  commenter: user,
+});
+const mensaje = new schema.Entity("mensaje", {
+  author: user,
+  text: text,
+});
+const mensajes = new schema.Entity("mensajes", {
+  mensajes: [mensaje],
+});
 socket.on('messages', data => {
     //desnomalizar aqui
+    const normalizedData = normalize(data, mensajes);
+    const denormalizedData = denormalize(
+        normalizedData.result,
+        mensajes,
+        normalizedData.entities
+      );
 
-
-
-
-    
-
-
-
-
-    render(data);
+    render(denormalizedData);
 });
 function render(data) {
 
@@ -71,7 +79,9 @@ function render(data) {
         return(`<div style="color:rgb(128,64,0);">
                 <strong style="color:rgb(0,0,255);">${elem.author.nombre} ${elem.author.apellido}</strong>
                 [(${elem.date})]:
-                <em style="color:rgb(0,143,57);">${elem.text}</em> </div>`)
+                <em style="color:rgb(0,143,57);">${elem.text}</em> 
+                <img class="card-img-top" src="${elem.author.avatar}" alt="Card image cap">
+                </div>`)
     }).join(" ");
     document.getElementById('messages').innerHTML = html;
 }
@@ -79,7 +89,7 @@ function render(data) {
 function addMessage(e) {
     const mensaje = {
       author: {
-        id: document.getElementById('username').value,
+        idAttribute: document.getElementById('username').value,
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
         edad: document.getElementById('edad').value,

@@ -5,29 +5,22 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server.es6.js",
-    "ServerES6toJS5": "node_modules/.bin/babel ./server.es6.js -o ./server.js -w",
-    "ServerTStoJS5": "node_modules/.bin/tsc ./server.ts -w --esModuleInterop",
-    "dev": ".\\node_modules\\.bin\\webpack ./public/index.js ./server.js ./archivo.js ./routes/front.js ./routes/products.js ./controllers/product.js -o ./bundle.js --mode='development' -w",
-    "prod": ".\\node_modules\\.bin\\webpack ./public/index.js ./server.js ./archivo.js ./routes/front.js ./routes/products.js ./controllers/product.js -o ./bundle.js --mode='production' -w",
-    "build": "webpack -w"
+    "start": "nodemon src/server.es6.js"
   },
   "author": "Luis Alonso Otero <alonsooteroseminario@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "@types/express": "^4.17.11",
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
     "bootstrap": "^5.0.0-beta3",
     "express": "^4.17.1",
     "express-handlebars": "^5.3.0",
     "faker": "^5.5.3",
-    "knex": "^0.95.6",
     "mongoose": "^5.12.11",
     "mysql": "^2.18.1",
+    "normalizr": "^3.6.1",
     "pug": "^3.0.2",
     "socket.io": "^4.0.1",
-    "sqlite3": "^5.0.2"
+    "util-deprecate": "^1.0.2"
   },
   "devDependencies": {}
 }

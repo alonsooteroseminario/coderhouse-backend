@@ -1,6 +1,22 @@
 const mongoose = require('mongoose');
+const { normalize, schema } = require('normalizr');
+const utils = require('util');
 
 const url = 'mongodb://localhost:27017/ecommerce';
+
+const user = new schema.Entity('users');
+const text = new schema.Entity("text", {
+  commenter: user,
+});
+const mensaje = new schema.Entity("mensaje", {
+  author: user,
+  text: text,
+});
+const mensajes = new schema.Entity("mensajes", {
+  mensajes: [mensaje],
+});
+
+
 
 const esquemaMensaje = new mongoose.Schema({
   id: { type: Number, require: true },
@@ -21,20 +37,15 @@ class ArchivoDB {
         console.log(err);
       }else{
         console.log('Conectado a la base en constructor de archivoDb');
+        this.DB_MENSAJES = this.listar();
       }
     })
   }
 
   insertar(mensaje) {
     //normalizar aqui
-
-
-
-
-
-    
-
-    return daoMensajes.create(mensaje, (err,res) => {
+    const normalizedData = normalize(mensaje, mensajes);
+    return daoMensajes.create(normalizedData, (err,res) => {
       if (err) {
         console.log(err);
       }else{
@@ -57,7 +68,7 @@ class ArchivoDB {
       if (err) {
         console.log(err)
       } else {
-        console.log(res)
+        this.DB_MENSAJES = res;
       }
     });
   }
@@ -66,7 +77,7 @@ class ArchivoDB {
       if (err) {
         console.log(err)
       } else {
-        console.log(res)
+        this.DB_MENSAJES = res;
       }
     });
   }
