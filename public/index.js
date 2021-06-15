@@ -51,27 +51,12 @@ socket.on('productos', data => {
         document.getElementById('productos').innerHTML = '<p>nada para mostrar</p>';
     }
 })
-const user = new schema.Entity('users');
-const text = new schema.Entity("text", {
-  commenter: user,
-});
-const mensaje = new schema.Entity("mensaje", {
-  author: user,
-  text: text,
-});
-const mensajes = new schema.Entity("mensajes", {
-  mensajes: [mensaje],
-});
+
 socket.on('messages', data => {
     //desnomalizar aqui
-    const normalizedData = normalize(data, mensajes);
-    const denormalizedData = denormalize(
-        normalizedData.result,
-        mensajes,
-        normalizedData.entities
-      );
+    // console.log(data)
 
-    render(denormalizedData);
+    render(data);
 });
 function render(data) {
 
@@ -87,9 +72,10 @@ function render(data) {
 }
 
 function addMessage(e) {
-    const mensaje = {
+    console.log(e)
+    const data = {
       author: {
-        idAttribute: document.getElementById('username').value,
+        id: document.getElementById('username').value.toString(),
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
         edad: document.getElementById('edad').value,
@@ -98,7 +84,8 @@ function addMessage(e) {
       },
       text: document.getElementById('texto').value,
     };
-    socket.emit('new-message', mensaje);
+
+    socket.emit('new-message', data);
     document.getElementById('texto').value = ''
     document.getElementById('texto').focus()
 

@@ -1,26 +1,34 @@
 const mongoose = require('mongoose');
-const { normalize, schema } = require('normalizr');
+const { denormalize, normalize, schema } = require('normalizr');
 const utils = require('util');
 
 const url = 'mongodb://localhost:27017/ecommerce';
 
-const user = new schema.Entity('users');
-const text = new schema.Entity("text", {
-  commenter: user,
-});
+const user = new schema.Entity("users");
+
+// Define your text schema
+const text = new schema.Entity("text");
+
+// Define your mensaje
 const mensaje = new schema.Entity("mensaje", {
   author: user,
   text: text,
 });
+
 const mensajes = new schema.Entity("mensajes", {
   mensajes: [mensaje],
 });
 
-
-
 const esquemaMensaje = new mongoose.Schema({
   id: { type: Number, require: true },
-  author: { type: String, require: true, max: 1000 },
+  author: {
+    id: { type: String, require: true, max: 1000 },
+    nombre: { type: String, require: true, max: 1000 },
+    apellido: { type: String, require: true, max: 1000 },
+    edad: { type: Number, require: true },
+    alias: { type: String, require: true, max: 1000 },
+    avatar: { type: String, require: true, max: 1000 },
+  },
   text: { type: String, require: true, max: 1000 },
   date: { type: String, require: true, max: 1000 }
 })
@@ -42,10 +50,41 @@ class ArchivoDB {
     })
   }
 
-  insertar(mensaje) {
+  insertar(normalizedData) {
+
+  
+    // console.log("/* -------------- originalData string------------- */");
+    // console.log(utils.inspect(originalData, false, 3, true))// string
+    // console.log(utils.inspect(originalData, false, 3, true).length)// string
     //normalizar aqui
-    const normalizedData = normalize(mensaje, mensajes);
-    return daoMensajes.create(normalizedData, (err,res) => {
+    // console.log(mensaje)
+
+    // console.log(utils.inspect(normalizedData, false, 5, true));
+    // console.log("length", JSON.stringify(normalizedData).length);
+
+    // console.log(normalizedData.entities.mensajes)
+    // console.log(normalizedData.entities);
+
+    // console.log(utils.inspect(normalizedData, false, 6, true));// string
+    // console.log("originalData length", JSON.stringify(originalData).length);
+    // console.log("normalizedData length", JSON.stringify(normalizedData).length);
+ 
+
+    // console.log(utils.inspect(normalizedData, false, 6, true).length);// string
+    console.log("/* -------------- DENORMALIZED ------------- */");
+    const denormalizedData = denormalize(
+        normalizedData.result,
+        mensajes,
+        normalizedData.entities
+    );
+    console.log(denormalizedData);
+    console.log("/* -------------- ARRAY DE MENSAJES ------------- */");
+    console.log(denormalizedData.mensajes);
+    // console.log("denormalizedData length", JSON.stringify(denormalizedData).length);
+    // console.log(utils.inspect(denormalizedData, false, 1, true)); // string
+  
+    //aqui tiene que entrar un objeto
+    return daoMensajes.create(denormalizedData, (err,res) => {
       if (err) {
         console.log(err);
       }else{
@@ -55,11 +94,23 @@ class ArchivoDB {
   }
 
   listar() {
+
     return daoMensajes.find({}, (err,res) => {
       if (err) {
         console.log(err)
       } else {
-        // console.log(res)
+        // const normalizedData = res;
+        // console.log("/* -------------- DENORMALIZED ------------- */");
+
+        // const denormalizedData = denormalize(
+        //     normalizedData.result,
+        //     mensajes,
+        //     normalizedData.entities
+        // );
+        // console.log(denormalizedData);
+        // console.log("/****************************************/");
+        // console.log(utils.inspect(denormalizedData, false, 3, true)); // string
+        // return denormalizedData;
       }
     });
   }
