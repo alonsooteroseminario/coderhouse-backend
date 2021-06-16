@@ -83,7 +83,7 @@ io.on('connection', async (socket) => {
     };
     // console.log(nuevoMensaje);
     listaMensajes.push(nuevoMensaje)
-    console.log(listaMensajes);
+    // console.log(listaMensajes);
     const originalData = {
       id: "1",
       mensajes: listaMensajes,
@@ -91,6 +91,8 @@ io.on('connection', async (socket) => {
     console.log("/* -------------- NORMALIZED ------------- */");
     const normalizedData = normalize(originalData, mensajes);
     console.log(normalizedData)
+    // console.log("/* -------------- NORMALIZED inspect utils------------- */");
+    // console.log(utils.inspect(normalizedData, false, 4, true));
     await archivoDB.insertar(normalizedData);
     io.sockets.emit('messages', listaMensajes)
   })
