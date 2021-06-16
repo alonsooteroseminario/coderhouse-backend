@@ -1,5 +1,7 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
+const { denormalize, normalize, schema } = require('normalizr');
+const utils = require('util');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
 const ArchivoDB = require('./DB/archivoDb');
@@ -37,29 +39,62 @@ app.use("/productos/nuevo-producto", frontRoutes);
 
 app.get('/chat', (req, res) => {
   res.sendFile('./index.html', { root:__dirname })
-})
+});
+
+const user = new schema.Entity("users");
+
+// Define your text schema
+const text = new schema.Entity("text");
+
+// Define your mensaje
+const mensaje = new schema.Entity("mensaje", {
+  author: user,
+  text: text,
+});
+
+const mensajes = new schema.Entity("mensajes", {
+  mensajes: [mensaje],
+});
 
 io.on('connection', async (socket) => {
   console.log('Cliente conectado');
-  socket.emit('messages', await archivoDB.listar())
+  //lista desde base de datos y desnomalizr
+  let listaMensajes = await archivoDB.listar();
+
+  socket.emit('messages', listaMensajes)
 
   socket.on('new-message', async (data) => {
-    let listaMensajes = await archivoDB.listar();
+    // console.log("/* -------------- DATA ------------- */");
+    // console.log(data);
     const nuevoMensaje = {
-      id: listaMensajes.length + 1,
+      id: listaMensajes.length+1,
       author: {
-        idAttribute: data.author.idAttribute,
+        id: data.author.id,
         nombre: data.author.nombre,
         apellido: data.author.apellido,
         edad: data.author.edad,
         alias: data.author.alias,
         avatar: data.author.avatar
       },
-      text: data.text,
+      text: {
+        id: listaMensajes.length+1,
+        text: data.text,
+      },
       date: new Date().toLocaleString()
     };
+    // console.log(nuevoMensaje);
     listaMensajes.push(nuevoMensaje)
-    await archivoDB.insertar(listaMensajes);
+    // console.log(listaMensajes);
+    const originalData = {
+      id: "1",
+      mensajes: listaMensajes,
+    };
+    const normalizedData = normalize(originalData, mensajes);
+    // console.log("/* -------------- NORMALIZED ------------- */");
+    // console.log(normalizedData)
+    // console.log("/* -------------- NORMALIZED inspect utils------------- */");
+    // console.log(utils.inspect(normalizedData, false, 4, true));
+    await archivoDB.insertar(normalizedData);
     io.sockets.emit('messages', listaMensajes)
   })
 })

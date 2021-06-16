@@ -1,29 +1,52 @@
 const mongoose = require('mongoose');
-const { normalize, schema } = require('normalizr');
+const { denormalize, normalize, schema } = require('normalizr');
 const utils = require('util');
 
 const url = 'mongodb://localhost:27017/ecommerce';
 
-const user = new schema.Entity('users');
-const text = new schema.Entity("text", {
-  commenter: user,
-});
+const user = new schema.Entity("users");
+
+// Define your text schema
+const text = new schema.Entity("text");
+
+// Define your mensaje
 const mensaje = new schema.Entity("mensaje", {
   author: user,
   text: text,
 });
+
 const mensajes = new schema.Entity("mensajes", {
   mensajes: [mensaje],
 });
-
-
-
+//tiene que tener forma de normalizaData
 const esquemaMensaje = new mongoose.Schema({
-  id: { type: Number, require: true },
-  author: { type: String, require: true, max: 1000 },
-  text: { type: String, require: true, max: 1000 },
-  date: { type: String, require: true, max: 1000 }
+  entities: {
+    users: { 
+      id: { type: String, require: true, max: 1000 },
+      nombre: { type: String, require: true, max: 1000 },
+      apellido: { type: String, require: true, max: 1000 },
+      edad: { type: String, require: true, max: 1000 },
+      alias: { type: String, require: true, max: 1000 },
+      avatar: { type: String, require: true, max: 1000 },
+     },
+    text: { 
+      id: { type: Number, require: true },
+      text: { type: String, require: true, max: 1000 },
+     },
+    mensaje: { 
+      id: { type: Number, require: true },
+      author: { type: String, require: true, max: 1000 },
+      text: { type: Number, require: true },
+      date: { type: String, require: true, max: 1000 },
+     },
+    mensajes: { 
+      id: { type: String, require: true, max: 1000 },
+      mensajes: { type: Number, require: true },
+     },
+  },
+  result: { type: String, require: true, max: 1000 },
 })
+
 const daoMensajes = mongoose.model('mensajes', esquemaMensaje)
 
 class ArchivoDB {
@@ -37,14 +60,15 @@ class ArchivoDB {
         console.log(err);
       }else{
         console.log('Conectado a la base en constructor de archivoDb');
-        this.DB_MENSAJES = this.listar();
       }
     })
   }
 
-  insertar(mensaje) {
-    //normalizar aqui
-    const normalizedData = normalize(mensaje, mensajes);
+  insertar(normalizedData) {
+    
+    const texts = normalizedData.entities.text;
+    // console.log(texts);
+
     return daoMensajes.create(normalizedData, (err,res) => {
       if (err) {
         console.log(err);
@@ -55,11 +79,24 @@ class ArchivoDB {
   }
 
   listar() {
+
     return daoMensajes.find({}, (err,res) => {
       if (err) {
         console.log(err)
       } else {
-        // console.log(res)
+        console.log("/* -------------- NORMALIZED ------------- */");
+        const normalizedData = res;
+        console.log(normalizedData);
+
+        
+        const denormalizedData = denormalize(
+              normalizedData.result,
+              mensajes,
+              normalizedData.entities
+        );
+        console.log("/* -------------- DENORMALIZED denormalizedData.mensajes ------------- */");
+        console.log(denormalizedData);
+        
       }
     });
   }
