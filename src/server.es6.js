@@ -1,9 +1,12 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
+const cookieParser = require('cookie-parser')
+const session = require('express-session')
 const { denormalize, normalize, schema } = require('normalizr');
 const utils = require('util');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
+const loginRoutes = require('./routes/login');
 const ArchivoDB = require('./DB/archivoDb');
 const archivoDB = new ArchivoDB();
 
@@ -13,19 +16,7 @@ const io = require('socket.io')(httpServer);
 
 var hbs = exphbs.create({
   extname: "hbs",
-  defaultLayout: 'main.hbs',
-  helpers: {
-    lowercase: function (s) { return s.toLowerCase(); },
-    full_name: (firstname, lastname) => firstname + " " + lastname,
-    ifeq: function(a,b,options) {
-      if (a==b) { return options.fn(this);}
-      return options.inverse(this);
-    },
-    ifnoteq: function(a,b,options) {
-      if (a!=b) { return options.fn(this);}
-      return options.inverse(this);
-    },
-  }
+  defaultLayout: 'main.hbs'
 });
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
@@ -33,25 +24,27 @@ app.set('view engine', 'hbs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
+app.use(cookieParser());
+app.use(session({
+  secret: 'shhhhhhhhhhhhhhhhhhhhh',
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use("/productos", productRoutes);
 app.use("/productos/nuevo-producto", frontRoutes);
+app.use("/", loginRoutes);
 
 app.get('/chat', (req, res) => {
   res.sendFile('./index.html', { root:__dirname })
 });
 
 const user = new schema.Entity("users");
-
-// Define your text schema
 const text = new schema.Entity("text");
-
-// Define your mensaje
 const mensaje = new schema.Entity("mensaje", {
   author: user,
   text: text,
 });
-
 const mensajes = new schema.Entity("mensajes", {
   mensajes: [mensaje],
 });
