@@ -21,28 +21,28 @@ const mensajes = new schema.Entity("mensajes", {
 //tiene que tener forma de normalizaData
 const esquemaMensaje = new mongoose.Schema({
   entities: {
-    users: [{ 
+    users: { 
       id: { type: String, require: true, max: 1000 },
       nombre: { type: String, require: true, max: 1000 },
       apellido: { type: String, require: true, max: 1000 },
       edad: { type: String, require: true, max: 1000 },
       alias: { type: String, require: true, max: 1000 },
       avatar: { type: String, require: true, max: 1000 },
-     }],
-    text: [{ 
+     },
+    text: { 
       id: { type: Number, require: true },
       text: { type: String, require: true, max: 1000 },
-     }],
-    mensaje: [{ 
+     },
+    mensaje: { 
       id: { type: Number, require: true },
       author: { type: String, require: true, max: 1000 },
       text: { type: Number, require: true },
       date: { type: String, require: true, max: 1000 },
-     }],
-    mensajes: [{ 
+     },
+    mensajes: { 
       id: { type: String, require: true, max: 1000 },
       mensajes: { type: Number, require: true },
-     }],
+     },
   },
   result: { type: String, require: true, max: 1000 },
 })
@@ -67,7 +67,7 @@ class ArchivoDB {
   insertar(normalizedData) {
     
     const texts = normalizedData.entities.text;
-    console.log(texts);
+    // console.log(texts);
 
     return daoMensajes.create(normalizedData, (err,res) => {
       if (err) {
@@ -84,21 +84,19 @@ class ArchivoDB {
       if (err) {
         console.log(err)
       } else {
-        // console.log("/* -------------- DENORMALIZED ------------- */");
+        console.log("/* -------------- NORMALIZED ------------- */");
         const normalizedData = res;
-        if (normalizedData.length == 0) {
-          // console.log(normalizedData);
-          return normalizedData;
-        }
-        else{
-          const denormalizedData = denormalize(
+        console.log(normalizedData);
+
+        
+        const denormalizedData = denormalize(
               normalizedData.result,
               mensajes,
               normalizedData.entities
-          );
-          // console.log(denormalizedData);
-          return denormalizedData;
-        }
+        );
+        console.log("/* -------------- DENORMALIZED denormalizedData.mensajes ------------- */");
+        console.log(denormalizedData);
+        
       }
     });
   }

@@ -62,9 +62,9 @@ function render(data) {
 
     const html = data.map((elem, index) => {
         return(`<div style="color:rgb(128,64,0);">
-                <strong style="color:rgb(0,0,255);">${elem.author.nombre} ${elem.author.apellido}</strong>
+                <strong style="color:rgb(0,0,255);">${elem.author.id}</strong>
                 [(${elem.date})]:
-                <em style="color:rgb(0,143,57);">${elem.text}</em> 
+                <em style="color:rgb(0,143,57);">${elem.text.text}</em> 
                 <img class="card-img-top" src="${elem.author.avatar}" alt="Card image cap">
                 </div>`)
     }).join(" ");
@@ -75,7 +75,7 @@ function addMessage(e) {
     console.log(e)
     const data = {
       author: {
-        id: document.getElementById('username').value.toString(),
+        id: document.getElementById('username').value,
         nombre: document.getElementById('nombre').value,
         apellido: document.getElementById('apellido').value,
         edad: document.getElementById('edad').value,

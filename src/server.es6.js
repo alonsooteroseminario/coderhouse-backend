@@ -64,11 +64,12 @@ io.on('connection', async (socket) => {
   socket.emit('messages', listaMensajes)
 
   socket.on('new-message', async (data) => {
+    // console.log("/* -------------- DATA ------------- */");
     // console.log(data);
     const nuevoMensaje = {
       id: listaMensajes.length+1,
       author: {
-        id: data.author.idAttribute,
+        id: data.author.id,
         nombre: data.author.nombre,
         apellido: data.author.apellido,
         edad: data.author.edad,
@@ -88,9 +89,9 @@ io.on('connection', async (socket) => {
       id: "1",
       mensajes: listaMensajes,
     };
-    console.log("/* -------------- NORMALIZED ------------- */");
     const normalizedData = normalize(originalData, mensajes);
-    console.log(normalizedData)
+    // console.log("/* -------------- NORMALIZED ------------- */");
+    // console.log(normalizedData)
     // console.log("/* -------------- NORMALIZED inspect utils------------- */");
     // console.log(utils.inspect(normalizedData, false, 4, true));
     await archivoDB.insertar(normalizedData);
