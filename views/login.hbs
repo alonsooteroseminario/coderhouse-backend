@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <h1 class="text-center">Login de Usuario</h1>
+    <h1 class="text-center">Ingrese con su Usuario</h1>
     <div class="login-wrap" style="width:320px;
                                     margin: 0 auto;
                                     margin-top:100px;
@@ -8,14 +8,21 @@
                                     padding:15px;
                                     background: #f8f8f8;
                                     border-radius: 4px;">
-      <form action="/con-session" method="get" class="form-horizontal" role="form">
+
+
+
+
+
+      <form action="/con-session" method="post" class="form-horizontal" role="form">
+
         <div class="form-group">
           <label class="col-sm-3 control-label">
             Nombre</label>
           <div class="col-sm-9">      
-              <input type="text" name="inputUser" class="form-control" id="inputUser" placeholder="Escribe tu nombre" required>
+              <input type="text" name="inputUser" class="form-control" placeholder="Escribe tu nombre" value="Luis">
           </div>
         </div>
+
         <div class="form-group last" style="margin-bottom:0px;">
           <div class="col-sm-offset-3 col-sm-9">
             <input type="hidden" name="form" value="1" />
@@ -23,7 +30,13 @@
               Ingresar</button>
           </div>
         </div>
+
       </form>
+
+
+
+
+
     </div>
   </div>
 </div>

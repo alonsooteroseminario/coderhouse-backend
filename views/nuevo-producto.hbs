@@ -1,7 +1,8 @@
-{{!-- {{#if usuario}} --}}
-    
+{{#if usuario}}  
+    <p>Vista de Productos</p>
+
     <div class="form-group">
-    <label>Bievenido! {{name}}</label>
+    <label>Bievenido! {{usuario}}</label>
 
     <form action="/logout" method="get" class="form-horizontal" role="form">
         <div class="form-group last" style="margin-bottom:0px;">
@@ -14,6 +15,14 @@
         </div>
     </form>
     </div>
+{{else}}
+    <p>Vista de Productos</p>
+
+    <div class="form-group">
+        <label>Usuario no Logeado</label>
+    </div>
+
+{{/if}}
 
     <form action="/productos/vista" method="post" role="form">
         <div class="form-group">
@@ -32,26 +41,9 @@
         <button id ='miBoton' type="submit" class="btn btn-default">ENVIAR</button>
     </form>
 
-{{!-- {{else}}
 
 
-    <form action="/productos/vista" method="post" role="form">
-        <div class="form-group">
-            <label for="name">Title</label>
-            <input id="input-title" class="form-control" type="text" name="title">
-        </div>
-        <div class="form-group">
-            <label for="name">Price</label>
-            <input id="input-price" class="form-control" type="number" name="price">
-        </div>
-        <div>
-            <label for="name">Image</label>
-            <input id="input-thumbnail" class="form-control" type="text" name="thumbnail">
-        </div>
-        <input type="hidden" name="form" value="1" />
-        <button id ='miBoton' type="submit" class="btn btn-default">ENVIAR</button>
-    </form>
 
-{{/if}} --}}
+
 
 
