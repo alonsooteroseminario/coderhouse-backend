@@ -84,18 +84,18 @@ class ArchivoDB {
       if (err) {
         console.log(err)
       } else {
-        console.log("/* -------------- NORMALIZED ------------- */");
-        const normalizedData = res;
-        console.log(normalizedData);
+        // console.log("/* -------------- NORMALIZED ------------- */");
+        // const normalizedData = res;
+        // console.log(normalizedData);
 
         
-        const denormalizedData = denormalize(
-              normalizedData.result,
-              mensajes,
-              normalizedData.entities
-        );
-        console.log("/* -------------- DENORMALIZED denormalizedData.mensajes ------------- */");
-        console.log(denormalizedData);
+        // const denormalizedData = denormalize(
+        //       normalizedData.result,
+        //       mensajes,
+        //       normalizedData.entities
+        // );
+        // console.log("/* -------------- DENORMALIZED denormalizedData.mensajes ------------- */");
+        // console.log(denormalizedData);
         
       }
     });
