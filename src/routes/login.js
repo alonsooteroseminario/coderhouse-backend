@@ -16,9 +16,12 @@ function showSession(req) {
   }
 
 router.get('/login', (req, res) => {
-    res.render('login', {
-        active: 'login'
-    })
+    const data = req.body;
+    console.log(data);
+    if (data.form === "1") {
+        res.redirect('http://localhost:8080/productos/nuevo-producto').status(201);
+    }
+    res.render('login')
 })
 
 let contador = 0
