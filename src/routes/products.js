@@ -48,15 +48,18 @@ const api = new MockAPI();
 
 router.get("/vista", async (req, res) => {
   const products = await productoDB.listar();
-  console.log(products.length)
   res.render('vista', {
     active: "vista",
     products: products
   });
   if (products.length == 0) {
-    res.status(404).json({
-      error: "no hay productos cargados",
+    res.render('vista', {
+      active: "vista",
+      products: products
     });
+    // res.status(404).json({
+    //   error: "no hay productos cargados",
+    // });
   }
 });
   

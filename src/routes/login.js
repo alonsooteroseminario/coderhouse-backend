@@ -16,11 +16,6 @@ function showSession(req) {
   }
 
 router.get('/login', (req, res) => {
-    const data = req.body;
-    console.log(data);
-    if (data.form === "1") {
-        res.redirect('http://localhost:8080/productos/nuevo-producto').status(201);
-    }
     res.render('login')
 })
 
@@ -30,10 +25,13 @@ router.get('/sin-session', (req, res) => {
 })
 
 router.get('/con-session', (req, res) => {
-  showSession(req)
+  const data = req.body;
+  console.log(data);
+  // showSession(req)
   if (!req.session.contador) {
     req.session.contador = 1
-    res.send('Bienvenido!')
+    res.redirect('http://localhost:8080/productos/nuevo-producto');
+    // res.send('Bienvenido!')
   } else {
     req.session.contador++
     res.send(`Ud ha visitado el sitio ${req.session.contador} veces.`)
@@ -41,11 +39,18 @@ router.get('/con-session', (req, res) => {
 })
 
 router.get('/logout', (req, res) => {
+  const data = req.body;
+  console.log(data);
+  console.log(req.params);
   req.session.destroy(err => {
     if (err) {
       res.json({ status: 'Logout ERROR', body: err })
     } else {
-      res.send('Logout ok!')
+      res.render('adios');
+      setTimeout(function(){ 
+
+      }, 2000);
+      // res.send('Logout ok!')
     }
   })
 })
