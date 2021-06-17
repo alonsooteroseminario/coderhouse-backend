@@ -5,61 +5,22 @@ const router = express.Router();
 const { mysql:configMysql } = require('./../DB/config');
 const ProductoDB = require('./../DB/productoDb');
 const productoDB = new ProductoDB(configMysql);
-
-let PRODUCTS_DB = [];
-
-function generarProducto() {
-  return {
-    title: faker.commerce.productName(),
-    price: faker.commerce.price(),
-    thumbnail: faker.image.image(),
-  }
-}
-
-class MockAPI {
-  constructor(){
-    this.PRODUCTS_DB = []
-  }
-  popular(n = 10) {
-    this.PRODUCTS_DB = [];
-    for (let i = 0; i < n; i++) {
-      const producto = generarProducto();
-      const nuevoproducto = {
-        id: this.PRODUCTS_DB.length + 1,
-        title: producto.title,
-        price: producto.price,
-        thumbnail: producto.thumbnail,
-      }
-      this.PRODUCTS_DB.push(nuevoproducto)
-    }
-  }
-  agregar(producto) {
-    this.PRODUCTS_DB.push(producto)
-  }
-  obtenerTodos() {
-    return [...this.PRODUCTS_DB]
-  }
-  obtenerPorId(id) {
-    return this.PRODUCTS_DB.find(u => u.id === id)
-  }
-}
+const MockAPI = require('../controllers/mockAPI');
 const api = new MockAPI();
 
-
 router.get("/vista", async (req, res) => {
-  const products = await productoDB.listar();
-  res.render('vista', {
-    active: "vista",
-    products: products
-  });
-  if (products.length == 0) {
+  const nombre = req.session.inputUser;
+  if (!nombre) {
+    setTimeout(function(){ 
+      res.redirect('http://localhost:8080/login');
+    }, 2000);
+  }else{
+    const products = await productoDB.listar();
     res.render('vista', {
       active: "vista",
-      products: products
+      products: products,
+      usuario: nombre
     });
-    // res.status(404).json({
-    //   error: "no hay productos cargados",
-    // });
   }
 });
   
@@ -91,7 +52,7 @@ router.post("/vista", async (req, res) => {
       console.log(err)
     })) {
       // if (data.form === "1") return res.redirect('http://localhost:8080/nuevo-producto');
-      res.redirect('http://localhost:8080/nuevo-producto').status(201).json(data);
+      res.redirect('http://localhost:8080/producto/nuevo-producto').status(201).json(data);
     }
     res.status(400).send();
   });

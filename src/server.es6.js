@@ -26,9 +26,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 app.use(cookieParser());
 app.use(session({
-  secret: 'shhhhhhhhhhhhhhhhhhhhh',
+  secret: 'secret',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: { maxAge: 60000 }
 }));
 
 app.use("/productos", productRoutes);
