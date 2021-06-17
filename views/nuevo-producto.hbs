@@ -1,4 +1,4 @@
-{{#if usuario}}
+{{!-- {{#if usuario}} --}}
     
     <div class="form-group">
     <label>Bievenido! {{name}}</label>
@@ -6,6 +6,7 @@
     <form action="/logout" method="get" class="form-horizontal" role="form">
         <div class="form-group last" style="margin-bottom:0px;">
           <div class="col-sm-offset-3 col-sm-9">
+            <input type="hidden" name="form" value="1" />
             <button type="submit" class="btn btn-success btn-sm">
               Desloguearse
               </button>
@@ -31,7 +32,7 @@
         <button id ='miBoton' type="submit" class="btn btn-default">ENVIAR</button>
     </form>
 
-{{else}}
+{{!-- {{else}}
 
 
     <form action="/productos/vista" method="post" role="form">
@@ -51,6 +52,6 @@
         <button id ='miBoton' type="submit" class="btn btn-default">ENVIAR</button>
     </form>
 
-{{/if}}
+{{/if}} --}}
 
 
