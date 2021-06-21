@@ -1,9 +1,10 @@
 const express = require("express");
 const exphbs = require('express-handlebars');
-const cookieParser = require('cookie-parser')
-const session = require('express-session')
-const { denormalize, normalize, schema } = require('normalizr');
-const utils = require('util');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
+require('dotenv').config();
+const MongoStore = require('connect-mongo');
+const { normalize, schema } = require('normalizr');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
 const loginRoutes = require('./routes/login');
@@ -21,11 +22,22 @@ var hbs = exphbs.create({
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 
+const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
+
+const admin = process.env.MONGO_USER;
+const password = process.env.MONGO_PASSWORD;
+
+const url = 'mongodb+srv://'+admin.toString()+':'+password.toString()+'@cluster0.rzdyo.mongodb.net/sesiones?retryWrites=true&w=majority';
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
 app.use(cookieParser());
 app.use(session({
+  store: MongoStore.create({ 
+    mongoUrl: url,
+    ttl: 10 * 60, // = 10 min. Default
+    mongoOptions: advancedOptions }),
   secret: 'secret',
   resave: false,
   saveUninitialized: false,
@@ -37,7 +49,14 @@ app.use("/productos/nuevo-producto", frontRoutes);
 app.use("/", loginRoutes);
 
 app.get('/chat', (req, res) => {
-  res.sendFile('./index.html', { root:__dirname })
+  const nombre = req.session.inputUser;
+  if (!nombre){
+    setTimeout(function(){ 
+      res.redirect('http://localhost:8080/login');
+    }, 2000);
+  }else{
+    res.sendFile('./index.html', { root:__dirname })
+  }
 });
 
 const user = new schema.Entity("users");
