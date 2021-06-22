@@ -33,9 +33,10 @@ router.get('/logout', (req, res) => {
     if (err) {
       res.json({ status: 'Logout ERROR', body: err })
     } else {
-      res.render('adios',{
-        usuario: nombre
-      });
+
+      setTimeout(function(){ 
+        res.redirect('http://localhost:8080/login');
+      }, 2000);
     }
   })
 })
