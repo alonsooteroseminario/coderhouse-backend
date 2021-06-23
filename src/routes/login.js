@@ -3,10 +3,6 @@ const router = express.Router();
 
 this.nombre = '';
 
-router.get('/login', (req, res) => {
-  res.render('login')
-})
-
 let contador = 0
 router.get('/sin-session', (req, res) => {
   res.json({ contador: ++contador })

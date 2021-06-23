@@ -1,42 +1,30 @@
-<div class="container">
-  <div class="row">
-    <h1 class="text-center">Ingrese con su Usuario</h1>
-    <div class="login-wrap" style="width:320px;
-                                    margin: 0 auto;
-                                    margin-top:100px;
-                                    border:1px solid #eee;
-                                    padding:15px;
-                                    background: #f8f8f8;
-                                    border-radius: 4px;">
 
+      <div class="container my-5">
 
+        <h1 style="color: blue;">LOGIN</h1>
+        <br>
+        <form class="form" action="/login" method="post" role="form" autocomplete="off">
 
-
-
-      <form action="/con-session" method="post" class="form-horizontal" role="form">
-
-        <div class="form-group">
-          <label class="col-sm-3 control-label">
-            Nombre</label>
-          <div class="col-sm-9">      
-              <input type="text" name="inputUser" class="form-control" placeholder="Escribe tu nombre">
+          <div class="form-group">
+            <input id="nombre" name='username' placeholder="nombre" class="form-control" type="text" required>
           </div>
+
+          <div class="form-group">
+            <input id="password"  name='password' placeholder="password" class="form-control" type="password" required>
+          </div>
+
+          <div class="form-group">
+            <input class="btn btn-success my-3" type="submit" value="Login">
+          </div>
+        </form>
+
+        <hr>
+        <div class="text-left">
+          <button class="btn btn-success my-3" onclick="location.href = '/register'">Ir a Register</button>
         </div>
 
-        <div class="form-group last" style="margin-bottom:0px;">
-          <div class="col-sm-offset-3 col-sm-9">
-            <input type="hidden" name="form" value="1" />
-            <button type="submit" class="btn btn-success btn-sm">
-              Ingresar</button>
-          </div>
-        </div>
-
-      </form>
+      </div>
+      
 
 
-
-
-
-    </div>
   </div>
-</div>

@@ -9,19 +9,16 @@ const MockAPI = require('../controllers/mockAPI');
 const api = new MockAPI();
 
 router.get("/vista", async (req, res) => {
-  const nombre = req.session.inputUser;
-  if (!nombre) {
-    setTimeout(function(){ 
-      res.redirect('http://localhost:8080/login');
-    }, 2000);
-  }else{
-    const products = await productoDB.listar();
-    res.render('vista', {
-      active: "vista",
-      products: products,
-      usuario: nombre
-    });
+  if (!req.user.contador) {
+    req.user.contador = 0
   }
+  const products = await productoDB.listar();
+  res.render('vista', {
+    active: "vista",
+    products: products,
+    usuario: req.user.username,
+  });
+  req.user.contador++
 });
   
 router.get("/vista/:id", async (req, res) => {
