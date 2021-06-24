@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <h1>Desafio 24</h1>
+    <h1>Desafio 26</h1>
     <ul>
 
         <li><a href="/login">Login</a></li>
@@ -30,7 +30,18 @@
         <li><a href="/chat">Volver al Chat</a></li>
 
     </ul>
-
+    <div class="form-group">
+        <form action="/logout" method="get" class="form-horizontal" role="form">
+            <div class="form-group last" style="margin-bottom:0px;">
+              <div class="col-sm-offset-3 col-sm-9">
+                <input type="hidden" name="form" value="1" />
+                <button type="submit" class="btn btn-success btn-sm">
+                  Desloguearse
+                  </button>
+              </div>
+            </div>
+        </form>
+        </div>
     <div class="container-fluid mt-3">
         <h1>Mi App Chat</h1>
     

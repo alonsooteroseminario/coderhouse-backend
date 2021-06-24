@@ -10,17 +10,65 @@ const frontRoutes = require('./routes/front');
 const loginRoutes = require('./routes/login');
 const ArchivoDB = require('./DB/archivoDb');
 const archivoDB = new ArchivoDB();
+const passport = require('passport');
+const { Strategy: LocalStrategy } = require('passport-local');
 
+/* ------------------ DATABASE -------------------- */
+const usuarios = []
+/* ------------------ PASSPORT -------------------- */
+passport.use('register', new LocalStrategy({ passReqToCallback: true }, (req, username, password, done) => {
+
+  const { direccion } = req.body
+
+  const usuario = usuarios.find(usuario => usuario.username == username)
+  if (usuario) {
+    return done('already registered')
+  }
+
+  const user = {
+    username,
+    password,
+    direccion,
+  }
+  usuarios.push(user)
+
+  return done(null, user)
+}));
+passport.use('login', new LocalStrategy((username, password, done) => {
+
+  const user = usuarios.find(usuario => usuario.username == username)
+
+  if (!user) {
+    return done(null, false)
+  }
+
+  if (user.password != password) {
+    return done(null, false)
+  }
+
+  user.contador = 0
+
+  return done(null, user);
+}));
+passport.serializeUser(function (user, done) {
+  done(null, user.username);
+});
+passport.deserializeUser(function (username, done) {
+  const usuario = usuarios.find(usuario => usuario.username == username)
+  done(null, usuario);
+});
+/* --------------------- AUTH --------------------------- */
+function isAuth(req, res, next) {
+  if (req.isAuthenticated()) {
+    next()
+  } else {
+    res.redirect('/login')
+  }
+}
+/* --------------------- SERVER --------------------------- */
 const app = express();
 const httpServer = require('http').Server(app);
 const io = require('socket.io')(httpServer);
-
-var hbs = exphbs.create({
-  extname: "hbs",
-  defaultLayout: 'main.hbs'
-});
-app.engine('hbs', hbs.engine);
-app.set('view engine', 'hbs');
 
 const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 
@@ -29,6 +77,13 @@ const password = process.env.MONGO_PASSWORD;
 
 const url = 'mongodb+srv://'+admin.toString()+':'+password.toString()+'@cluster0.rzdyo.mongodb.net/sesiones?retryWrites=true&w=majority';
 
+/* --------------------- MIDDLEWARE --------------------------- */
+var hbs = exphbs.create({
+  extname: "hbs",
+  defaultLayout: 'main.hbs'
+});
+app.engine('hbs', hbs.engine);
+app.set('view engine', 'hbs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
@@ -43,20 +98,47 @@ app.use(session({
   saveUninitialized: false,
   cookie: { maxAge: 60000 }
 }));
+app.use(passport.initialize());
+app.use(passport.session());
+/* --------------------- ROUTES --------------------------- */
 
-app.use("/productos", productRoutes);
-app.use("/productos/nuevo-producto", frontRoutes);
-app.use("/", loginRoutes);
+app.use("/productos", isAuth, productRoutes);
+app.use("/productos/nuevo-producto", isAuth, frontRoutes);
+// app.use("/", loginRoutes);
 
-app.get('/chat', (req, res) => {
-  const nombre = req.session.inputUser;
-  if (!nombre){
-    setTimeout(function(){ 
-      res.redirect('http://localhost:8080/login');
-    }, 2000);
-  }else{
-    res.sendFile('./index.html', { root:__dirname })
+/* --------- LOGOUT ---------- */
+app.get('/logout', (req, res) => {
+  req.logout();
+  setTimeout(function(){ 
+    res.redirect('http://localhost:8080/login');
+  }, 2000);
+})
+// LOGIN
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+app.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin', successRedirect: '/productos/vista' }))
+app.get('/faillogin', (req, res) => {
+  res.render('login-error', {});
+})
+// REGISTER
+app.get('/register', (req, res) => {
+  res.render('register')
+})
+app.post('/register', passport.authenticate('register', { failureRedirect: '/failregister', successRedirect: '/' }))
+app.get('/failregister', (req, res) => {
+  res.render('register-error', {});
+})
+/* --------- INICIO ---------- */
+app.get('/', isAuth, (req, res) => {
+  res.redirect('/productos/vista')
+})
+app.get('/chat', isAuth, (req, res) => {
+  if (!req.user.contador){
+    req.user.contador = 0
   }
+  res.sendFile('./index.html', { root:__dirname })
+  
 });
 
 const user = new schema.Entity("users");
