@@ -7,34 +7,52 @@ const MongoStore = require('connect-mongo');
 const { normalize, schema } = require('normalizr');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
-const loginRoutes = require('./routes/login');
+// const loginRoutes = require('./routes/login');
 const ArchivoDB = require('./DB/archivoDb');
 const archivoDB = new ArchivoDB();
+const UsuarioDB = require('./DB/usuariosDb');
+const usuarioDB = new UsuarioDB();
 const passport = require('passport');
 const { Strategy: LocalStrategy } = require('passport-local');
+const bCrypt = require('bcrypt');
 
-/* ------------------ DATABASE -------------------- */
-const usuarios = []
+/* ------------- VALIDATE PASSWORD ---------------- */
+
+const isValidPassword = function(user, password) {
+  return bCrypt.compareSync(password, user.hashPassword);
+}
+let createHash = function(password) {
+  return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
+}
+
 /* ------------------ PASSPORT -------------------- */
-passport.use('register', new LocalStrategy({ passReqToCallback: true }, (req, username, password, done) => {
+passport.use('register', new LocalStrategy({ passReqToCallback: true }, async (req, username, password, done) => {
 
   const { direccion } = req.body
 
+  let usuarios = await usuarioDB.listar();
+
   const usuario = usuarios.find(usuario => usuario.username == username)
+
   if (usuario) {
     return done('already registered')
   }
 
+  const hashPassword = createHash(password);
+
   const user = {
     username,
-    password,
+    hashPassword,
     direccion,
   }
   usuarios.push(user)
+  await usuarioDB.insertar(usuarios);
 
   return done(null, user)
 }));
-passport.use('login', new LocalStrategy((username, password, done) => {
+passport.use('login', new LocalStrategy(async (username, password, done) => {
+
+  let usuarios = await usuarioDB.listar();
 
   const user = usuarios.find(usuario => usuario.username == username)
 
@@ -42,7 +60,7 @@ passport.use('login', new LocalStrategy((username, password, done) => {
     return done(null, false)
   }
 
-  if (user.password != password) {
+  if (!isValidPassword(user, password)) {
     return done(null, false)
   }
 
@@ -50,14 +68,19 @@ passport.use('login', new LocalStrategy((username, password, done) => {
 
   return done(null, user);
 }));
+
 passport.serializeUser(function (user, done) {
   done(null, user.username);
 });
-passport.deserializeUser(function (username, done) {
+
+passport.deserializeUser(async function (username, done) {
+  let usuarios = await usuarioDB.listar();
   const usuario = usuarios.find(usuario => usuario.username == username)
   done(null, usuario);
 });
+
 /* --------------------- AUTH --------------------------- */
+
 function isAuth(req, res, next) {
   if (req.isAuthenticated()) {
     next()
@@ -65,7 +88,9 @@ function isAuth(req, res, next) {
     res.redirect('/login')
   }
 }
+
 /* --------------------- SERVER --------------------------- */
+
 const app = express();
 const httpServer = require('http').Server(app);
 const io = require('socket.io')(httpServer);
