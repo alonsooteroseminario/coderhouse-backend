@@ -2,9 +2,8 @@ const express = require('express');
 const faker = require('faker');
 faker.locale = 'es'
 const router = express.Router();
-const { mysql:configMysql } = require('./../DB/config');
 const ProductoDB = require('./../DB/productoDb');
-const productoDB = new ProductoDB(configMysql);
+const productoDB = new ProductoDB();
 const MockAPI = require('../controllers/mockAPI');
 const api = new MockAPI();
 
@@ -16,7 +15,7 @@ router.get("/vista", async (req, res) => {
   res.render('vista', {
     active: "vista",
     products: products,
-    usuario: req.user.username,
+    user: req.user,
   });
   req.user.contador++
 });
