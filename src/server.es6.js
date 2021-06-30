@@ -14,16 +14,14 @@ const usuarioDB = new UsuarioDB();
 /* ------------------ PASSPORT -------------------- */
 const passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
-const { Strategy: LocalStrategy } = require('passport-local');
-const bCrypt = require('bcrypt');
 
-/* ------------------ PASSPORT -------------------- */
-const FACEBOOK_CLIENT_ID = '780206402654346';
-const FACEBOOK_CLIENT_SECRET = '4b057c58c9a7302c9de67035c0cf94c1';
+/* ------------------ PASSPORT FACEBOOK -------------------- */
+const facebook_client_id = process.env.FACEBOOK_CLIENT_ID;
+const facebook_client_secret = process.env.FACEBOOK_CLIENT_SECRET;
 
 passport.use(new FacebookStrategy({
-  clientID: FACEBOOK_CLIENT_ID.toString(),
-  clientSecret: FACEBOOK_CLIENT_SECRET.toString(),
+  clientID: facebook_client_id.toString(),
+  clientSecret: facebook_client_secret.toString(),
   callbackURL: '/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'photos', 'emails'],
   scope: ['email']

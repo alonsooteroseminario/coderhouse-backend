@@ -7,7 +7,7 @@ router.get('/', async (req, res) => {
     }
     res.render('nuevo-producto', {
         active: 'nuevo-producto',
-        usuario: req.user.username
+        user: req.user
     })
 })
 
