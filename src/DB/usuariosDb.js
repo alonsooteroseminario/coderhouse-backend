@@ -4,8 +4,9 @@ const url = 'mongodb://localhost:27017/ecommerce';
 
 const esquemaUsuario = new mongoose.Schema({
   username: { type: String, require: true, max: 100 },
-  hashPassword: { type: String, require: true, max: 100 },
-  direccion: { type: String, require: true, max: 100 }
+  facebookId: { type: String, require: true},
+  email: { type: String, require: true, max: 100 },
+  foto: { type: String, require: true},
 })
 
 const daoUsuarios = mongoose.model('usuarios', esquemaUsuario);

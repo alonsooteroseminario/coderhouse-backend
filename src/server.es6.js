@@ -7,66 +7,52 @@ const MongoStore = require('connect-mongo');
 const { normalize, schema } = require('normalizr');
 const productRoutes = require("./routes/products");
 const frontRoutes = require('./routes/front');
-// const loginRoutes = require('./routes/login');
 const ArchivoDB = require('./DB/archivoDb');
 const archivoDB = new ArchivoDB();
 const UsuarioDB = require('./DB/usuariosDb');
 const usuarioDB = new UsuarioDB();
+/* ------------------ PASSPORT -------------------- */
 const passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 const { Strategy: LocalStrategy } = require('passport-local');
 const bCrypt = require('bcrypt');
 
-/* ------------- VALIDATE PASSWORD ---------------- */
-
-const isValidPassword = function(user, password) {
-  return bCrypt.compareSync(password, user.hashPassword);
-}
-let createHash = function(password) {
-  return bCrypt.hashSync(password, bCrypt.genSaltSync(10), null);
-}
-
 /* ------------------ PASSPORT -------------------- */
-passport.use('register', new LocalStrategy({ passReqToCallback: true }, async (req, username, password, done) => {
+const FACEBOOK_CLIENT_ID = '780206402654346';
+const FACEBOOK_CLIENT_SECRET = '4b057c58c9a7302c9de67035c0cf94c1';
 
-  const { direccion } = req.body
+passport.use(new FacebookStrategy({
+  clientID: FACEBOOK_CLIENT_ID.toString(),
+  clientSecret: FACEBOOK_CLIENT_SECRET.toString(),
+  callbackURL: '/auth/facebook/callback',
+  profileFields: ['id', 'displayName', 'photos', 'emails'],
+  scope: ['email']
+}, async function (accessToken, refreshToken, userProfile, done) {
 
+  // console.log(userProfile.displayName)
   let usuarios = await usuarioDB.listar();
 
-  const usuario = usuarios.find(usuario => usuario.username == username)
+  const usuario = usuarios.find(usuario => usuario.username == userProfile.displayName)
 
   if (usuario) {
-    return done('already registered')
+    
+    user.contador = 0
+
+    return done(null, usuario);
+  }
+  else{
+    const user = {
+      username: userProfile.displayName,
+      facebookId: userProfile.id,
+      email: userProfile.emails[0].value,
+      foto: userProfile.photos[0].value,
+    }
+    usuarios.push(user)
+    await usuarioDB.insertar(usuarios);
+    
+    return done(null, user);
   }
 
-  const hashPassword = createHash(password);
-
-  const user = {
-    username,
-    hashPassword,
-    direccion,
-  }
-  usuarios.push(user)
-  await usuarioDB.insertar(usuarios);
-
-  return done(null, user)
-}));
-passport.use('login', new LocalStrategy(async (username, password, done) => {
-
-  let usuarios = await usuarioDB.listar();
-
-  const user = usuarios.find(usuario => usuario.username == username)
-
-  if (!user) {
-    return done(null, false)
-  }
-
-  if (!isValidPassword(user, password)) {
-    return done(null, false)
-  }
-
-  user.contador = 0
-
-  return done(null, user);
 }));
 
 passport.serializeUser(function (user, done) {
@@ -129,7 +115,6 @@ app.use(passport.session());
 
 app.use("/productos", isAuth, productRoutes);
 app.use("/productos/nuevo-producto", isAuth, frontRoutes);
-// app.use("/", loginRoutes);
 
 /* --------- LOGOUT ---------- */
 app.get('/logout', (req, res) => {
@@ -138,22 +123,18 @@ app.get('/logout', (req, res) => {
     res.redirect('http://localhost:8080/login');
   }, 2000);
 })
+
+app.get('/auth/facebook', passport.authenticate('facebook'));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/faillogin' }));
+
 // LOGIN
 app.get('/login', (req, res) => {
   res.render('login')
 })
-app.post('/login', passport.authenticate('login', { failureRedirect: '/faillogin', successRedirect: '/productos/vista' }))
 app.get('/faillogin', (req, res) => {
   res.render('login-error', {});
 })
-// REGISTER
-app.get('/register', (req, res) => {
-  res.render('register')
-})
-app.post('/register', passport.authenticate('register', { failureRedirect: '/failregister', successRedirect: '/' }))
-app.get('/failregister', (req, res) => {
-  res.render('register-error', {});
-})
+
 /* --------- INICIO ---------- */
 app.get('/', isAuth, (req, res) => {
   res.redirect('/productos/vista')
