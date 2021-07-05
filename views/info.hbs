@@ -1,0 +1,34 @@
+{{#if info}}  
+        <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Argumentos de entrada</th>
+                <th scope="col">Nombre de plataforma</th>
+                <th scope="col">Version de node.js</th>
+                <th scope="col">Uso de memoria</th>
+                <th scope="col">Path de Ejecución</th>
+                <th scope="col">Process id</th>
+                <th scope="col">Carpeta corriente</th>
+                </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                {{#each info.execArgv}}
+                    {{info.execArgv}}
+                {{/each}}
+                </td>
+                <td>{{info.title}}</td>
+                <td>{{info.version}}</td>
+                <td>{{info.memoryUsage}}</td>
+                <td>{{info.execPath}}</td> 
+                <td>{{info.pid}}</td> 
+                <td>{{info.cwd}}</td> 
+            </tr>
+        </tbody>
+    </table>
+{{else}}
+    <p>
+        process NO
+    </p>
+{{/if}}
