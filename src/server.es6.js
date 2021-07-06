@@ -148,9 +148,14 @@ app.get('/chat', isAuth, (req, res) => {
 
 /* --------- INFO ---------- */
 app.get('/info', isAuth, (req, res) => {
-  console.log(process)
+  // console.log(process.argv)
+  // console.log(process.memoryUsage())
+
   res.render('info', {
+    user: req.user,
     info: process,
+    argv: process.argv,
+    memoryUsage: process.memoryUsage(),
   });
 })
 
