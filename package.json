@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server.es6.js"
+    "start": "node src/server.es6.js"
   },
   "author": "Luis Alonso Otero <alonsooteroseminario@gmail.com>",
   "license": "MIT",

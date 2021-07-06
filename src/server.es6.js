@@ -16,8 +16,9 @@ const passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 /* ------------------ PASSPORT FACEBOOK -------------------- */
-const facebook_client_id = process.env.FACEBOOK_CLIENT_ID;
-const facebook_client_secret = process.env.FACEBOOK_CLIENT_SECRET;
+const port = parseInt(process.argv[2]) || 8080;
+const facebook_client_id = process.argv[3] || process.env.FACEBOOK_CLIENT_ID;
+const facebook_client_secret = process.argv[4] || process.env.FACEBOOK_CLIENT_SECRET;
 
 passport.use(new FacebookStrategy({
   clientID: facebook_client_id.toString(),
@@ -145,6 +146,14 @@ app.get('/chat', isAuth, (req, res) => {
   
 });
 
+/* --------- INFO ---------- */
+app.get('/info', isAuth, (req, res) => {
+  console.log(process)
+  res.render('info', {
+    info: process,
+  });
+})
+
 const user = new schema.Entity("users");
 const text = new schema.Entity("text");
 const mensaje = new schema.Entity("mensaje", {
@@ -198,7 +207,10 @@ io.on('connection', async (socket) => {
   })
 })
 
-const port = 8080;
+process.on('exit', function (code) {
+  console.log('Exit code:'+ code);
+});
+
 const server = httpServer.listen(port, () => {
   console.log('El servidor esta corriendo en el puerto: ' + server.address().port);
 });
