@@ -5,7 +5,11 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/server.es6.js"
+    "start": "nodemon src/server.es6.js",
+    "prod": "./node_modules/.bin/pm2 start src/server.es6.js --name='Server1' --watch",
+    "fork": "./node_modules/.bin/pm2 start src/server.es6.js --name='ServerFork' --watch",
+    "cluster": "./node_modules/.bin/pm2 start src/server.es6.js --name='ServerCluster' --watch -i max",
+    "forever": "forever start -w src/server.es6.js"
   },
   "author": "Luis Alonso Otero <alonsooteroseminario@gmail.com>",
   "license": "MIT",
@@ -26,6 +30,7 @@
     "passport": "^0.4.1",
     "passport-facebook": "^3.0.0",
     "passport-local": "^1.0.0",
+    "pm2": "^5.1.0",
     "pug": "^3.0.2",
     "session-file-store": "^1.5.0",
     "socket.io": "^4.0.1",
