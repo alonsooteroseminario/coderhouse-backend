@@ -99,7 +99,8 @@
                 <th scope="col">Path de Ejecución</th>
                 <th scope="col">Process id</th>
                 <th scope="col">Carpeta corriente</th>
-                </tr>
+                <th scope="col">Numero de CPUs presentes</th>
+            </tr>
         </thead>
         <tbody>
             <tr>
@@ -138,6 +139,7 @@
                 <td>{{info.execPath}}</td> 
                 <td>{{info.pid}}</td> 
                 <td>{{info.cwd}}</td> 
+                <td>{{numCPUs}}</td> 
             </tr>
         </tbody>
     </table>
