@@ -97,7 +97,7 @@ app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static("./public"));
+// app.use(express.static("./public"));
 app.use(cookieParser());
 app.use(session({
   store: MongoStore.create({ 
@@ -149,19 +149,8 @@ app.get('/chat', isAuth, (req, res) => {
 const cluster = require('cluster')
 
 /* --------- INFO ---------- */
-app.get('/info', isAuth, (req, res) => {
-  // console.log(process.argv)
-  // console.log(process.memoryUsage())
+app.get('/info', (req, res) => {
   const numCPUs = require('os').cpus().length
-
-  // for (let i = 0; i < numCPUs; i++) {
-  //   cluster.fork()
-  // }
-
-  // cluster.on('exit', worker => {
-  //   console.log('Worker', worker.process.pid, 'died', new Date().toLocaleString())
-  //   cluster.fork()
-  // })
 
   res.render('info', {
     user: req.user,
@@ -172,43 +161,43 @@ app.get('/info', isAuth, (req, res) => {
   });
 })
 /* --------- RANDOMS ---------- */
-// app.get('/randoms', isAuth, (req, res) => {
-//   const { cant } = req.params;
-//   console.log(cant)
-//   let { url } = req;
+app.get('/randoms', (req, res) => {
+  const { cant } = req.params;
+  console.log(cant)
+  let { url } = req;
 
-//   if (url == `/randoms?cant=${cant}`) {
-//     const computo = fork('./computo.js');
-//     computo.send('start');
+  if (url == `/randoms?cant=${cant}`) {
+    const computo = fork('./computo.js');
+    computo.send('start');
 
-//     const array = [];
-//     if (cant == undefined) {
-//       for (let i = 0; i < 100000000; i++) {
-//         const numero_random = computo;
-//         array.push(numero_random);
-//       }
-//       console.log(array)
+    const array = [];
+    if (cant == undefined) {
+      for (let i = 0; i < 100000000; i++) {
+        const numero_random = computo;
+        array.push(numero_random);
+      }
+      console.log(array)
 
-//       res.render('randoms', {
-//         active: 'randoms',
-//         randoms: array,
-//         cantidad: cant,
-//       })
+      res.render('randoms', {
+        active: 'randoms',
+        randoms: array,
+        cantidad: cant,
+      })
 
-//     }else if (url == `/randoms?cant=${cant}`) {
-//       for (let i = 0; i < cant; i++) {
-//         const numero_random = computo;
-//         array.push(numero_random);
-//       };
+    }else if (url == `/randoms?cant=${cant}`) {
+      for (let i = 0; i < cant; i++) {
+        const numero_random = computo;
+        array.push(numero_random);
+      };
 
-//       res.render('randoms', {
-//         active: 'randoms',
-//         randoms: array,
-//         cantidad: cant,
-//       })
-//     }
-//   }
-// })
+      res.render('randoms', {
+        active: 'randoms',
+        randoms: array,
+        cantidad: cant,
+      })
+    }
+  }
+})
 
 const user = new schema.Entity("users");
 const text = new schema.Entity("text");
