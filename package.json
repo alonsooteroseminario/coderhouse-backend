@@ -6,9 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/server.es6.js",
-    "prod": "./node_modules/.bin/pm2 start src/server.es6.js --name='Server1' --watch",
-    "fork": "./node_modules/.bin/pm2 start src/server.es6.js --name='ServerFork' --watch",
-    "cluster": "./node_modules/.bin/pm2 start src/server.es6.js --name='ServerCluster' --watch -i max",
+    "prod": "pm2 start src/server.es6.js --name='Server' --watch",
+    "fork": "pm2 start src/server.es6.js --name='ServerFork' --watch --",
+    "cluster": "pm2 start src/server.es6.js --name='ServerCluster' --watch -i 1 --",
     "forever": "forever start -w src/server.es6.js"
   },
   "author": "Luis Alonso Otero <alonsooteroseminario@gmail.com>",
