@@ -12,6 +12,8 @@ const archivoDB = new ArchivoDB();
 const UsuarioDB = require('./DB/usuariosDb');
 const usuarioDB = new UsuarioDB();
 const { fork } = require('child_process');
+const compression = require('compression');
+const { logger, loggerWarn, loggerError } = require('./logger')
 /* ------------------ PASSPORT -------------------- */
 const passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -146,19 +148,25 @@ app.get('/chat', isAuth, (req, res) => {
   res.sendFile('./index.html', { root:__dirname })
   
 });
-const cluster = require('cluster')
 
 /* --------- INFO ---------- */
-app.get('/info', (req, res) => {
-  const numCPUs = require('os').cpus().length
-
-  res.render('info', {
-    user: req.user,
-    info: process,
-    argv: process.argv,
-    memoryUsage: process.memoryUsage(),
-    numCPUs: numCPUs,
-  });
+app.get('/info', compression(), (req, res) => {
+  try {
+    logger.info('Mensaje info -----------------> OK');
+    loggerWarn.warn('Mensaje warn -----------------> OK')
+    const numCPUs = require('os').cpus().length
+    res.render('info', {
+      user: req.user,
+      info: process,
+      argv: process.argv,
+      memoryUsage: process.memoryUsage(),
+      numCPUs: numCPUs,
+    });
+  } catch(err) {
+    loggerWarn.warn('Error message: ' + err)
+    logger.info('Error message: ' + err);
+    loggerError.error('Error message: ' + err);
+  }
 })
 /* --------- RANDOMS ---------- */
 app.get('/randoms', (req, res) => {
@@ -257,6 +265,9 @@ process.on('exit', function (code) {
 });
 
 const server = httpServer.listen(port, () => {
-  console.log('El servidor esta corriendo en el puerto: ' + server.address().port);
+  logger.info('El servidor esta corriendo en el puerto: ' + server.address().port);
 });
-server.on('error', err => console.log('Error message: ' + err));
+server.on('error', err => {
+  logger.info('Error message: ' + err); 
+  loggerError.error('Error message: ' + err);
+});
