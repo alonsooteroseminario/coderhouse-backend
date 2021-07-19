@@ -1,0 +1,829 @@
+Statistical profiling result from nobloq-v8.log, (4146 ticks, 16 unaccounted, 0 excluded).
+
+ [Shared libraries]:
+   ticks  total  nonlib   name
+   2922   70.5%          /usr/bin/node
+    544   13.1%          /lib/x86_64-linux-gnu/libc-2.27.so
+    262    6.3%          /lib/x86_64-linux-gnu/libpthread-2.27.so
+     25    0.6%          [vdso]
+     15    0.4%          /usr/lib/x86_64-linux-gnu/libstdc++.so.6.0.25
+      1    0.0%          /lib/x86_64-linux-gnu/libm-2.27.so
+
+ [JavaScript]:
+   ticks  total  nonlib   name
+     31    0.7%    8.2%  LazyCompile: *parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:269:30
+     26    0.6%    6.9%  LazyCompile: *next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:478:32
+     21    0.5%    5.6%  RegExp: [ \t]+$
+     20    0.5%    5.3%  LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+     19    0.5%    5.0%  LazyCompile: *normalizeString path.js:52:25
+     15    0.4%    4.0%  LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+     15    0.4%    4.0%  LazyCompile: *anonymous /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:12:42
+     14    0.3%    3.7%  LazyCompile: *resolve path.js:973:10
+     13    0.3%    3.4%  LazyCompile: *wrap /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:101:22
+     12    0.3%    3.2%  LazyCompile: *castChunk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:52:19
+     10    0.2%    2.7%  LazyCompile: *<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:174:29
+      9    0.2%    2.4%  RegExp: (?:\r\n?|\n).*
+      5    0.1%    1.3%  LazyCompile: *push /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:868:22
+      5    0.1%    1.3%  LazyCompile: *generateList /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:143:38
+      5    0.1%    1.3%  LazyCompile: *appendToBuffer /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:42:42
+      5    0.1%    1.3%  LazyCompile: *WhitespaceControl.Program /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/whitespace-control.js:19:48
+      4    0.1%    1.1%  RegExp: ^(?:\}(~)?\}\})
+      4    0.1%    1.1%  RegExp: \r?\n\s*?$
+      4    0.1%    1.1%  LazyCompile: *hidden internal/errors.js:282:25
+      3    0.1%    0.8%  RegExp: ^(?:[^\x00]*?(?=(\{\{)))
+      3    0.1%    0.8%  RegExp: ^(?:([^\s!"#%-,\.\/;->@\[-\^`\{-~]+(?=([=~}\s\/.)|]))))
+      3    0.1%    0.8%  LazyCompile: *popStack /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:960:30
+      3    0.1%    0.8%  LazyCompile: *anonymous /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:549:49
+      3    0.1%    0.8%  LazyCompile: *SourceNode_add /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:172:51
+      3    0.1%    0.8%  LazyCompile: *SourceNode /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:35:20
+      3    0.1%    0.8%  LazyCompile: *<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:320:22
+      3    0.1%    0.8%  LazyCompile: *<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:130:39
+      2    0.0%    0.5%  RegExp: ^(?:true(?=([~}\s)])))
+      2    0.0%    0.5%  RegExp: ^(?:\|)
+      2    0.0%    0.5%  RegExp: ^(?:\{\{(~)?\{)
+      2    0.0%    0.5%  RegExp: ^(?:\{\{(~)?\s*else\s*(~)?\}\})
+      2    0.0%    0.5%  RegExp: ^(?:\{\{(~)?\^)
+      2    0.0%    0.5%  RegExp: ^(?:\{\{(~)?&)
+      2    0.0%    0.5%  RegExp: ^(?:\{\{(~)?![\s\S]*?\}\})
+      2    0.0%    0.5%  RegExp: ^(?:\()
+      2    0.0%    0.5%  RegExp: ^(?:=)
+      2    0.0%    0.5%  RegExp: ^(?:$)
+      2    0.0%    0.5%  RegExp: (^|\r?\n)\s*?$
+      2    0.0%    0.5%  LazyCompile: *template /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/runtime.js:52:18
+      2    0.0%    0.5%  LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/response.js:989:29
+      2    0.0%    0.5%  LazyCompile: *readPackageScope internal/modules/cjs/loader.js:279:26
+      2    0.0%    0.5%  LazyCompile: *opcode /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:347:26
+      2    0.0%    0.5%  LazyCompile: *next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/index.js:176:16
+      2    0.0%    0.5%  LazyCompile: *lookupProperty /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/runtime.js:118:44
+      2    0.0%    0.5%  LazyCompile: *extend /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/utils.js:28:16
+      2    0.0%    0.5%  LazyCompile: *MustacheStatement /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:215:48
+      2    0.0%    0.5%  LazyCompile: *Module._nodeModulePaths internal/modules/cjs/loader.js:742:37
+      1    0.0%    0.3%  RegExp: ^\s*?(\r?\n|$)
+      1    0.0%    0.3%  RegExp: ^\/info\/?$
+      1    0.0%    0.3%  RegExp: ^\/auth\/facebook\/?$
+      1    0.0%    0.3%  RegExp: ^\/?$
+      1    0.0%    0.3%  RegExp: ^[ \t]*\r?\n?
+      1    0.0%    0.3%  RegExp: ^(?:\}\}\}\})
+      1    0.0%    0.3%  RegExp: ^(?:\{\{\{\{)
+      1    0.0%    0.3%  RegExp: ^(?:\{\{(~)?\s*else\b)
+      1    0.0%    0.3%  RegExp: ^(?:\{\{(~)?\/)
+      1    0.0%    0.3%  RegExp: ^(?:\{\{(~)?\*?)
+      1    0.0%    0.3%  RegExp: ^(?:\{\{(~)?>)
+      1    0.0%    0.3%  RegExp: ^(?:\{\{(~)?#\*?)
+      1    0.0%    0.3%  RegExp: ^(?:\{\{(~)?!--)
+      1    0.0%    0.3%  RegExp: ^(?:\s+)
+      1    0.0%    0.3%  RegExp: ^(?:\))
+      1    0.0%    0.3%  RegExp: ^(?:[^\x00]+)
+      1    0.0%    0.3%  RegExp: ^(?:[\/.])
+      1    0.0%    0.3%  RegExp: ^(?:(~)?\}\})
+      1    0.0%    0.3%  RegExp: \.\d+
+      1    0.0%    0.3%  RegExp: =+$
+      1    0.0%    0.3%  RegExp: ;\s*charset\s*=
+      1    0.0%    0.3%  RegExp: ; *([!#$%&'*+.^_`|~0-9A-Za-z-]+) *= *("(?:[\u000b\u0020\u0021\u0023-\u005b\u005d-\u007e\u0080-\u00ff]|\\[\u000b\u0020-\u00ff])*"|[!#$%&'*+.^_`|~0-9A-Za-z-]+) *
+      1    0.0%    0.3%  RegExp: ([ \t]+$)
+      1    0.0%    0.3%  RegExp: (?:^|\/)\.?\.$
+      1    0.0%    0.3%  LazyCompile: *unsigned32 /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/faker/vendor/mersenne.js:73:23
+      1    0.0%    0.3%  LazyCompile: *toString buffer.js:775:46
+      1    0.0%    0.3%  LazyCompile: *stripFlags /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/helpers.js:52:20
+      1    0.0%    0.3%  LazyCompile: *resolvePath /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:492:36
+      1    0.0%    0.3%  LazyCompile: *require internal/modules/cjs/helpers.js:71:31
+      1    0.0%    0.3%  LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      1    0.0%    0.3%  LazyCompile: *removeListener events.js:451:28
+      1    0.0%    0.3%  LazyCompile: *realpathSync fs.js:1534:22
+      1    0.0%    0.3%  LazyCompile: *readFileSync fs.js:357:22
+      1    0.0%    0.3%  LazyCompile: *read internal/fs/read_file_context.js:79:7
+      1    0.0%    0.3%  LazyCompile: *quotedString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:118:38
+      1    0.0%    0.3%  LazyCompile: *pushStackLiteral /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:877:46
+      1    0.0%    0.3%  LazyCompile: *pushContext /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:437:36
+      1    0.0%    0.3%  LazyCompile: *push /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:79:22
+      1    0.0%    0.3%  LazyCompile: *prepareProgram /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/helpers.js:185:24
+      1    0.0%    0.3%  LazyCompile: *preamble /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:208:30
+      1    0.0%    0.3%  LazyCompile: *nextTick internal/process/task_queues.js:105:18
+      1    0.0%    0.3%  LazyCompile: *lookupOnContext /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:448:44
+      1    0.0%    0.3%  LazyCompile: *join path.js:1033:7
+      1    0.0%    0.3%  LazyCompile: *functionCall /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:113:38
+      1    0.0%    0.3%  LazyCompile: *deserializeObject /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/bson/lib/bson/parser/deserializer.js:43:33
+      1    0.0%    0.3%  LazyCompile: *debug /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/debug/src/debug.js:65:17
+      1    0.0%    0.3%  LazyCompile: *classifySexpr /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:363:40
+      1    0.0%    0.3%  LazyCompile: *basename path.js:1153:11
+      1    0.0%    0.3%  LazyCompile: *appendEscaped /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:416:40
+      1    0.0%    0.3%  LazyCompile: *appendContent /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:375:40
+      1    0.0%    0.3%  LazyCompile: *Writable.write _stream_writable.js:291:36
+      1    0.0%    0.3%  LazyCompile: *SubExpression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:236:40
+      1    0.0%    0.3%  LazyCompile: *SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      1    0.0%    0.3%  LazyCompile: *Module._resolveLookupPaths internal/modules/cjs/loader.js:777:38
+      1    0.0%    0.3%  LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      1    0.0%    0.3%  LazyCompile: *Module._findPath internal/modules/cjs/loader.js:607:28
+      1    0.0%    0.3%  LazyCompile: *Glob._process /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:298:36
+      1    0.0%    0.3%  LazyCompile: *<anonymous> internal/util/debuglog.js:61:18
+      1    0.0%    0.3%  LazyCompile: *<anonymous> internal/util.js:296:24
+      1    0.0%    0.3%  LazyCompile: *<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:505:34
+
+ [C++]:
+   ticks  total  nonlib   name
+
+ [Summary]:
+   ticks  total  nonlib   name
+    361    8.7%   95.8%  JavaScript
+      0    0.0%    0.0%  C++
+    162    3.9%   43.0%  GC
+   3769   90.9%          Shared libraries
+     16    0.4%          Unaccounted
+
+ [C++ entry points]:
+   ticks    cpp   total   name
+
+ [Bottom up (heavy) profile]:
+  Note: percentage shows a share of a particular caller in the total
+  amount of its parent calls.
+  Callers occupying less than 1.0% are not shown.
+
+   ticks parent  name
+   2922   70.5%  /usr/bin/node
+   1608   55.0%    /usr/bin/node
+    200   12.4%      LazyCompile: ~wrapSafe internal/modules/cjs/loader.js:1038:18
+    200  100.0%        LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1092:37
+    200  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+    122   61.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+     78   39.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+    104    6.5%      LazyCompile: ~openSync fs.js:449:18
+    104  100.0%        LazyCompile: ~readFileSync fs.js:357:22
+    103   99.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+     86   83.5%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+     17   16.5%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+     86    5.3%      LazyCompile: ~memoryUsage internal/process/per_thread.js:150:23
+     86  100.0%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/src/server.es6.js:153:33
+     58   67.4%          LazyCompile: ~handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+     58  100.0%            LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/route.js:114:16
+     28   32.6%          LazyCompile: *handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+     28  100.0%            LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/route.js:114:16
+     51    3.2%      LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+     20   39.2%        LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+     20  100.0%          LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      8   40.0%            LazyCompile: ~invokePartial /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/runtime.js:298:23
+      8   40.0%            LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      4   20.0%            LazyCompile: ~_renderTemplate /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:260:18
+     19   37.3%        LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+     19  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+     19  100.0%            LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+     11   21.6%        LazyCompile: ~compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+     11  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+     11  100.0%            LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1    2.0%        LazyCompile: *compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1  100.0%          LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      1  100.0%            LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+     47    2.9%      /usr/bin/node
+      5   10.6%        LazyCompile: *quotedString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:118:38
+      3   60.0%          LazyCompile: ~pushSource /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:881:34
+      1   33.3%            LazyCompile: ~compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1   33.3%            LazyCompile: ~appendEscaped /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:416:40
+      1   33.3%            LazyCompile: ~append /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:394:26
+      2   40.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      2  100.0%            LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      4    8.5%        LazyCompile: *PathExpression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:289:42
+      3   75.0%          LazyCompile: *MustacheStatement /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:215:48
+      3  100.0%            LazyCompile: *Program /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:113:28
+      1   25.0%          LazyCompile: *SubExpression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:236:40
+      1  100.0%            LazyCompile: ~MustacheStatement /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:215:48
+      3    6.4%        LazyCompile: ~readPackage internal/modules/cjs/loader.js:245:21
+      3  100.0%          LazyCompile: ~readPackageScope internal/modules/cjs/loader.js:279:26
+      3  100.0%            LazyCompile: ~trySelf internal/modules/cjs/loader.js:396:17
+      3    6.4%        LazyCompile: *Glob._process /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:298:36
+      3  100.0%          LazyCompile: ~Glob._processGlobStar2 /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:631:45
+      3  100.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:625:43
+      2    4.3%        LazyCompile: ~wrapSafe internal/modules/cjs/loader.js:1038:18
+      2  100.0%          LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1092:37
+      2  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      2    4.3%        LazyCompile: ~objectLiteral /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:123:40
+      2  100.0%          LazyCompile: ~objectLiteral /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:1002:40
+      2  100.0%            LazyCompile: ~setupHelperArgs /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:1104:44
+      2    4.3%        LazyCompile: ~get internal/modules/esm/module_map.js:13:6
+      2  100.0%          LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      2  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      2    4.3%        LazyCompile: ~emit events.js:263:44
+      2  100.0%          LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/sdam/monitor.js:218:62
+      2  100.0%            LazyCompile: ~emit events.js:263:44
+      2    4.3%        LazyCompile: *Module._findPath internal/modules/cjs/loader.js:607:28
+      2  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+      1   50.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      1   50.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      1    2.1%        LazyCompile: ~wrapHelpersToPassLookupProperty /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/runtime.js:359:41
+      1  100.0%          LazyCompile: ~ret._setup /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/runtime.js:217:25
+      1  100.0%            LazyCompile: *ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/runtime.js:188:15
+      1    2.1%        LazyCompile: ~set internal/modules/esm/module_map.js:17:6
+      1  100.0%          LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      1    2.1%        LazyCompile: ~scopedId /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/ast.js:14:32
+      1  100.0%          LazyCompile: ~PathExpression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:289:42
+      1  100.0%            LazyCompile: ~accept /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:101:26
+      1    2.1%        LazyCompile: ~readPackageScope internal/modules/cjs/loader.js:279:26
+      1  100.0%          LazyCompile: ~trySelf internal/modules/cjs/loader.js:396:17
+      1  100.0%            LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+      1    2.1%        LazyCompile: ~pathToFileURL internal/url.js:1374:23
+      1  100.0%          LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      1    2.1%        LazyCompile: ~parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/minimatch/minimatch.js:271:16
+      1  100.0%          /usr/bin/node
+      1  100.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/minimatch/minimatch.js:181:26
+      1    2.1%        LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:478:32
+      1  100.0%          LazyCompile: ~lex /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:525:30
+      1  100.0%            LazyCompile: ~lex /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:295:25
+      1    2.1%        LazyCompile: ~isIPv6 internal/net.js:34:16
+      1  100.0%          LazyCompile: ~isIP internal/net.js:38:14
+      1  100.0%            LazyCompile: ~lookupAndConnect net.js:984:26
+      1    2.1%        LazyCompile: ~header /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/response.js:754:29
+      1  100.0%          LazyCompile: ~contentType /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/response.js:594:32
+      1  100.0%            LazyCompile: ~send /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/response.js:107:25
+      1    2.1%        LazyCompile: ~format /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/content-type/index.js:65:17
+      1  100.0%          LazyCompile: ~setCharset /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/utils.js:250:41
+      1  100.0%            LazyCompile: ~send /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/response.js:107:25
+      1    2.1%        LazyCompile: ~expressInit /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/middleware/init.js:29:30
+      1  100.0%          LazyCompile: ~handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%            LazyCompile: ~trim_prefix /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/index.js:288:23
+      1    2.1%        LazyCompile: ~cookieParser /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/cookie-parser/index.js:44:32
+      1  100.0%          LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/index.js:275:64
+      1  100.0%            LazyCompile: *next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/index.js:176:16
+      1    2.1%        LazyCompile: ~append /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:394:26
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      1    2.1%        LazyCompile: ~ServerDescription /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/sdam/server_description.js:59:14
+      1  100.0%          LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/sdam/server.js:150:51
+      1  100.0%            LazyCompile: *emit events.js:263:44
+      1    2.1%        LazyCompile: ~Glob._process /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:298:36
+      1  100.0%          LazyCompile: ~Glob._processGlobStar2 /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:631:45
+      1  100.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:625:43
+      1    2.1%        LazyCompile: ~FastBuffer internal/buffer.js:945:1
+      1  100.0%          LazyCompile: ~createUnsafeBuffer buffer.js:147:28
+      1  100.0%            LazyCompile: ~allocUnsafeSlow buffer.js:393:50
+      1    2.1%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/minimatch/minimatch.js:181:26
+      1  100.0%          /usr/bin/node
+      1  100.0%            LazyCompile: ~make /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/minimatch/minimatch.js:142:15
+      1    2.1%        LazyCompile: *realpathSync fs.js:1534:22
+      1  100.0%          LazyCompile: ~toRealPath internal/modules/cjs/loader.js:362:20
+      1  100.0%            LazyCompile: ~tryFile internal/modules/cjs/loader.js:353:17
+      1    2.1%        LazyCompile: *next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:478:32
+      1  100.0%          LazyCompile: *parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:269:30
+      1  100.0%            LazyCompile: ~parseWithoutProcessing /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:33:32
+      1    2.1%        LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%          LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      1    2.1%        /usr/bin/node
+      1  100.0%          LazyCompile: ~Glob._processReaddir2 /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:375:44
+      1  100.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:370:43
+     38    2.4%      LazyCompile: ~cpus os.js:103:14
+     38  100.0%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/src/server.es6.js:153:33
+     38  100.0%          LazyCompile: ~handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+     38  100.0%            LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/route.js:114:16
+     38    2.4%      LazyCompile: *next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:478:32
+     34   89.5%        LazyCompile: *parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:269:30
+     31   91.2%          LazyCompile: ~parseWithoutProcessing /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:33:32
+     31  100.0%            LazyCompile: ~parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:51:15
+      3    8.8%          LazyCompile: *compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      3  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      4   10.5%        LazyCompile: ~lex /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:525:30
+      4  100.0%          LazyCompile: *parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:269:30
+      4  100.0%            LazyCompile: ~parseWithoutProcessing /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:33:32
+     37    2.3%      LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+     36   97.3%        LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+     32   88.9%          LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+     26   81.3%            LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+      5   15.6%            LazyCompile: ~SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      1    3.1%            LazyCompile: *SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      2    5.6%          LazyCompile: ~SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      2  100.0%            /usr/bin/node
+      2    5.6%          LazyCompile: *SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      2  100.0%            /usr/bin/node
+      1    2.7%        LazyCompile: ~SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      1  100.0%          /usr/bin/node
+      1  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+     35    2.2%      LazyCompile: ~writevGeneric internal/stream_base_commons.js:116:23
+     35  100.0%        LazyCompile: ~Socket._writev net.js:792:36
+     35  100.0%          LazyCompile: ~clearBuffer _stream_writable.js:497:21
+     35  100.0%            LazyCompile: ~Writable.uncork _stream_writable.js:328:37
+     33    2.1%      LazyCompile: ~readSync fs.js:532:18
+     26   78.8%        LazyCompile: ~tryReadSync fs.js:345:21
+     26  100.0%          LazyCompile: ~readFileSync fs.js:357:22
+     26  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      7   21.2%        LazyCompile: *readFileSync fs.js:357:22
+      7  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      7  100.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+     29    1.8%      LazyCompile: ~writeSync fs.js:650:19
+     29  100.0%        LazyCompile: ~actualWrite /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/sonic-boom/index.js:335:22
+     29  100.0%          LazyCompile: ~SonicBoom.write /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/sonic-boom/index.js:210:38
+     29  100.0%            LazyCompile: ~write /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/pino/lib/proto.js:164:16
+     24    1.5%      LazyCompile: ~closeSync fs.js:415:19
+     13   54.2%        LazyCompile: ~readFileSync fs.js:357:22
+     13  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+     10   76.9%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      3   23.1%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+     11   45.8%        LazyCompile: *readFileSync fs.js:357:22
+     11  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+     11  100.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+     23    1.4%      LazyCompile: ~stat internal/modules/cjs/loader.js:139:14
+     17   73.9%        LazyCompile: ~tryFile internal/modules/cjs/loader.js:353:17
+     17  100.0%          LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:369:23
+     16   94.1%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      1    5.9%            LazyCompile: ~tryPackage internal/modules/cjs/loader.js:307:20
+      6   26.1%        LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      6  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+      6  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+     23    1.4%      LazyCompile: ~hash /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:596:14
+     13   56.5%        LazyCompile: ~isModified /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:425:24
+      9   69.2%          LazyCompile: ~shouldSetCookie /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:464:29
+      9  100.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:220:28
+      4   30.8%          LazyCompile: ~shouldSave /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:440:24
+      4  100.0%            LazyCompile: ~end /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:250:27
+     10   43.5%        LazyCompile: ~generate /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:363:22
+     10  100.0%          LazyCompile: ~session /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:179:26
+      8   80.0%            LazyCompile: ~handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+      2   20.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/index.js:275:64
+     23    1.4%      LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+     22   95.7%        LazyCompile: ~nativeModuleRequire internal/bootstrap/loaders.js:297:29
+      2    9.1%          LazyCompile: ~setupPrepareStackTrace internal/bootstrap/node.js:251:32
+      2  100.0%            Eval: ~<anonymous> internal/bootstrap/node.js:1:1
+      2    9.1%          Eval: ~<anonymous> stream.js:1:1
+      2  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      2    9.1%          Eval: ~<anonymous> internal/bootstrap/node.js:1:1
+      1    4.5%          LazyCompile: ~setupProcessObject internal/bootstrap/node.js:270:28
+      1  100.0%            Eval: ~<anonymous> internal/bootstrap/node.js:1:1
+      1    4.5%          LazyCompile: ~setupBuffer internal/bootstrap/node.js:329:21
+      1  100.0%            Eval: ~<anonymous> internal/bootstrap/node.js:1:1
+      1    4.5%          LazyCompile: ~readFile fs.js:294:18
+      1  100.0%            LazyCompile: ~go$readFile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/graceful-fs/graceful-fs.js:117:26
+      1    4.5%          LazyCompile: ~initializeCJSLoader internal/bootstrap/pre_execution.js:399:29
+      1  100.0%            LazyCompile: ~prepareMainThreadExecution internal/bootstrap/pre_execution.js:14:36
+      1    4.5%          Eval: ~<anonymous> url.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> tls.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> net.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> internal/util/inspect.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> internal/url.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> internal/source_map/source_map_cache.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> internal/process/task_queues.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> internal/modules/esm/loader.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> internal/main/run_main_module.js:1:1
+      1    4.5%          Eval: ~<anonymous> internal/child_process.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> http.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.5%          Eval: ~<anonymous> crypto.js:1:1
+      1  100.0%            LazyCompile: ~compileForInternalLoader internal/bootstrap/loaders.js:264:27
+      1    4.3%        LazyCompile: ~compileForPublicLoader internal/bootstrap/loaders.js:213:25
+      1  100.0%          LazyCompile: ~loadNativeModule internal/modules/cjs/helpers.js:20:26
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+     20    1.2%      LazyCompile: ~statSync fs.js:1004:18
+     20  100.0%        LazyCompile: ~tryStat /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/view.js:174:17
+     20  100.0%          LazyCompile: ~resolve /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/view.js:146:42
+     20  100.0%            LazyCompile: ~lookup /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/view.js:104:40
+     20    1.2%      LazyCompile: *lookupOnContext /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:448:44
+     20  100.0%        LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+     14   70.0%          LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+     14  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      4   20.0%          LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      4  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      2   10.0%          LazyCompile: *compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      2  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+     18    1.1%      LazyCompile: ~Socket._destroy net.js:652:37
+     18  100.0%        LazyCompile: ~destroy internal/streams/destroy.js:5:17
+     18  100.0%          LazyCompile: ~afterShutdown net.js:426:23
+     17    1.1%      LazyCompile: ~readPackage internal/modules/cjs/loader.js:245:21
+      9   52.9%        LazyCompile: ~readPackageExports internal/modules/cjs/loader.js:302:28
+      9  100.0%          LazyCompile: ~applyExports internal/modules/cjs/loader.js:441:22
+      9  100.0%            LazyCompile: ~resolveExports internal/modules/cjs/loader.js:498:24
+      5   29.4%        LazyCompile: ~readPackageMain internal/modules/cjs/loader.js:297:25
+      5  100.0%          LazyCompile: ~tryPackage internal/modules/cjs/loader.js:307:20
+      4   80.0%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      1   20.0%            LazyCompile: *Module._findPath internal/modules/cjs/loader.js:607:28
+      3   17.6%        LazyCompile: ~readPackageScope internal/modules/cjs/loader.js:279:26
+      3  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      2   66.7%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      1   33.3%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+     42    1.4%    LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+     20   47.6%      LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+     20  100.0%        LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+     17   85.0%          LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+     17  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      2   10.0%          LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      2  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1    5.0%          LazyCompile: *compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      9   21.4%      LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      9  100.0%        LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      5   55.6%          LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      5  100.0%            /usr/bin/node
+      3   33.3%          LazyCompile: ~_renderTemplate /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:260:18
+      3  100.0%            LazyCompile: ~render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      1   11.1%          LazyCompile: ~invokePartial /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/runtime.js:298:23
+      1  100.0%            LazyCompile: *invokePartialWrapper /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/runtime.js:70:32
+      6   14.3%      LazyCompile: ~compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      6  100.0%        LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      5   83.3%          LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      5  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      1   16.7%          LazyCompile: ~compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      1  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      5   11.9%      LazyCompile: *compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      5  100.0%        LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      5  100.0%          LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      5  100.0%            /usr/bin/node
+      2    4.8%      LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      2  100.0%        LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      2  100.0%          LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      2  100.0%            LazyCompile: ~_renderTemplate /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:260:18
+     40    1.4%    LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+     39   97.5%      LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+     34   87.2%        LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+     28   82.4%          LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+     18   64.3%            LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+      5   17.9%            LazyCompile: ~SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      5   17.9%            LazyCompile: *SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      3    8.8%          LazyCompile: ~SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      3  100.0%            /usr/bin/node
+      3    8.8%          LazyCompile: *SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      3  100.0%            /usr/bin/node
+      3    7.7%        LazyCompile: ~SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      3  100.0%          /usr/bin/node
+      3  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      2    5.1%        LazyCompile: *SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      2  100.0%          /usr/bin/node
+      2  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1    2.5%      LazyCompile: ~SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      1  100.0%        /usr/bin/node
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: ~compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+
+    544   13.1%  /lib/x86_64-linux-gnu/libc-2.27.so
+    328   60.3%    LazyCompile: *cpus os.js:103:14
+    328  100.0%      LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/src/server.es6.js:153:33
+    207   63.1%        LazyCompile: ~handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+    207  100.0%          LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/route.js:114:16
+    207  100.0%            LazyCompile: ~compression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/compression/index.js:59:31
+    121   36.9%        LazyCompile: *handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+    121  100.0%          LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/route.js:114:16
+    121  100.0%            LazyCompile: ~compression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/compression/index.js:59:31
+     84   15.4%    /usr/bin/node
+     25   29.8%      /usr/bin/node
+      4   16.0%        LazyCompile: *quotedString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:118:38
+      2   50.0%          LazyCompile: ~pushSource /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:881:34
+      2  100.0%            LazyCompile: ~appendEscaped /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:416:40
+      1   25.0%          LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:130:39
+      1  100.0%            LazyCompile: *setupHelper /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:1020:36
+      1   25.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      4   16.0%        LazyCompile: *parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:269:30
+      4  100.0%          LazyCompile: ~parseWithoutProcessing /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:33:32
+      4  100.0%            LazyCompile: ~parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:51:15
+      2    8.0%        LazyCompile: ~pathToFileURL internal/url.js:1374:23
+      1   50.0%          LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      1   50.0%          LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      1  100.0%            LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+      1    4.0%        LazyCompile: ~set maxAge /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/session/cookie.js:83:13
+      1  100.0%          /usr/bin/node
+      1  100.0%            LazyCompile: ~Cookie /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/session/cookie.js:25:46
+      1    4.0%        LazyCompile: ~receiveResponse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/cmap/stream_description.js:28:18
+      1  100.0%          LazyCompile: ~set ismaster /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/cmap/connection.js:108:15
+      1  100.0%            /usr/bin/node
+      1    4.0%        LazyCompile: ~readPackage internal/modules/cjs/loader.js:245:21
+      1  100.0%          LazyCompile: ~readPackageScope internal/modules/cjs/loader.js:279:26
+      1  100.0%            LazyCompile: ~trySelf internal/modules/cjs/loader.js:396:17
+      1    4.0%        LazyCompile: ~processTicksAndRejections internal/process/task_queues.js:69:35
+      1    4.0%        LazyCompile: ~parseConnectionString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/uri_parser.js:560:31
+      1  100.0%          LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/uri_parser.js:93:35
+      1  100.0%            LazyCompile: ~onresolve dns.js:198:19
+      1    4.0%        LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:478:32
+      1  100.0%          LazyCompile: ~lex /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:525:30
+      1  100.0%            LazyCompile: ~lex /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:295:25
+      1    4.0%        LazyCompile: ~getOwn internal/bootstrap/loaders.js:149:16
+      1  100.0%          LazyCompile: ~syncExports internal/bootstrap/loaders.js:252:14
+      1  100.0%            LazyCompile: ~<anonymous> internal/bootstrap/loaders.js:238:15
+      1    4.0%        LazyCompile: ~_pathToPositionalSyntax /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/schema.js:831:33
+      1  100.0%          LazyCompile: ~Schema.path /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/schema.js:618:33
+      1  100.0%            LazyCompile: ~add /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/schema.js:454:36
+      1    4.0%        LazyCompile: ~_getTemplateName /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:322:19
+      1  100.0%          LazyCompile: ~getPartials /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:52:20
+      1  100.0%            /usr/bin/node
+      1    4.0%        LazyCompile: ~StateMachine.ctor /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/statemachine.js:34:29
+      1  100.0%          Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/internal.js:1:1
+      1  100.0%            LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1092:37
+      1    4.0%        LazyCompile: ~FastBuffer internal/buffer.js:945:1
+      1  100.0%          LazyCompile: ~createUnsafeBuffer buffer.js:147:28
+      1  100.0%            LazyCompile: ~createPool buffer.js:156:20
+      1    4.0%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/debug/src/node.js:124:55
+      1  100.0%          /usr/bin/node
+      1  100.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/debug/src/node.js:1:1
+      1    4.0%        LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      1  100.0%          /usr/bin/node
+      1    4.0%        LazyCompile: *appendEscaped /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:416:40
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      1    4.0%        LazyCompile: *SubExpression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:236:40
+      1  100.0%          LazyCompile: ~MustacheStatement /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:215:48
+      1  100.0%            LazyCompile: *Program /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:113:28
+      5    6.0%      LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      2   40.0%        LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      2  100.0%          LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      2  100.0%            LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      1   20.0%        LazyCompile: ~compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1   20.0%        LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1   20.0%        LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%          LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      2    2.4%      LazyCompile: ~inflight /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/inflight/inflight.js:7:19
+      2  100.0%        LazyCompile: ~wrapper /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/wrappy/wrappy.js:19:19
+      2  100.0%          LazyCompile: ~Glob._readdir /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:525:36
+      2  100.0%            LazyCompile: ~Glob._processGlobStar /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:623:44
+      2    2.4%      LazyCompile: ~Faker /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/faker/lib/index.js:24:16
+      2  100.0%        Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/faker/index.js:1:1
+      2  100.0%          LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1092:37
+      2  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      2    2.4%      LazyCompile: *realpathSync fs.js:1534:22
+      2  100.0%        LazyCompile: ~toRealPath internal/modules/cjs/loader.js:362:20
+      2  100.0%          LazyCompile: ~tryFile internal/modules/cjs/loader.js:353:17
+      2  100.0%            LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:369:23
+      2    2.4%      LazyCompile: *readPackageScope internal/modules/cjs/loader.js:279:26
+      1   50.0%        LazyCompile: ~trySelf internal/modules/cjs/loader.js:396:17
+      1  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+      1  100.0%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      1   50.0%        LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      1  100.0%          LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      2    2.4%      LazyCompile: *anonymous /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:12:42
+      2  100.0%        LazyCompile: *parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:269:30
+      2  100.0%          LazyCompile: ~parseWithoutProcessing /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:33:32
+      2  100.0%            LazyCompile: ~parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:51:15
+      1    1.2%      LazyCompile: ~writeCommand /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/cmap/message_stream.js:51:15
+      1  100.0%        LazyCompile: ~write /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/cmap/connection.js:297:15
+      1  100.0%          LazyCompile: ~_command /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/wireprotocol/command.js:41:18
+      1  100.0%            LazyCompile: ~command /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/wireprotocol/command.js:19:17
+      1    1.2%      LazyCompile: ~setup /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/engine.io/node_modules/debug/src/common.js:7:15
+      1  100.0%        Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/engine.io/node_modules/debug/src/node.js:1:1
+      1  100.0%          LazyCompile: *Module._compile internal/modules/cjs/loader.js:1092:37
+      1  100.0%            LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      1    1.2%      LazyCompile: ~session /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:179:26
+      1  100.0%        LazyCompile: ~handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%          LazyCompile: ~trim_prefix /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/index.js:288:23
+      1  100.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/index.js:275:64
+      1    1.2%      LazyCompile: ~serializeInto /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/bson/lib/bson/parser/serializer.js:674:43
+      1  100.0%        LazyCompile: ~serializeObject /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/bson/lib/bson/parser/serializer.js:320:31
+      1  100.0%          LazyCompile: ~serializeInto /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/bson/lib/bson/parser/serializer.js:674:43
+      1  100.0%            LazyCompile: ~serialize /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/bson/lib/bson/bson.js:47:46
+      1    1.2%      LazyCompile: ~selectServer /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/sdam/topology.js:380:15
+      1  100.0%        LazyCompile: ~connect /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/sdam/topology.js:250:10
+      1  100.0%          LazyCompile: ~createTopology /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/operations/connect.js:486:24
+      1  100.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/operations/connect.js:281:25
+      1    1.2%      LazyCompile: ~resolve path.js:973:10
+      1  100.0%        LazyCompile: ~Module._nodeModulePaths internal/modules/cjs/loader.js:742:37
+      1  100.0%          LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      1  100.0%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      1    1.2%      LazyCompile: ~render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/response.js:989:29
+      1  100.0%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/src/server.es6.js:153:33
+      1  100.0%          LazyCompile: ~handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+      1  100.0%            LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/route.js:114:16
+      1    1.2%      LazyCompile: ~render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      1  100.0%        /usr/bin/node
+      1    1.2%      LazyCompile: ~processTimers internal/timers.js:477:25
+      1    1.2%      LazyCompile: ~prepareMainThreadExecution internal/bootstrap/pre_execution.js:14:36
+      1  100.0%        Eval: ~<anonymous> internal/main/run_main_module.js:1:1
+      1    1.2%      LazyCompile: ~prepareHandshakeDocument /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/connection/connect.js:159:34
+      1  100.0%        LazyCompile: ~performInitialHandshake /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/connection/connect.js:70:33
+      1  100.0%          LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/connection/connect.js:30:54
+      1  100.0%            LazyCompile: ~callback /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/connection/connect.js:275:28
+      1    1.2%      LazyCompile: ~prepareHandshakeDocument /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/connection/connect.js:159:34
+      1  100.0%        LazyCompile: ~performInitialHandshake /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/connection/connect.js:70:33
+      1  100.0%          LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/connection/connect.js:30:54
+      1  100.0%            LazyCompile: ~callback /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/connection/connect.js:275:28
+      1    1.2%      LazyCompile: ~onConnectSecure _tls_wrap.js:1487:25
+      1  100.0%        LazyCompile: ~emit events.js:263:44
+      1  100.0%          LazyCompile: ~TLSSocket._finishInit _tls_wrap.js:910:43
+      1  100.0%            LazyCompile: ~ssl.onhandshakedone _tls_wrap.js:708:27
+      1    1.2%      LazyCompile: ~functionCall /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:113:38
+      1  100.0%        LazyCompile: ~invokeKnownHelper /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:682:48
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1    1.2%      LazyCompile: ~emitReadable_ _stream_readable.js:552:23
+      1  100.0%        LazyCompile: ~processTicksAndRejections internal/process/task_queues.js:69:35
+      1    1.2%      LazyCompile: ~dirname path.js:1127:10
+      1  100.0%        LazyCompile: ~Module internal/modules/cjs/loader.js:156:16
+      1  100.0%          LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      1  100.0%            LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+      1    1.2%      LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1  100.0%        LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      1  100.0%          LazyCompile: ~_renderTemplate /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:260:18
+      1  100.0%            LazyCompile: ~render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      1    1.2%      LazyCompile: ~appendEscaped /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:416:40
+      1  100.0%        LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1    1.2%      LazyCompile: ~_writeRaw _http_outgoing.js:307:19
+      1  100.0%        LazyCompile: ~_send _http_outgoing.js:282:49
+      1  100.0%          LazyCompile: ~end _http_outgoing.js:726:45
+      1  100.0%            LazyCompile: ~end /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-session/index.js:250:27
+      1    1.2%      LazyCompile: ~_flushOutput _http_outgoing.js:835:63
+      1  100.0%        LazyCompile: ~_writeRaw _http_outgoing.js:307:19
+      1  100.0%          LazyCompile: ~_send _http_outgoing.js:282:49
+      1  100.0%            LazyCompile: ~write_ _http_outgoing.js:627:16
+      1    1.2%      LazyCompile: ~_ensureIndexes /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/model.js:1595:24
+      1  100.0%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/model.js:1557:52
+      1  100.0%          LazyCompile: ~promiseOrCallback /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/helpers/promiseOrCallback.js:7:44
+      1  100.0%            LazyCompile: ~Mongoose._promiseOrCallback /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/index.js:1148:49
+      1    1.2%      LazyCompile: ~ServerDescription /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/sdam/server_description.js:59:14
+      1  100.0%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/sdam/topology.js:139:48
+      1  100.0%          /usr/bin/node
+      1  100.0%            LazyCompile: ~Topology /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/sdam/topology.js:103:14
+      1    1.2%      LazyCompile: ~Module._extensions..json internal/modules/cjs/loader.js:1163:39
+      1  100.0%        LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      1  100.0%          LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      1  100.0%            LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+      1    1.2%      LazyCompile: ~IncomingMessage _http_incoming.js:41:25
+      1  100.0%        LazyCompile: ~parserOnHeadersComplete _http_common.js:74:33
+      1    1.2%      LazyCompile: ~Glob._processReaddir2 /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:375:44
+      1  100.0%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/glob/glob.js:370:43
+      1  100.0%          LazyCompile: *prepareMustache /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/helpers.js:99:25
+      1  100.0%            LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/inflight/inflight.js:38:35
+      1    1.2%      LazyCompile: ~Db /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/db.js:142:12
+      1  100.0%        LazyCompile: ~MongoClient.db /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/mongo_client.js:295:36
+      1  100.0%          LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/build/main/lib/MongoStore.js:125:19
+      1  100.0%            /usr/bin/node
+      1    1.2%      LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:130:39
+      1  100.0%        /usr/bin/node
+      1  100.0%          LazyCompile: ~objectLiteral /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:123:40
+      1  100.0%            LazyCompile: ~objectLiteral /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:1002:40
+      1    1.2%      LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/operations/command_v2.js:95:59
+      1  100.0%        LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/cmap/connection_pool.js:345:21
+      1  100.0%          LazyCompile: ~handleOperationResult /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/sdam/server.js:520:40
+      1  100.0%            LazyCompile: ~messageHandler /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/cmap/connection.js:220:33
+      1    1.2%      LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/cmap/connection_pool.js:345:21
+      1  100.0%        LazyCompile: ~handleOperationResult /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/core/sdam/server.js:520:40
+      1  100.0%          LazyCompile: ~messageHandler /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/connect-mongo/node_modules/mongodb/lib/cmap/connection.js:220:33
+      1  100.0%            LazyCompile: ~emit events.js:263:44
+      1    1.2%      LazyCompile: *updateOutgoingData _http_server.js:484:28
+      1  100.0%        LazyCompile: ~_flushOutput _http_outgoing.js:835:63
+      1  100.0%          LazyCompile: ~_writeRaw _http_outgoing.js:307:19
+      1  100.0%            LazyCompile: ~_send _http_outgoing.js:282:49
+      1    1.2%      LazyCompile: *stat internal/modules/cjs/loader.js:139:14
+      1  100.0%        LazyCompile: ~tryFile internal/modules/cjs/loader.js:353:17
+      1  100.0%          LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:369:23
+      1  100.0%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      1    1.2%      LazyCompile: *resolve path.js:973:10
+      1  100.0%        LazyCompile: *render /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:150:15
+      1  100.0%          LazyCompile: ~renderView /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:183:19
+      1  100.0%            /usr/bin/node
+      1    1.2%      LazyCompile: *readFile fs.js:294:18
+      1  100.0%        LazyCompile: ~go$readFile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/graceful-fs/graceful-fs.js:117:26
+      1  100.0%          LazyCompile: ~readFile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/graceful-fs/graceful-fs.js:111:21
+      1  100.0%            LazyCompile: *getTemplate /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express-handlebars/lib/express-handlebars.js:108:20
+      1    1.2%      LazyCompile: *processTicksAndRejections internal/process/task_queues.js:69:35
+      1    1.2%      LazyCompile: *popStack /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:960:30
+      1  100.0%        LazyCompile: ~append /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:394:26
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: ~compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1    1.2%      LazyCompile: *invokeAmbiguous /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:699:44
+      1  100.0%        LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%          LazyCompile: *compileInput /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:507:24
+      1  100.0%            LazyCompile: ~ret /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/compiler.js:515:15
+      1    1.2%      LazyCompile: *get internal/url.js:612:8
+      1  100.0%        LazyCompile: ~format internal/url.js:396:27
+      1  100.0%          LazyCompile: ~toString internal/url.js:445:29
+      1  100.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      1    1.2%      LazyCompile: *castChunk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:52:19
+      1  100.0%        LazyCompile: *lookupOnContext /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:448:44
+      1  100.0%          LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%            LazyCompile: *compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      1    1.2%      LazyCompile: *SourceNode_prepend /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:197:59
+      1  100.0%        LazyCompile: *setupHelper /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:1020:36
+      1  100.0%          LazyCompile: ~invokeKnownHelper /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:682:48
+      1  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1    1.2%      LazyCompile: *SourceNode_add /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:172:51
+      1  100.0%        LazyCompile: *functionCall /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/code-gen.js:113:38
+      1  100.0%          LazyCompile: ~invokePartial /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:725:40
+      1  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1    1.2%      LazyCompile: *<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:320:22
+      1  100.0%        LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+      1  100.0%          LazyCompile: *SourceNode_walk /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:221:53
+      1  100.0%            LazyCompile: ~SourceNode_toString /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:318:61
+      1    1.2%      LazyCompile: *<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/source-map/lib/source-node.js:174:29
+      1  100.0%        LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1  100.0%          LazyCompile: ~compileChildren /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:805:44
+      1  100.0%            LazyCompile: *compile /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/javascript-compiler.js:73:28
+      1    1.2%      Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/normalizr/dist/normalizr.js:1:1
+      1  100.0%        LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1092:37
+      1  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      1  100.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+      1    1.2%      Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/faker/index.js:1:1
+      1  100.0%        LazyCompile: ~Module._compile internal/modules/cjs/loader.js:1092:37
+      1  100.0%          LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+      1  100.0%            LazyCompile: ~Module.load internal/modules/cjs/loader.js:974:33
+     45    8.3%    LazyCompile: *stat internal/modules/cjs/loader.js:139:14
+     20   44.4%      LazyCompile: ~tryFile internal/modules/cjs/loader.js:353:17
+     19   95.0%        LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:369:23
+     18   94.7%          LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+     18  100.0%            LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+      1    5.3%          LazyCompile: ~tryPackage internal/modules/cjs/loader.js:307:20
+      1  100.0%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      1    5.0%        LazyCompile: ~tryPackage internal/modules/cjs/loader.js:307:20
+      1  100.0%          LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      1  100.0%            LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+     16   35.6%      LazyCompile: *Module._findPath internal/modules/cjs/loader.js:607:28
+     16  100.0%        LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+      9   56.3%          LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      9  100.0%            LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+      7   43.8%          LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      7  100.0%            LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+      9   20.0%      LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      9  100.0%        LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+      7   77.8%          LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      7  100.0%            LazyCompile: *require internal/modules/cjs/helpers.js:71:31
+      2   22.2%          LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+      2  100.0%            LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+     23    4.2%    LazyCompile: *realpathSync fs.js:1534:22
+     23  100.0%      LazyCompile: ~toRealPath internal/modules/cjs/loader.js:362:20
+     15   65.2%        LazyCompile: ~tryFile internal/modules/cjs/loader.js:353:17
+     12   80.0%          LazyCompile: ~tryExtensions internal/modules/cjs/loader.js:369:23
+      8   66.7%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      4   33.3%            LazyCompile: ~tryPackage internal/modules/cjs/loader.js:307:20
+      3   20.0%          LazyCompile: ~tryPackage internal/modules/cjs/loader.js:307:20
+      3  100.0%            LazyCompile: ~Module._findPath internal/modules/cjs/loader.js:607:28
+      8   34.8%        LazyCompile: *Module._findPath internal/modules/cjs/loader.js:607:28
+      8  100.0%          LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+      7   87.5%            LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      1   12.5%            LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+     19    3.5%    LazyCompile: *Module._findPath internal/modules/cjs/loader.js:607:28
+     19  100.0%      LazyCompile: ~Module._resolveFilename internal/modules/cjs/loader.js:901:35
+     11   57.9%        LazyCompile: ~Module._load internal/modules/cjs/loader.js:823:24
+     11  100.0%          LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+     11  100.0%            LazyCompile: ~require internal/modules/cjs/helpers.js:71:31
+      8   42.1%        LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+      7   87.5%          LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+      7  100.0%            LazyCompile: ~require internal/modules/cjs/helpers.js:71:31
+      1   12.5%          LazyCompile: *require internal/modules/cjs/helpers.js:71:31
+      1  100.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/src/routes/products.js:1:1
+
+    262    6.3%  /lib/x86_64-linux-gnu/libpthread-2.27.so
+    136   51.9%    /usr/bin/node
+    128   94.1%      LazyCompile: ~removeListener events.js:451:28
+    128  100.0%        LazyCompile: ~Readable.removeListener _stream_readable.js:901:45
+    128  100.0%          LazyCompile: ~detachSocket _http_server.js:222:62
+    128  100.0%            LazyCompile: ~resOnFinish _http_server.js:676:21
+      3    2.2%      /usr/bin/node
+      1   33.3%        LazyCompile: ~FastBuffer internal/buffer.js:945:1
+      1  100.0%          LazyCompile: ~createUnsafeBuffer buffer.js:147:28
+      1  100.0%            LazyCompile: ~allocate buffer.js:408:18
+      1   33.3%        LazyCompile: *next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:478:32
+      1  100.0%          LazyCompile: *parse /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/parser.js:269:30
+      1  100.0%            LazyCompile: ~parseWithoutProcessing /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/handlebars/dist/cjs/handlebars/compiler/base.js:33:32
+     47   17.9%    LazyCompile: *readFileSync fs.js:357:22
+     47  100.0%      LazyCompile: ~Module._extensions..js internal/modules/cjs/loader.js:1147:37
+     47  100.0%        LazyCompile: *Module._load internal/modules/cjs/loader.js:823:24
+     33   70.2%          LazyCompile: *require internal/modules/cjs/helpers.js:71:31
+      3    9.1%            LazyCompile: ~module.exports /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mquery/node_modules/bluebird/js/release/promise.js:2:26
+      2    6.1%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/schema/index.js:1:1
+      1    3.0%            LazyCompile: ~Faker /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/faker/lib/index.js:24:16
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/sonic-boom/index.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/socket.io-parser/dist/index.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/passport/lib/authenticator.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/passport-oauth2/lib/strategy.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mquery/node_modules/bluebird/js/release/util.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mpath/index.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/types/index.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/schema/number.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/schema/array.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/schema.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/queryhelpers.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/index.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/helpers/update/applyTimestampsToChildren.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/helpers/populate/assignVals.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/helpers/clone.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/drivers/node-mongodb-native/collection.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/document.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongoose/lib/cast.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/topologies/mongos.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/index.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/connection/connection.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/core/auth/defaultAuthProviders.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/collection.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/lib/cmap/connection.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/mongodb/index.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/fast-redact/lib/parse.js:1:1
+      1    3.0%            Eval: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/engine.io/lib/engine.io.js:1:1
+     14   29.8%          LazyCompile: ~Module.require internal/modules/cjs/loader.js:1018:36
+     14  100.0%            LazyCompile: ~require internal/modules/cjs/helpers.js:71:31
+     18    6.9%    LazyCompile: *cpus os.js:103:14
+     18  100.0%      LazyCompile: ~<anonymous> /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/src/server.es6.js:153:33
+      9   50.0%        LazyCompile: ~handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+      9  100.0%          LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/route.js:114:16
+      9  100.0%            LazyCompile: ~compression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/compression/index.js:59:31
+      9   50.0%        LazyCompile: *handle /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/layer.js:86:49
+      9  100.0%          LazyCompile: ~next /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/express/lib/router/route.js:114:16
+      9  100.0%            LazyCompile: ~compression /mnt/d/google drive/coderhouse/curso_backend/coderhouse-backend/node_modules/compression/index.js:59:31
+
