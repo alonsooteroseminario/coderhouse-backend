@@ -1,0 +1,33 @@
+Started phase 0, duration: 1s @ 15:07:24(-0400) 2021-07-19
+Report @ 15:07:29(-0400) 2021-07-19
+Elapsed time: 5 seconds
+  Scenarios launched:  20
+  Scenarios completed: 20
+  Requests completed:  1000
+  Mean response/sec: 181.49
+  Response time (msec):
+    min: 9
+    max: 132
+    median: 89
+    p95: 117
+    p99: 123
+  Codes:
+    200: 1000
+
+All virtual users finished
+Summary report @ 15:07:29(-0400) 2021-07-19
+  Scenarios launched:  20
+  Scenarios completed: 20
+  Requests completed:  1000
+  Mean response/sec: 180.83
+  Response time (msec):
+    min: 9
+    max: 132
+    median: 89
+    p95: 117
+    p99: 123
+  Scenario counts:
+    0: 20 (100%)
+  Codes:
+    200: 1000
+

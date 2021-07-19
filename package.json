@@ -4,9 +4,10 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/server.es6.js",
+    "test": "node src/benchmark.js",
+    "start": "0x src/server.es6.js",
     "prod": "pm2 start src/server.es6.js --name='Server' --watch",
+    "prod-prof": "pm2 start --prof src/server.es6.js --name='Server' --watch",
     "fork": "pm2 start src/server.es6.js --name='ServerFork' --watch --",
     "cluster": "pm2 start src/server.es6.js --name='ServerCluster' --watch -i 1 --",
     "forever": "forever start -w src/server.es6.js"
@@ -15,6 +16,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/express": "^4.17.11",
+    "autocannon": "^7.4.0",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.0.0-beta3",
     "compression": "^1.7.4",

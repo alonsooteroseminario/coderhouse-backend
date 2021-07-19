@@ -11,7 +11,7 @@ const ArchivoDB = require('./DB/archivoDb');
 const archivoDB = new ArchivoDB();
 const UsuarioDB = require('./DB/usuariosDb');
 const usuarioDB = new UsuarioDB();
-const { fork } = require('child_process');
+// const { fork } = require('child_process');
 const compression = require('compression');
 const { logger, loggerWarn, loggerError } = require('./logger')
 /* ------------------ PASSPORT -------------------- */
@@ -152,6 +152,7 @@ app.get('/chat', isAuth, (req, res) => {
 /* --------- INFO ---------- */
 app.get('/info', compression(), (req, res) => {
   try {
+    console.log('Console log INFO')
     logger.info('Mensaje info -----------------> OK');
     loggerWarn.warn('Mensaje warn -----------------> OK')
     const numCPUs = require('os').cpus().length
@@ -169,43 +170,43 @@ app.get('/info', compression(), (req, res) => {
   }
 })
 /* --------- RANDOMS ---------- */
-app.get('/randoms', (req, res) => {
-  const { cant } = req.params;
-  console.log(cant)
-  let { url } = req;
+// app.get('/randoms', (req, res) => {
+//   const { cant } = req.params;
+//   console.log(cant)
+//   let { url } = req;
 
-  if (url == `/randoms?cant=${cant}`) {
-    const computo = fork('./computo.js');
-    computo.send('start');
+//   if (url == `/randoms?cant=${cant}`) {
+//     const computo = fork('./computo.js');
+//     computo.send('start');
 
-    const array = [];
-    if (cant == undefined) {
-      for (let i = 0; i < 100000000; i++) {
-        const numero_random = computo;
-        array.push(numero_random);
-      }
-      console.log(array)
+//     const array = [];
+//     if (cant == undefined) {
+//       for (let i = 0; i < 100000000; i++) {
+//         const numero_random = computo;
+//         array.push(numero_random);
+//       }
+//       console.log(array)
 
-      res.render('randoms', {
-        active: 'randoms',
-        randoms: array,
-        cantidad: cant,
-      })
+//       res.render('randoms', {
+//         active: 'randoms',
+//         randoms: array,
+//         cantidad: cant,
+//       })
 
-    }else if (url == `/randoms?cant=${cant}`) {
-      for (let i = 0; i < cant; i++) {
-        const numero_random = computo;
-        array.push(numero_random);
-      };
+//     }else if (url == `/randoms?cant=${cant}`) {
+//       for (let i = 0; i < cant; i++) {
+//         const numero_random = computo;
+//         array.push(numero_random);
+//       };
 
-      res.render('randoms', {
-        active: 'randoms',
-        randoms: array,
-        cantidad: cant,
-      })
-    }
-  }
-})
+//       res.render('randoms', {
+//         active: 'randoms',
+//         randoms: array,
+//         cantidad: cant,
+//       })
+//     }
+//   }
+// })
 
 const user = new schema.Entity("users");
 const text = new schema.Entity("text");
