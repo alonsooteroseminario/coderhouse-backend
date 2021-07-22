@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "node src/benchmark.js",
-    "start": "nodemon src/server.es6.js",
+    "start": "node server.js",
     "start-0x": "0x src/server.es6.js",
     "prod": "pm2 start src/server.es6.js --name='Server' --watch",
     "prod-prof": "pm2 start --prof src/server.es6.js --name='Server' --watch",
