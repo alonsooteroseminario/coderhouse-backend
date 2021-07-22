@@ -19,7 +19,7 @@ const passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 /* ------------------ PASSPORT FACEBOOK -------------------- */
-const port = parseInt(process.argv[2]) || 8080;
+const port = process.env.PORT || parseInt(process.argv[2]) || 8080;
 const facebook_client_id = process.argv[3] || process.env.FACEBOOK_CLIENT_ID;
 const facebook_client_secret = process.argv[4] || process.env.FACEBOOK_CLIENT_SECRET;
 
