@@ -14,6 +14,7 @@ const usuarioDB = new UsuarioDB();
 // const { fork } = require('child_process');
 const compression = require('compression');
 const { logger, loggerWarn, loggerError } = require('./src/logger')
+const nodemailer = require('nodemailer');
 /* ------------------ PASSPORT -------------------- */
 const passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
@@ -22,6 +23,7 @@ var FacebookStrategy = require('passport-facebook').Strategy;
 const port = process.env.PORT || parseInt(process.argv[2]) || 8080;
 const facebook_client_id = process.argv[3] || process.env.FACEBOOK_CLIENT_ID;
 const facebook_client_secret = process.argv[4] || process.env.FACEBOOK_CLIENT_SECRET;
+
 
 passport.use(new FacebookStrategy({
   clientID: facebook_client_id.toString(),
@@ -35,6 +37,8 @@ passport.use(new FacebookStrategy({
   let usuarios = await usuarioDB.listar();
 
   const usuario = usuarios.find(usuario => usuario.username == userProfile.displayName)
+  // usuarioGlobal = userProfile.displayName;
+  // console.log(userProfile.displayName);
 
   if (usuario) {
     
@@ -118,12 +122,45 @@ app.use(passport.session());
 app.use("/productos", isAuth, productRoutes);
 app.use("/productos/nuevo-producto", isAuth, frontRoutes);
 
+/* --------------------- EMAILS Y MESSAGING --------------------------- */
+
+const transporter = nodemailer.createTransport({
+  host: 'smtp.ethereal.email',
+  port: 587,
+  auth: {
+      user: 'kadin.bernier77@ethereal.email',
+      pass: 'Z5v8vjwSJjhsbUkyQQ'
+  }
+});
+const transporterGmail = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: 'alonsooteroseminario@gmail.com',
+      pass: process.env.GMAIL_PASSWORD.toString()
+  }
+});
+
 /* --------- LOGOUT ---------- */
 app.get('/logout', (req, res) => {
   req.logout();
   setTimeout(function(){ 
     res.redirect('http://localhost:8080/login');
   }, 2000);
+  const user = req.user;
+  let nombre_usuario = user.username;
+  const mailOptionsLogout = {
+    from: 'Servidor Logout',
+    to: 'kadin.bernier77@ethereal.email',
+    subject: `Mail de Logout de ${nombre_usuario} a las ${new Date().toLocaleString()}`,
+    html: `<h1 style="color: blue;">El usuario ${nombre_usuario} se a deslogueado a las ${new Date().toLocaleString()} </h1>`
+  };
+  transporter.sendMail(mailOptionsLogout , (err, info) => {
+    if(err) {
+        console.log(err)
+        return err
+    }
+    console.log(info)
+  })
 })
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
@@ -139,6 +176,45 @@ app.get('/faillogin', (req, res) => {
 
 /* --------- INICIO ---------- */
 app.get('/', isAuth, (req, res) => {
+  const user = req.user;
+
+  let nombre_usuario = user.username;
+  let nombre_email = user.email;
+  let foto_facebook = user.foto;
+
+  const mailOptionsGmail = {
+    from: 'Servidor Node.js',
+    to: nombre_email,
+    subject: `Mail Gmail de ${nombre_usuario} a las ${new Date().toLocaleString()}`,
+    html: `<h1 style="color: blue;">El usuario ${nombre_usuario} se a logueado con Facebook a las ${new Date().toLocaleString()} </h1>`,
+    attachments: [
+      {   // filename and content type is derived from path
+          path: foto_facebook
+      }
+  ]
+  };
+  const mailOptionsLogin = {
+    from: 'Servidor Login',
+    to: 'kadin.bernier77@ethereal.email',
+    subject: `Mail de Login de ${nombre_usuario} a las ${new Date().toLocaleString()}`,
+    html: `<h1 style="color: blue;">El usuario ${nombre_usuario} se a logueado con Facebook a las ${new Date().toLocaleString()} </h1>`
+  };
+
+  transporter.sendMail(mailOptionsLogin, (err, info) => {
+      if(err) {
+          console.log(err)
+          return err
+      }
+      // console.log(info)
+  })
+  transporterGmail.sendMail(mailOptionsGmail, (err, info) => {
+      if(err) {
+          console.log(err)
+          return err
+      }
+      // console.log(info)
+  })
+
   res.redirect('/productos/vista')
 })
 app.get('/chat', isAuth, (req, res) => {
@@ -167,45 +243,7 @@ app.get('/info', compression(), (req, res) => {
     logger.info('Error message: ' + err);
     loggerError.error('Error message: ' + err);
   }
-})
-/* --------- RANDOMS ---------- */
-// app.get('/randoms', (req, res) => {
-//   const { cant } = req.params;
-//   console.log(cant)
-//   let { url } = req;
-
-//   if (url == `/randoms?cant=${cant}`) {
-//     const computo = fork('./computo.js');
-//     computo.send('start');
-
-//     const array = [];
-//     if (cant == undefined) {
-//       for (let i = 0; i < 100000000; i++) {
-//         const numero_random = computo;
-//         array.push(numero_random);
-//       }
-//       console.log(array)
-
-//       res.render('randoms', {
-//         active: 'randoms',
-//         randoms: array,
-//         cantidad: cant,
-//       })
-
-//     }else if (url == `/randoms?cant=${cant}`) {
-//       for (let i = 0; i < cant; i++) {
-//         const numero_random = computo;
-//         array.push(numero_random);
-//       };
-
-//       res.render('randoms', {
-//         active: 'randoms',
-//         randoms: array,
-//         cantidad: cant,
-//       })
-//     }
-//   }
-// })
+});
 
 const user = new schema.Entity("users");
 const text = new schema.Entity("text");
@@ -217,6 +255,11 @@ const mensajes = new schema.Entity("mensajes", {
   mensajes: [mensaje],
 });
 
+const accountSid = process.env.ACCOUNT_SID_TWILIO.toString();
+const authToken = process.env.AUTHTOKEN_TWILIO.toString();
+
+const client = require('twilio')(accountSid, authToken);
+
 io.on('connection', async (socket) => {
   console.log('Cliente conectado');
   //lista desde base de datos y desnomalizr
@@ -225,8 +268,6 @@ io.on('connection', async (socket) => {
   socket.emit('messages', listaMensajes)
 
   socket.on('new-message', async (data) => {
-    // console.log("/* -------------- DATA ------------- */");
-    // console.log(data);
     const nuevoMensaje = {
       id: listaMensajes.length+1,
       author: {
@@ -243,18 +284,23 @@ io.on('connection', async (socket) => {
       },
       date: new Date().toLocaleString()
     };
-    // console.log(nuevoMensaje);
+    if (data.text.toString().includes("administrador")){
+        client.messages.create({
+          body: `Mensaje enviado por ${data.author.nombre} ${data.author.apellido}. \n\n
+                Texto completo: \n\n
+                ${data.text}`,
+          from: '+17637103691',
+          to: '+56956942823'
+        })
+        .then(message => console.log(message.sid))
+        .catch(console.log)
+    }
     listaMensajes.push(nuevoMensaje)
-    // console.log(listaMensajes);
     const originalData = {
       id: "1",
       mensajes: listaMensajes,
     };
     const normalizedData = normalize(originalData, mensajes);
-    // console.log("/* -------------- NORMALIZED ------------- */");
-    // console.log(normalizedData)
-    // console.log("/* -------------- NORMALIZED inspect utils------------- */");
-    // console.log(utils.inspect(normalizedData, false, 4, true));
     await archivoDB.insertar(normalizedData);
     io.sockets.emit('messages', listaMensajes)
   })
