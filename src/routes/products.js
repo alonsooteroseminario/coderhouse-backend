@@ -98,14 +98,8 @@ router.post("/vista", async (req, res) => {
 
 var schema = buildSchema(`
     type Query {
-        message: String,
-        messages: [String],
-        numero: Int,
-        numeros: [Int],
-        course(id: Int!): Product
-        courses(topic: String): [Product]
-        cursos: [Product]
-        cursos2: [Product]
+        productos: [Product]
+        productos2: [Product]
     },
     type Mutation {
         updateProductTopic(id: Int!, topic: String!): Product
@@ -118,32 +112,28 @@ var schema = buildSchema(`
     }    
 `);
 
-let coursesData = productoDB.listar();
+let productsData = productoDB.listar();
 
-console.log(coursesData);
+console.log(productsData);
 
-var getCursos = function() {
-  return coursesData
+var getProductos = function() {
+  return productsData
 }
 
 var updateProductTopic = function({id, topic}) {
-  coursesData.map(course => {
-      if (course.id === id) {
-          course.topic = topic;
-          return course;
+  productsData.map(product => {
+      if (product.id === id) {
+          product.topic = topic;
+          return product;
       }
   });
-  return coursesData.filter(course => course.id === id) [0];
+  return productsData.filter(product => product.id === id) [0];
 }
 
 // Root resolver
 var root = {
-  message: () => 'Hola Mundo!',
-  messages: () => 'Hola Mundo!'.split(' '),
-  numero: () => 123,
-  numeros: () => [1,2,3],
-  cursos: getCursos,
-  cursos2: () => coursesData,
+  productos: getProductos,
+  productos2: () => productsData,
   updateProductTopic: updateProductTopic
 };
 
