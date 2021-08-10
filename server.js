@@ -6,21 +6,21 @@ require('dotenv').config();
 const MongoStore = require('connect-mongo');
 const { normalize, schema } = require('normalizr');
 const productRoutes = require("./src/routes/products");
-const frontRoutes = require('./src/routes/front');
+// const frontRoutes = require('./src/routes/front');
 const ArchivoDB = require('./src/DB/archivoDb');
 const archivoDB = new ArchivoDB();
 const UsuarioDB = require('./src/DB/usuariosDb');
 const usuarioDB = new UsuarioDB();
-// const { fork } = require('child_process');
 const compression = require('compression');
-const { logger, loggerWarn, loggerError } = require('./src/logger')
-const nodemailer = require('nodemailer');
+const { logger, loggerWarn, loggerError } = require('./src/utils/logger')
+const { transporter, transporterGmail } = require('./src/controllers/email');
+
+const port = process.env.PORT || parseInt(process.argv[2]) || 8080;
 /* ------------------ PASSPORT -------------------- */
 const passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 
 /* ------------------ PASSPORT FACEBOOK -------------------- */
-const port = process.env.PORT || parseInt(process.argv[2]) || 8080;
 const facebook_client_id = process.argv[3] || process.env.FACEBOOK_CLIENT_ID;
 const facebook_client_secret = process.argv[4] || process.env.FACEBOOK_CLIENT_SECRET;
 
@@ -117,62 +117,12 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-/* --------------------- ROUTES --------------------------- */
-
-app.use("/productos", isAuth, productRoutes);
-app.use("/productos/nuevo-producto", isAuth, frontRoutes);
-
-/* --------------------- EMAILS Y MESSAGING --------------------------- */
-
-const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
-  auth: {
-      user: 'kadin.bernier77@ethereal.email',
-      pass: 'Z5v8vjwSJjhsbUkyQQ'
-  }
-});
-const transporterGmail = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-      user: 'alonsooteroseminario@gmail.com',
-      pass: process.env.GMAIL_PASSWORD.toString()
-  }
-});
-
-/* --------- LOGOUT ---------- */
-app.get('/logout', (req, res) => {
-  req.logout();
-  setTimeout(function(){ 
-    res.redirect('http://localhost:8080/login');
-  }, 2000);
-  const user = req.user;
-  let nombre_usuario = user.username;
-  const mailOptionsLogout = {
-    from: 'Servidor Logout',
-    to: 'kadin.bernier77@ethereal.email',
-    subject: `Mail de Logout de ${nombre_usuario} a las ${new Date().toLocaleString()}`,
-    html: `<h1 style="color: blue;">El usuario ${nombre_usuario} se a deslogueado a las ${new Date().toLocaleString()} </h1>`
-  };
-  transporter.sendMail(mailOptionsLogout , (err, info) => {
-    if(err) {
-        console.log(err)
-        return err
-    }
-    console.log(info)
-  })
-})
 
 app.get('/auth/facebook', passport.authenticate('facebook'));
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/faillogin' }));
 
-/* --------- LOGIN ---------- */
-app.get('/login', (req, res) => {
-  res.render('login')
-})
-app.get('/faillogin', (req, res) => {
-  res.render('login-error', {});
-})
+/* -------- ROUTES ------------ */
+app.use("/productos", isAuth, productRoutes);
 
 /* --------- INICIO ---------- */
 app.get('/', isAuth, (req, res) => {
@@ -221,9 +171,9 @@ app.get('/chat', isAuth, (req, res) => {
   if (!req.user.contador){
     req.user.contador = 0
   }
-  res.sendFile('./src/index.html', { root:__dirname })
+  res.status(200)
+  // res.sendFile('./src/index.html', { root:__dirname })
 });
-
 /* --------- INFO ---------- */
 app.get('/info', compression(), (req, res) => {
   try {
@@ -244,6 +194,38 @@ app.get('/info', compression(), (req, res) => {
     loggerError.error('Error message: ' + err);
   }
 });
+/* --------- LOGOUT ---------- */
+app.get('/logout', (req, res) => {
+
+
+  setTimeout(function(){ 
+    res.redirect('http://localhost:8080/login');
+  }, 2000);
+  const user = req.user;
+  console.log(user)
+  let nombre_usuario = user.username;
+  const mailOptionsLogout = {
+    from: 'Servidor Logout',
+    to: 'kadin.bernier77@ethereal.email',
+    subject: `Mail de Logout de ${nombre_usuario} a las ${new Date().toLocaleString()}`,
+    html: `<h1 style="color: blue;">El usuario ${nombre_usuario} se a deslogueado a las ${new Date().toLocaleString()} </h1>`
+  };
+  transporter.sendMail(mailOptionsLogout , (err, info) => {
+    if(err) {
+        console.log(err)
+        return err
+    }
+    console.log(info)
+  });
+  req.logout();
+})
+/* --------- LOGIN ---------- */
+app.get('/login', (req, res) => {
+  res.render('login')
+})
+app.get('/faillogin', (req, res) => {
+  res.render('login-error', {});
+})
 
 const user = new schema.Entity("users");
 const text = new schema.Entity("text");
