@@ -5,6 +5,7 @@ const router = express.Router();
 const ProductoDB = require('./../DB/productoDb');
 const productoDB = new ProductoDB();
 const MockAPI = require('../controllers/mockAPI');
+const { transporter, transporterGmail } = require('../controllers/email');
 const api = new MockAPI();
 
 router.get("/vista", async (req, res) => {
@@ -100,5 +101,15 @@ router.get("/vista-test/:cant?", async (req, res) => {
 
   }
 });
+
+router.get('/nuevo-producto', async (req, res) => {
+  if (!req.user.contador) {
+      req.user.contador = 0
+  }
+  res.render('nuevo-producto', {
+      active: 'nuevo-producto',
+      user: req.user
+  })
+})
 
 module.exports = router;
