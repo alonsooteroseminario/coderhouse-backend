@@ -114,7 +114,7 @@ var schema = buildSchema(`
 
 let productsData = productoDB.listar();
 
-console.log(productsData);
+// console.log(productsData);
 
 var getProductos = function() {
   return productsData
