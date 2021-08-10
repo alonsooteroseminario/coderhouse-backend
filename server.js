@@ -6,70 +6,14 @@ require('dotenv').config();
 const MongoStore = require('connect-mongo');
 const { normalize, schema } = require('normalizr');
 const productRoutes = require("./src/routes/products");
-// const frontRoutes = require('./src/routes/front');
 const ArchivoDB = require('./src/DB/archivoDb');
 const archivoDB = new ArchivoDB();
-const UsuarioDB = require('./src/DB/usuariosDb');
-const usuarioDB = new UsuarioDB();
 const compression = require('compression');
 const { logger, loggerWarn, loggerError } = require('./src/utils/logger')
 const { transporter, transporterGmail } = require('./src/controllers/email');
+const { passport } = require('./src/controllers/passport');
 
 const port = process.env.PORT || parseInt(process.argv[2]) || 8080;
-/* ------------------ PASSPORT -------------------- */
-const passport = require('passport');
-var FacebookStrategy = require('passport-facebook').Strategy;
-
-/* ------------------ PASSPORT FACEBOOK -------------------- */
-const facebook_client_id = process.argv[3] || process.env.FACEBOOK_CLIENT_ID;
-const facebook_client_secret = process.argv[4] || process.env.FACEBOOK_CLIENT_SECRET;
-
-
-passport.use(new FacebookStrategy({
-  clientID: facebook_client_id.toString(),
-  clientSecret: facebook_client_secret.toString(),
-  callbackURL: '/auth/facebook/callback',
-  profileFields: ['id', 'displayName', 'photos', 'emails'],
-  scope: ['email']
-}, async function (accessToken, refreshToken, userProfile, done) {
-
-  // console.log(userProfile.displayName)
-  let usuarios = await usuarioDB.listar();
-
-  const usuario = usuarios.find(usuario => usuario.username == userProfile.displayName)
-  // usuarioGlobal = userProfile.displayName;
-  // console.log(userProfile.displayName);
-
-  if (usuario) {
-    
-    user.contador = 0
-
-    return done(null, usuario);
-  }
-  else{
-    const user = {
-      username: userProfile.displayName,
-      facebookId: userProfile.id,
-      email: userProfile.emails[0].value,
-      foto: userProfile.photos[0].value,
-    }
-    usuarios.push(user)
-    await usuarioDB.insertar(usuarios);
-    
-    return done(null, user);
-  }
-
-}));
-
-passport.serializeUser(function (user, done) {
-  done(null, user.username);
-});
-
-passport.deserializeUser(async function (username, done) {
-  let usuarios = await usuarioDB.listar();
-  const usuario = usuarios.find(usuario => usuario.username == username)
-  done(null, usuario);
-});
 
 /* --------------------- AUTH --------------------------- */
 
@@ -92,7 +36,7 @@ const advancedOptions = { useNewUrlParser: true, useUnifiedTopology: true };
 const admin = process.env.MONGO_USER;
 const password = process.env.MONGO_PASSWORD;
 
-const url = 'mongodb+srv://'+admin.toString()+':'+password.toString()+'@cluster0.rzdyo.mongodb.net/sesiones?retryWrites=true&w=majority';
+const url = `mongodb+srv://${admin.toString()}:${password.toString()}@cluster0.rzdyo.mongodb.net/sesiones?retryWrites=true&w=majority`;
 
 /* --------------------- MIDDLEWARE --------------------------- */
 var hbs = exphbs.create({
@@ -171,8 +115,8 @@ app.get('/chat', isAuth, (req, res) => {
   if (!req.user.contador){
     req.user.contador = 0
   }
-  res.status(200)
-  // res.sendFile('./src/index.html', { root:__dirname })
+  // res.status(200)
+  res.sendFile('./src/index.html', { root:__dirname })
 });
 /* --------- INFO ---------- */
 app.get('/info', compression(), (req, res) => {
