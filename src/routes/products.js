@@ -10,104 +10,6 @@ const MockAPI = require('../controllers/mockAPI');
 const { transporter, transporterGmail } = require('../controllers/email');
 const api = new MockAPI();
 
-var schema = buildSchema(`
-    type Query {
-        message: String,
-        messages: [String],
-        numero: Int,
-        numeros: [Int],
-        course(id: Int!): Course
-        courses(topic: String): [Course]
-        cursos: [Course]
-        cursos2: [Course]
-    },
-    type Mutation {
-        updateCourseTopic(id: Int!, topic: String!): Course
-    },
-    type Course {
-        id: Int
-        title: String
-        author: String
-        description: String
-        topic: String
-        url: String
-    }    
-`);
-
-var coursesData = [
-  {
-      id: 1,
-      title: 'The Complete Node.js Developer Course',
-      author: 'Andrew Mead, Rob Percival',
-      description: 'Learn Node.js by building real-world applications with Node, Express, MongoDB, Mocha, and more!',
-      topic: 'Node.js',
-      url: 'https://codingthesmartway.com/courses/nodejs/'
-  },
-  {
-      id: 2,
-      title: 'Node.js, Express & MongoDB Dev to Deployment',
-      author: 'Brad Traversy',
-      description: 'Learn by example building & deploying real-world Node.js applications from absolute scratch',
-      topic: 'Node.js',
-      url: 'https://codingthesmartway.com/courses/nodejs-express-mongodb/'
-  },
-  {
-      id: 3,
-      title: 'JavaScript: Understanding The Weird Parts',
-      author: 'Anthony Alicea',
-      description: 'An advanced JavaScript course for everyone! Scope, closures, prototypes, this, build your own framework, and more.',
-      topic: 'JavaScript',
-      url: 'https://codingthesmartway.com/courses/understand-javascript/'
-  }
-]
-
-var getCourse = function(args) { 
-  var id = args.id;
-  return coursesData.filter(course => {
-      return course.id == id;
-  })[0];
-}
-var getCourses = function(args) {
-  if (args.topic) {
-      var topic = args.topic;
-      return coursesData.filter(course => course.topic === topic);
-  } else {
-      return coursesData;
-  }
-}
-
-var getCursos = function() {
-  return coursesData
-}
-
-var updateCourseTopic = function({id, topic}) {
-  coursesData.map(course => {
-      if (course.id === id) {
-          course.topic = topic;
-          return course;
-      }
-  });
-  return coursesData.filter(course => course.id === id) [0];
-}
-
-// Root resolver
-var root = {
-  message: () => 'Hola Mundo!',
-  messages: () => 'Hola Mundo!'.split(' '),
-  numero: () => 123,
-  numeros: () => [1,2,3],
-  course: getCourse,
-  courses: getCourses,
-  cursos: getCursos,
-  cursos2: () => coursesData,
-  updateCourseTopic: updateCourseTopic
-};
-
-router.use('/graphql', graphqlHTTP({
-  schema: schema,
-  rootValue: root,
-  graphiql: true
-}));
 
 router.get("/vista", async (req, res) => {
   if (!req.user.contador) {
@@ -192,6 +94,64 @@ router.post("/vista", async (req, res) => {
     }
     res.status(400).send();
 });
+
+
+var schema = buildSchema(`
+    type Query {
+        message: String,
+        messages: [String],
+        numero: Int,
+        numeros: [Int],
+        course(id: Int!): Product
+        courses(topic: String): [Product]
+        cursos: [Product]
+        cursos2: [Product]
+    },
+    type Mutation {
+        updateProductTopic(id: Int!, topic: String!): Product
+    },
+    type Product {
+        id: Int
+        title: String
+        price: String
+        thumbnail: String
+    }    
+`);
+
+let coursesData = productoDB.listar();
+
+console.log(coursesData);
+
+var getCursos = function() {
+  return coursesData
+}
+
+var updateProductTopic = function({id, topic}) {
+  coursesData.map(course => {
+      if (course.id === id) {
+          course.topic = topic;
+          return course;
+      }
+  });
+  return coursesData.filter(course => course.id === id) [0];
+}
+
+// Root resolver
+var root = {
+  message: () => 'Hola Mundo!',
+  messages: () => 'Hola Mundo!'.split(' '),
+  numero: () => 123,
+  numeros: () => [1,2,3],
+  cursos: getCursos,
+  cursos2: () => coursesData,
+  updateProductTopic: updateProductTopic
+};
+
+router.use('/graphql', graphqlHTTP({
+  schema: schema,
+  rootValue: root,
+  graphiql: true
+}));
 
 
 
