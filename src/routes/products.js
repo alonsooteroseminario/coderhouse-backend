@@ -12,6 +12,7 @@ const api = new MockAPI();
 
 
 router.get("/vista", async (req, res) => {
+  console.log(res)
   if (!req.user.contador) {
     req.user.contador = 0
   }
