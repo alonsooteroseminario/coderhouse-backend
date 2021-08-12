@@ -91,3 +91,70 @@ function addMessage(e) {
 
     return false;
 }
+
+var query = `{ productos2 {
+    id
+    title
+    price
+    thumbnail
+}}`
+var variables = {}
+
+const fetchData = async () => {
+    const res = await fetch('http://localhost:8080/productos/graphql', {
+        method: 'POST',
+        headers:{
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+        body: JSON.stringify({
+                    query,
+                    variables 
+                })
+    });
+    const data = await res.json();
+    verProdHtml(data);
+};
+
+document.addEventListener('DOMContentLoaded', e => { fetchData() });
+
+let verProdHtml = (data) => {
+    // console.log(data)
+
+    const headHtmlTable = `<table id="tbodyGraphql" class="table">
+                                <thead>
+                                    <tr>
+                                    <th scope="col">#</th>
+                                    <th scope="col">title</th>
+                                    <th scope="col">price</th>
+                                    <th scope="col">thumbnail</th>
+                                    </tr>
+                                </thead>
+                                <tbody>`
+
+                                  
+    let html = Object.values(Object.values(data)[0])[0].map(producto => {
+
+        return(`
+                                    <tr>
+
+                                        <th scope="row">${producto.id}</th>
+                                        <td>${producto.title}</td>
+                                        <td>${producto.price}</td>
+                                        <td>
+                                            <img class="img-thumbnail" src="${producto.thumbnail}" alt="" />
+                                        </td>
+
+                                    </tr>
+            `)
+    })
+   
+    // console.log(Object.values(Object.values(data)[0])[0])
+
+    // console.log(html)
+
+    const finalHtmlTable = `    </tbody>
+                            </table>` 
+    document.getElementById('tableGraphql').innerHTML = headHtmlTable + html + finalHtmlTable;
+
+};

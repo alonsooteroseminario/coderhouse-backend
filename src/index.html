@@ -208,30 +208,7 @@
               }
           }
       ` */
-      var query = `{ productos2 {
-                      id
-                      title
-                      price
-                      thumbnail
-                  }}`
-      var variables = {}
 
-
-
-      fetch('/productos/graphql', {
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json',
-          },
-          body: JSON.stringify({
-              query,
-              variables 
-          })
-      })
-      .then(r => r.json())
-      .then(data => console.log('Ultimo: ',data))
-      .catch(console.error)
 
 
   </script>
