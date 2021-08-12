@@ -12,14 +12,14 @@ const api = new MockAPI();
 
 
 router.get("/vista", async (req, res) => {
-  console.log(res)
+
   if (!req.user.contador) {
     req.user.contador = 0
   }
-  const products = await productoDB.listar();
+  // const products = await productoDB.listar();
   res.render('vista', {
     active: "vista",
-    products: products,
+    // products: products,
     user: req.user,
   });
   req.user.contador++
