@@ -158,3 +158,41 @@ let verProdHtml = (data) => {
     document.getElementById('tableGraphql').innerHTML = headHtmlTable + html + finalHtmlTable;
 
 };
+
+// getElementById
+let newTitle = document.getElementById('input-title');
+let newPrice = document.getElementById('input-price');
+let newThumbnail = document.getElementById('input-thumbnail');
+
+// mutation & variables para agregar producto
+var mutation = `mutation{
+    agregarProductoGraphql(title: ${newTitle}, price: ${newPrice}, thumbnail: ${newThumbnail}) {
+      title
+      price
+      thumbnail
+    }
+  }`
+
+
+const fetchPOSTdata = async () => {
+    const res = await fetch('http://localhost:8080/productos/graphql', {
+        method: 'POST',
+        headers:{
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+        body: JSON.stringify({
+                    mutation,
+                    variables 
+                })
+    });
+    // const data = await res.json();
+}
+
+// event listener, ejecutar  funcion() para traer info del formulario
+let botonProductoNuevo = document.getElementById('miBoton');
+botonProductoNuevo.addEventListener('click', () => { fetchPOSTdata() });
+
+
+
+
