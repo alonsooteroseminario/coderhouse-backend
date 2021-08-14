@@ -12,14 +12,14 @@ const api = new MockAPI();
 
 
 router.get("/vista", async (req, res) => {
-  console.log(res)
+
   if (!req.user.contador) {
     req.user.contador = 0
   }
-  const products = await productoDB.listar();
+  // const products = await productoDB.listar();
   res.render('vista', {
     active: "vista",
-    products: products,
+    // products: products,
     user: req.user,
   });
   req.user.contador++
@@ -104,6 +104,7 @@ var schema = buildSchema(`
     },
     type Mutation {
         updateProductTopic(id: Int!, topic: String!): Product
+        agregarProductoGraphql(title: String!, price: String!, thumbnail: String!): [Product]
     },
     type Product {
         id: Int
@@ -131,8 +132,30 @@ var updateProductTopic = function({id, topic}) {
   return productsData.filter(product => product.id === id) [0];
 }
 
+//funcion para POST 
+var agregarProductoGraphql = async function({title, price, thumbnail}, res) {
+
+  const products = await productoDB.listar();
+  products.push({
+    id: products.length + 1,
+    title: title,
+    price: parseInt(price),
+    thumbnail: thumbnail,
+  })
+
+  await productoDB.insertar(products).catch((err)=>{
+    console.log(err)
+  })
+  res.redirect('http://localhost:8080/producto/nuevo-producto')
+  return products;
+}
+
+
+
+
 // Root resolver
 var root = {
+  agregarProductoGraphql: agregarProductoGraphql,
   productos: getProductos,
   productos2: () => productsData,
   updateProductTopic: updateProductTopic
