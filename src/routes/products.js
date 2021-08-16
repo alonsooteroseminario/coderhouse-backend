@@ -13,28 +13,38 @@ const api = new MockAPI();
 
 router.get("/vista", async (req, res) => {
 
-  if (!req.user.contador) {
-    req.user.contador = 0
+  try {
+    if (!req.user.contador) {
+      req.user.contador = 0
+    }
+    // const products = await productoDB.listar();
+    res.status(200).render('vista', {
+      active: "vista",
+      // products: products,
+      user: req.user,
+    });
+    req.user.contador++
+  } catch (error) {
+    console.log(error)
   }
-  // const products = await productoDB.listar();
-  res.render('vista', {
-    active: "vista",
-    // products: products,
-    user: req.user,
-  });
-  req.user.contador++
+
 });
+
 router.get("/vista/:id", async (req, res) => {
+
+  try {
     const { id } = req.params;
     const currentProduct = await productoDB.listarPorId(id);
-
     if (currentProduct) {
-
-      return res.json(currentProduct);
+      return res.status(200).json(currentProduct);
     }
     res.status(404).json({
       error: "producto no encontrado",
     });
+  } catch (error) {
+    console.log(error)
+  }
+
 });
 router.get("/vista-test/:cant?", async (req, res) => {
     console.log(req.params.cant);
@@ -77,6 +87,8 @@ router.get('/nuevo-producto', async (req, res) => {
     })
 })
 router.post("/vista", async (req, res) => {
+
+  try {
     const data = req.body;
     const products = await productoDB.listar();
     data.id = products.length + 1;
@@ -86,14 +98,17 @@ router.post("/vista", async (req, res) => {
       price: parseInt(data.price),
       thumbnail: data.thumbnail,
     })
-
     if(await productoDB.insertar(products).catch((err)=>{
       console.log(err)
     })) {
       // if (data.form === "1") return res.redirect('http://localhost:8080/nuevo-producto');
-      res.redirect('http://localhost:8080/producto/nuevo-producto').status(201).json(data);
+      res.status(200).redirect('http://localhost:8080/producto/nuevo-producto').status(201).json(data);
     }
     res.status(400).send();
+  } catch (error) {
+    console.log(error)
+  }
+
 });
 
 
@@ -170,18 +185,30 @@ router.use('/graphql', graphqlHTTP({
 
 
 router.put("/vista/:id", async (req, res) => {
+
+  try {
     const data = req.body;
     const { id } = req.params;
     if(await productoDB.actualizarPorId(id, data)) {
-
-      res.status(201).json(data);
+      res.status(200).json(data);
     }
     res.status(400).send();
+  } catch (error) {
+    console.log(error)
+  }
+
+
 });
 router.delete("/vista/:id", async (req, res) => {
+
+  try {
     const { id } = req.params;
     const currentProduct = await productoDB.borrarPorId(id);
-    res.json(currentProduct);
+    res.status(200).json(currentProduct);
+  } catch (error) {
+    console.log(error)
+  }
+
 });
 
 
