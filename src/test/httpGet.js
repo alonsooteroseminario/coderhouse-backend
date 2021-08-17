@@ -3,7 +3,7 @@ const http = require('http')
 const options = {
     hostname: 'localhost',
     port: 8080,
-    path: '/api/productos',
+    path: '/productos/vista',
     method: 'GET'
 }
 

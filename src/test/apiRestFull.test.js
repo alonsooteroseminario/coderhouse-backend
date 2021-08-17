@@ -3,7 +3,7 @@ const request = supertest('http://localhost:8080');
 const expect = require('chai').expect;
 
 
-const id = '1'; //* id de producto como parametro debe ser reemplazado segun figure en mongodb Atlas
+const id = '60f97f080f0cc209e861e486'; //* id de producto como parametro debe ser reemplazado segun figure en mongodb Atlas
 const url = '/productos/vista';
 const urlModify = `/productos/vista/${id}`; 
 
@@ -13,7 +13,7 @@ const producto = {
     "thumbnail": 'https://cdn2.iconfinder.com/data/icons/international-food/64/fried_rice-128.png'
 };
 
-const price = 10000;
+const price = '10000';
 
 describe("Test API REST", ()=>{
     describe('test GET', () => {
