@@ -2,14 +2,14 @@ const http = require('http')
 
 const prod = JSON.stringify({
     title: "Arroz Blanco", 
-    price: 200,
+    price: '200',
     thumbnail: "https://cdn2.iconfinder.com/data/icons/international-food/64/fried_rice-128.png"   
 })
 
 const options = {
     hostname: 'localhost',
     port: 8080,
-    path: '/api/productos',
+    path: '/productos/vista',
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',
