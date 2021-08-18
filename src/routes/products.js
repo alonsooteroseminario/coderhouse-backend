@@ -4,8 +4,12 @@ var { buildSchema } = require('graphql');
 const faker = require('faker');
 faker.locale = 'es'
 const router = express.Router();
-const ProductoDB = require('./../DB/productoDb');
-const productoDB = new ProductoDB();
+
+// const ProductoDB = require('./../DB/productoDb');
+
+const factory = require('../DB/factory');
+const productoDB = factory;
+
 const MockAPI = require('../controllers/mockAPI');
 const { transporter, transporterGmail } = require('../controllers/email');
 const api = new MockAPI();

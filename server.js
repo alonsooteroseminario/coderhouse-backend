@@ -6,8 +6,8 @@ require('dotenv').config();
 const MongoStore = require('connect-mongo');
 const { normalize, schema } = require('normalizr');
 const productRoutes = require("./src/routes/products");
-const ArchivoDB = require('./src/DB/archivoDb');
-const archivoDB = new ArchivoDB();
+const MensajeDB = require('./src/DB/mensajesDb');
+const mensajeDB = new MensajeDB();
 const compression = require('compression');
 const { logger, loggerWarn, loggerError } = require('./src/utils/logger')
 const { transporter, transporterGmail } = require('./src/controllers/email');
@@ -189,7 +189,7 @@ const client = require('twilio')(accountSid, authToken);
 io.on('connection', async (socket) => {
   console.log('Cliente conectado');
   //lista desde base de datos y desnomalizr
-  let listaMensajes = await archivoDB.listar();
+  let listaMensajes = await mensajeDB.listar();
 
   socket.emit('messages', listaMensajes)
 
@@ -227,7 +227,7 @@ io.on('connection', async (socket) => {
       mensajes: listaMensajes,
     };
     const normalizedData = normalize(originalData, mensajes);
-    await archivoDB.insertar(normalizedData);
+    await mensajeDB.insertar(normalizedData);
     io.sockets.emit('messages', listaMensajes)
   })
 })
