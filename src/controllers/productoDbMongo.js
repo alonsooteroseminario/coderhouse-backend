@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const daoProductos = require('../model/productSchema');
 
 const admin = process.env.MONGO_USER;
 const password = process.env.MONGO_PASSWORD;
@@ -7,16 +8,7 @@ const url = 'mongodb+srv://'+admin.toString()+':'+password.toString()+'@cluster0
 
 // const url = 'mongodb://localhost:27017/ecommerce';
 
-const esquemaProducto = new mongoose.Schema({
-  id: { type: Number, require: true },
-  title: { type: String, require: true, max: 100 },
-  price: { type: String, require: true, max: 100 },
-  thumbnail: { type: String, require: true, max: 100 }
-})
-
-const daoProductos = mongoose.model('productos', esquemaProducto);
-
-class ProductoDB {
+class ProductoDBMongo {
   constructor() {
     mongoose.connect(url,{
       useNewUrlParser: true,
@@ -105,4 +97,4 @@ class ProductoDB {
   }
 }
 
-module.exports = ProductoDB;
+module.exports = ProductoDBMongo;

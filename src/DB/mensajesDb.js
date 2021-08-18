@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const daoMensajes = require('../model/mensajeSchema');
 const { denormalize, normalize, schema } = require('normalizr');
 const utils = require('util');
 
@@ -9,9 +10,7 @@ const url = 'mongodb+srv://'+admin.toString()+':'+password.toString()+'@cluster0
 
 // const url = 'mongodb://localhost:27017/ecommerce';
 
-
 const user = new schema.Entity("users");
-
 // Define your text schema
 const text = new schema.Entity("text");
 
@@ -25,37 +24,8 @@ const mensajes = new schema.Entity("mensajes", {
   mensajes: [mensaje],
 });
 //tiene que tener forma de normalizaData
-const esquemaMensaje = new mongoose.Schema({
-  entities: {
-    users: { 
-      id: { type: String, require: true, max: 1000 },
-      nombre: { type: String, require: true, max: 1000 },
-      apellido: { type: String, require: true, max: 1000 },
-      edad: { type: String, require: true, max: 1000 },
-      alias: { type: String, require: true, max: 1000 },
-      avatar: { type: String, require: true, max: 1000 },
-     },
-    text: { 
-      id: { type: Number, require: true },
-      text: { type: String, require: true, max: 1000 },
-     },
-    mensaje: { 
-      id: { type: Number, require: true },
-      author: { type: String, require: true, max: 1000 },
-      text: { type: Number, require: true },
-      date: { type: String, require: true, max: 1000 },
-     },
-    mensajes: { 
-      id: { type: String, require: true, max: 1000 },
-      mensajes: { type: Number, require: true },
-     },
-  },
-  result: { type: String, require: true, max: 1000 },
-})
 
-const daoMensajes = mongoose.model('mensajes', esquemaMensaje)
-
-class ArchivoDB {
+class MensajeDB {
   constructor() {
     mongoose.connect(url,{
       useNewUrlParser: true,
@@ -65,7 +35,7 @@ class ArchivoDB {
       if (err) {
         console.log(err);
       }else{
-        console.log('Conectado a la base en constructor de archivoDb');
+        console.log('Conectado a la base en constructor de mensajeDb');
       }
     })
   }
@@ -129,4 +99,4 @@ class ArchivoDB {
   }
 }
 
-module.exports = ArchivoDB;
+module.exports = MensajeDB;
