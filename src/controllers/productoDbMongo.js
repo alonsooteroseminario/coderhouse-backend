@@ -22,17 +22,6 @@ class ProductoDBMongo {
       }
     })
   }
-
-  crearTabla() {
-    return daoProductos.create({}, (err,res) => {
-      if (err) {
-        console.log(err);
-      }else{
-        // console.log(res);
-      }
-    });
-  }
-
   insertar(productos) {
     return daoProductos.create(productos, (err,res) => {
       if (err) {
@@ -43,7 +32,6 @@ class ProductoDBMongo {
       }
     });
   }
-
   listar() {
     return daoProductos.find({}, (err,res) => {
       if (err) {
@@ -53,7 +41,6 @@ class ProductoDBMongo {
       }
     }).lean();
   }
-
   listarPorId(id) {
     return daoProductos.find({id: id}, (err,res) => {
       if (err) {
@@ -63,7 +50,6 @@ class ProductoDBMongo {
       }
     });
   }
-
   borrarPorId(id) {
     return daoProductos.deleteOne({id: id}, (err,res) => {
       if (err) {

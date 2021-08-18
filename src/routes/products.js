@@ -4,9 +4,6 @@ var { buildSchema } = require('graphql');
 const faker = require('faker');
 faker.locale = 'es'
 const router = express.Router();
-
-// const ProductoDB = require('./../DB/productoDb');
-
 const factory = require('../DB/factory');
 const productoDB = factory;
 
