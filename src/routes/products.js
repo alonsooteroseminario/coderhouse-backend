@@ -8,7 +8,6 @@ const factory = require('../DB/factory');
 const productoDB = factory;
 
 const MockAPI = require('../controllers/mockAPI');
-const { transporter, transporterGmail } = require('../controllers/email');
 const api = new MockAPI();
 
 
@@ -133,7 +132,6 @@ var schema = buildSchema(`
 
 let productsData = productoDB.listar();
 // console.log(productsData)
-// console.log(productsData);
 
 var getProductos = function() {
   return productsData

@@ -1,6 +1,9 @@
 const ProductoDBMongo = require('../controllers/productoDbMongo');
 const ProductDbMemory = require('../controllers/productDbMemory');
 const ProductDbFileSystem = require('../controllers/productDbFileSystem');
+const ProductoDBSql = require('../controllers/productoDBSql');
+const {mysqlDBaaS} = require('../DB/config')
+
 /* -------------------------------------- */
 /*                FACTORY                 */
 /* -------------------------------------- */
@@ -11,6 +14,7 @@ class FactoryPersonaModel {
             case 'Mem': return new ProductDbMemory()
             case 'File': return new ProductDbFileSystem()
             case 'Mongo': return new ProductoDBMongo()
+            case 'Sql': return new ProductoDBSql(mysqlDBaaS)
         }
     }
 }
