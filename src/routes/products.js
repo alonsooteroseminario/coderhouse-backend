@@ -91,8 +91,9 @@ router.post("/vista", async (req, res) => {
 
   try {
     const data = req.body;
-    const products = await productoDB.listar();
+    let products = await productoDB.listar();
     data.id = products.length + 1;
+    console.log(products)
     products.push({
       id: data.id,
       title: data.title,

@@ -8,7 +8,8 @@ class ProductDbMemory {
         // if(data.title === "" || typeof data.title === "undefined") return false;
         // if(data.price === "" || typeof data.price === "undefined") return false;
         // data.id = PRODUCTS_DB.length + 1;
-        // PRODUCTS_DB.push({
+        // console.log(data)
+        // this.PRODUCTS_DB.push({
         //     id: data.id,
         //     title: data.title,
         //     price: parseInt(data.price),
@@ -18,7 +19,7 @@ class ProductDbMemory {
         return true;
     }
     listar () {
-        if (this.PRODUCTS_DB.length<1) return false
+        // if (this.PRODUCTS_DB.length<1) return false
         return this.PRODUCTS_DB;
     }
     listarPorId (id) {
