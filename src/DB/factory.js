@@ -1,5 +1,6 @@
 const ProductoDBMongo = require('../controllers/productoDbMongo');
 const ProductDbMemory = require('../controllers/productDbMemory');
+const ProductDbFileSystem = require('../controllers/productDbFileSystem');
 /* -------------------------------------- */
 /*                FACTORY                 */
 /* -------------------------------------- */
@@ -8,11 +9,12 @@ class FactoryPersonaModel {
         console.log('**** PERSISTENCIA SELECCIONADA **** [' + opcion + ']')
         switch(opcion) {
             case 'Mem': return new ProductDbMemory()
-            // case 'File': return new persistenciaFileSystem()
+            case 'File': return new ProductDbFileSystem()
             case 'Mongo': return new ProductoDBMongo()
         }
     }
 }
+
 
 const opcion = process.argv[2] || 'Mem';
 

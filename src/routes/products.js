@@ -93,7 +93,7 @@ router.post("/vista", async (req, res) => {
     const data = req.body;
     let products = await productoDB.listar();
     data.id = products.length + 1;
-    console.log(products)
+
     products.push({
       id: data.id,
       title: data.title,
@@ -132,7 +132,7 @@ var schema = buildSchema(`
 `);
 
 let productsData = productoDB.listar();
-
+// console.log(productsData)
 // console.log(productsData);
 
 var getProductos = function() {

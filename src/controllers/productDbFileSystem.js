@@ -1,32 +1,40 @@
+const fs = require('fs');
+
 let PRODUCTS_DB = [];
 
-class Product {
-    constructor() {}
-
-    add (data) {
-        if(data.title === "" || typeof data.title === "undefined") return false;
-        if(data.price === "" || typeof data.price === "undefined") return false;
-        data.id = PRODUCTS_DB.length + 1;
-        PRODUCTS_DB.push({
-            id: data.id,
-            title: data.title,
-            price: parseInt(data.price),
-            thumbnail: data.thumbnail,
-        });
-        return true;
+class ProductDbFileSystem {
+    constructor() {
+        this.PRODUCTS_DB = fs.readFile('datos.txt', 'utf-8', (err, data)=>{
+            if (err) {
+                console.log(err)
+                console.log('AQUI')
+            }else{
+                this.PRODUCTS_DB = JSON.parse(data);
+            }
+        })
     }
 
-    get () {
-        if (PRODUCTS_DB.length<1) return false
-        return PRODUCTS_DB;
+    insertar (data) {
+        try {
+            this.PRODUCTS_DB = data;
+            fs.writeFileSync('datos.txt', JSON.stringify(this.PRODUCTS_DB))
+            return true;
+        }
+        catch(error) {
+            console.log(error)
+        }
     }
-
-    getById (id) {
-        return PRODUCTS_DB.filter( (producto) => producto.id === parseInt(id) )[0];
+    listar () {
+        return this.PRODUCTS_DB;
     }
-
-    update(id, data) {
-        PRODUCTS_DB = PRODUCTS_DB.map( (producto) => {
+    listarPorId (id) {
+        return this.PRODUCTS_DB.filter( (producto) => producto.id === parseInt(id) )[0];
+    }
+    borrarPorId(id) {
+        this.PRODUCTS_DB = this.PRODUCTS_DB.filter((producto) => producto.id !== parseInt(id));
+    }
+    actualizarPorId(id, data) {
+        this.PRODUCTS_DB = this.PRODUCTS_DB.map( (producto) => {
             if ( producto.id === parseInt(id) ) {
                 producto.title = data.title
                 producto.price = parseInt(data.price)
@@ -36,9 +44,6 @@ class Product {
         return true;
     }
 
-    remove(id) {
-        PRODUCTS_DB = PRODUCTS_DB.filter((producto) => producto.id !== parseInt(id));
-    }
 }
 
-module.exports = Product;
+module.exports = ProductDbFileSystem;
