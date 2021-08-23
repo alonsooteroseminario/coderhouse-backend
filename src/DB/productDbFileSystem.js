@@ -1,24 +1,30 @@
+const fs = require('fs');
+
 let PRODUCTS_DB = [];
 
-class ProductDbMemory {
+class ProductDbFileSystem {
     constructor() {
-        this.PRODUCTS_DB = PRODUCTS_DB;
+        this.PRODUCTS_DB = fs.readFile('datos.txt', 'utf-8', (err, data)=>{
+            if (err) {
+                console.log(err)
+                console.log('AQUI')
+            }else{
+                this.PRODUCTS_DB = JSON.parse(data);
+            }
+        })
     }
+
     insertar (data) {
-        // if(data.title === "" || typeof data.title === "undefined") return false;
-        // if(data.price === "" || typeof data.price === "undefined") return false;
-        // data.id = PRODUCTS_DB.length + 1;
-        // PRODUCTS_DB.push({
-        //     id: data.id,
-        //     title: data.title,
-        //     price: parseInt(data.price),
-        //     thumbnail: data.thumbnail,
-        // });
-        this.PRODUCTS_DB = data;
-        return true;
+        try {
+            this.PRODUCTS_DB = data;
+            fs.writeFileSync('datos.txt', JSON.stringify(this.PRODUCTS_DB))
+            return true;
+        }
+        catch(error) {
+            console.log(error)
+        }
     }
     listar () {
-        if (this.PRODUCTS_DB.length<1) return false
         return this.PRODUCTS_DB;
     }
     listarPorId (id) {
@@ -37,6 +43,7 @@ class ProductDbMemory {
         });
         return true;
     }
+
 }
 
-module.exports = ProductDbMemory;
+module.exports = ProductDbFileSystem;
