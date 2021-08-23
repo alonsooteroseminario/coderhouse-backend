@@ -1,8 +1,8 @@
-const ProductoDBMongo = require('../controllers/productoDbMongo');
-const ProductDbMemory = require('../controllers/productDbMemory');
-const ProductDbFileSystem = require('../controllers/productDbFileSystem');
-const ProductoDBSql = require('../controllers/productoDBSql');
-const {mysqlDBaaS} = require('../DB/config')
+const ProductoDBMongo = require('./productoDbMongo');
+const ProductDbMemory = require('./productDbMemory');
+const ProductDbFileSystem = require('./productDbFileSystem');
+const ProductoDBSql = require('./productoDBSql');
+const {mysqlDBaaS} = require('../config/config')
 
 /* -------------------------------------- */
 /*                FACTORY                 */
