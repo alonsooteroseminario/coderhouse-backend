@@ -1,8 +1,11 @@
 const knex = require('knex');
+const DatabaseProductoDao = require("../DAO/DatabaseProductoDao");
+const productoDto = require ("../DTO/productoDto.js");
 
-class ProductoDBSql {
+class ProductoDBSql extends DatabaseProductoDao {
 
   constructor(config) {
+    super()
     this.knex = knex(config)
     this.knex.schema.hasTable('productos')
     .then((exists) =>{
@@ -31,7 +34,9 @@ class ProductoDBSql {
   }
 
   listarPorId(id) {
-    return this.knex.from('productos').where('id', id).select();
+    let prodById = this.knex.from('productos').where('id', id).select();
+    const myDto = productoDto(prodById)
+    return myDto;
   }
 
   actualizarPorId(id, data) {

@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const daoProductos = require('../model/productSchema');
+const DatabaseProductoDao = require("../DAO/DatabaseProductoDao");
+const productoDto = require ("../DTO/productoDto.js");
 
 const admin = process.env.MONGO_USER;
 const password = process.env.MONGO_PASSWORD;
@@ -8,8 +10,9 @@ const url = 'mongodb+srv://'+admin.toString()+':'+password.toString()+'@cluster0
 
 // const url = 'mongodb://localhost:27017/ecommerce';
 
-class ProductoDBMongo {
+class ProductoDBMongo extends DatabaseProductoDao {
   constructor() {
+    super()
     mongoose.connect(url,{
       useNewUrlParser: true,
       useUnifiedTopology: true,
@@ -42,13 +45,15 @@ class ProductoDBMongo {
     }).lean();
   }
   listarPorId(id) {
-    return daoProductos.find({id: id}, (err,res) => {
+    let prodById = daoProductos.find({id: id}, (err,res) => {
       if (err) {
         console.log(err)
       } else {
         console.log(res)
       }
     });
+    const myDto = productoDto(prodById)
+    return myDto;
   }
   borrarPorId(id) {
     return daoProductos.deleteOne({id: id}, (err,res) => {

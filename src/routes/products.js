@@ -92,16 +92,13 @@ router.post("/vista", async (req, res) => {
     const data = req.body;
     let products = await productoDB.listar();
     data.id = products.length + 1;
-
     products.push({
       id: data.id,
       title: data.title,
       price: parseInt(data.price),
       thumbnail: data.thumbnail,
     })
-    if(await productoDB.insertar(products).catch((err)=>{
-      console.log(err)
-    })) {
+    if(await productoDB.insertar(products)) {
       // if (data.form === "1") return res.redirect('http://localhost:8080/nuevo-producto');
       res.status(200).redirect('http://localhost:8080/producto/nuevo-producto').status(201).json(data);
     }
