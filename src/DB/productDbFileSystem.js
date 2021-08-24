@@ -1,9 +1,12 @@
 const fs = require('fs');
+const DatabaseProductoDao = require("../DAO/DatabaseProductoDao");
+const productoDto = require ("../DTO/productoDto.js");
 
 let PRODUCTS_DB = [];
 
-class ProductDbFileSystem {
+class ProductDbFileSystem extends DatabaseProductoDao {
     constructor() {
+        super()
         this.PRODUCTS_DB = fs.readFile('datos.txt', 'utf-8', (err, data)=>{
             if (err) {
                 console.log(err)
@@ -28,7 +31,9 @@ class ProductDbFileSystem {
         return this.PRODUCTS_DB;
     }
     listarPorId (id) {
-        return this.PRODUCTS_DB.filter( (producto) => producto.id === parseInt(id) )[0];
+        let prodById = this.PRODUCTS_DB.filter( (producto) => producto.id === parseInt(id) )[0];
+        const myDto = productoDto(prodById)
+        return myDto;
     }
     borrarPorId(id) {
         this.PRODUCTS_DB = this.PRODUCTS_DB.filter((producto) => producto.id !== parseInt(id));
