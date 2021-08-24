@@ -1,81 +1,23 @@
 const mongoose = require('mongoose');
 const daoMensajes = require('../model/mensajeSchema');
+const BaseMensaje = require ('../repository/mensaje.repository.js');
 const { denormalize, normalize, schema } = require('normalizr');
-const utils = require('util');
-
-const admin = process.env.MONGO_USER;
-const password = process.env.MONGO_PASSWORD;
-
-const url = 'mongodb+srv://'+admin.toString()+':'+password.toString()+'@cluster0.rzdyo.mongodb.net/ecommercedesafios?retryWrites=true&w=majority';
-
-// const url = 'mongodb://localhost:27017/ecommerce';
 
 const user = new schema.Entity("users");
 // Define your text schema
 const text = new schema.Entity("text");
-
 // Define your mensaje
 const mensaje = new schema.Entity("mensaje", {
   author: user,
   text: text,
 });
-
 const mensajes = new schema.Entity("mensajes", {
   mensajes: [mensaje],
 });
 //tiene que tener forma de normalizaData
 
-class MensajeDB {
-  constructor() {
-    mongoose.connect(url,{
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true
-    }, (err) => {
-      if (err) {
-        console.log(err);
-      }else{
-        console.log('Conectado a la base en constructor de mensajeDb');
-      }
-    })
-  }
+class MensajeDB extends BaseMensaje {
 
-  insertar(normalizedData) {
-    
-    const texts = normalizedData.entities.text;
-    // console.log(texts);
-
-    return daoMensajes.create(normalizedData, (err,res) => {
-      if (err) {
-        console.log(err);
-      }else{
-        // console.log(res);
-      }
-    });
-  }
-
-  listar() {
-
-    return daoMensajes.find({}, (err,res) => {
-      if (err) {
-        console.log(err)
-      } else {
-        // console.log("/* -------------- NORMALIZED ------------- */");
-        // const normalizedData = res;
-        // console.log(normalizedData);
-
-        
-        // const denormalizedData = denormalize(
-        //       normalizedData.result,
-        //       mensajes,
-        //       normalizedData.entities
-        // );
-        // console.log("/* -------------- DENORMALIZED denormalizedData.mensajes ------------- */");
-        // console.log(denormalizedData);
-        
-      }
-    });
-  }
   borrarPorId(id) {
     return daoMensajes.deleteOne({id: id}, (err,res) => {
       if (err) {
