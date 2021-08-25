@@ -2,7 +2,12 @@ const express = require("express");
 const exphbs = require('express-handlebars');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-require('dotenv').config();
+const path = require('path');
+let {n1} = require('yargs').argv;
+// require('dotenv').config();
+require('dotenv').config({
+  path: path.resolve(__dirname, process.env.NODE_ENV + '.env')
+});
 const MongoStore = require('connect-mongo');
 const { normalize, schema } = require('normalizr');
 const productRoutes = require("./src/routes/products");
@@ -13,7 +18,7 @@ const { logger, loggerWarn, loggerError } = require('./src/utils/logger')
 const { transporter, transporterGmail } = require('./src/controllers/email');
 const { passport } = require('./src/controllers/passport');
 
-const port = process.env.PORT || parseInt(process.argv[2]) || 8080;
+const port = process.env.PORT || parseInt(eval(`${n1}`)) || 8080;
 
 /* --------------------- AUTH --------------------------- */
 
