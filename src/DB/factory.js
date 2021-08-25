@@ -20,6 +20,6 @@ class FactoryPersonaModel {
 }
 
 
-const opcion = process.argv[2] || 'Mem';
+const opcion = process.argv[2] || process.env.OPCION || 'Mem';
 
 module.exports = FactoryPersonaModel.set(opcion);
