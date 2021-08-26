@@ -8,6 +8,7 @@ let {n1} = require('yargs').argv;
 require('dotenv').config({
   path: path.resolve(__dirname, process.env.NODE_ENV + '.env')
 });
+console.log(process.env.NODE_ENV)
 const MongoStore = require('connect-mongo');
 const { normalize, schema } = require('normalizr');
 const productRoutes = require("./src/routes/products");
