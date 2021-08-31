@@ -1,4 +1,4 @@
-const MongoCxn = require("../database/MongoCxn.js");
+const MongoCxn = require("../DB/database/MongoCxn");
 
 class BaseMensaje {
   constructor() {

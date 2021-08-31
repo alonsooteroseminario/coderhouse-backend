@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const daoUsuarios = require('../model/usuarioSchema');
+const daoUsuarios = require('../model/models/usuarioSchema');
 
 const admin = process.env.MONGO_USER;
 const password = process.env.MONGO_PASSWORD;
