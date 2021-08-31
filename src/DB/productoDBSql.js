@@ -1,6 +1,6 @@
 const knex = require('knex');
-const DatabaseProductoDao = require("../DAO/DatabaseProductoDao");
-const productoDto = require ("../DTO/productoDto.js");
+const DatabaseProductoDao = require("../model/DAOs/DatabaseProductoDao");
+const productoDto = require ("../model/DTOs/productoDto");
 
 class ProductoDBSql extends DatabaseProductoDao {
 

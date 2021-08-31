@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const daoMensajes = require('../model/mensajeSchema');
+const daoMensajes = require('../model/models/mensajeSchema');
 const BaseMensaje = require ('../repository/mensaje.repository.js');
 const { denormalize, normalize, schema } = require('normalizr');
 

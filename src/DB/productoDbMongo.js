@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const daoProductos = require('../model/productSchema');
-const DatabaseProductoDao = require("../DAO/DatabaseProductoDao");
-const productoDto = require ("../DTO/productoDto.js");
+const daoProductos = require('../model/models/productSchema');
+const DatabaseProductoDao = require("../model/DAOs/DatabaseProductoDao");
+const productoDto = require ("../model/DTOs/productoDto");
 
 const admin = process.env.MONGO_USER;
 const password = process.env.MONGO_PASSWORD;

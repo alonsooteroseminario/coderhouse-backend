@@ -1,6 +1,6 @@
 const fs = require('fs');
-const DatabaseProductoDao = require("../DAO/DatabaseProductoDao");
-const productoDto = require ("../DTO/productoDto.js");
+const DatabaseProductoDao = require("../model/DAOs/DatabaseProductoDao");
+const productoDto = require ("../model/DTOs/productoDto");
 
 let PRODUCTS_DB = [];
 

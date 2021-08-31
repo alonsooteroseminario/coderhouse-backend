@@ -18,6 +18,7 @@ const compression = require('compression');
 const { logger, loggerWarn, loggerError } = require('./src/utils/logger')
 const { transporter, transporterGmail } = require('./src/controllers/email');
 const { passport } = require('./src/controllers/passport');
+const cors = require('cors');
 
 const port = process.env.PORT || parseInt(eval(`${n1}`)) || 8080;
 
@@ -51,6 +52,7 @@ var hbs = exphbs.create({
 });
 app.engine('hbs', hbs.engine);
 app.set('view engine', 'hbs');
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static("./public"));
