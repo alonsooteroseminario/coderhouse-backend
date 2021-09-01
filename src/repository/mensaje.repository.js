@@ -1,4 +1,5 @@
 const MongoCxn = require("../DB/database/MongoCxn");
+const daoMensajes = require('../model/models/mensajeSchema');
 
 class BaseMensaje {
   constructor() {
