@@ -12,26 +12,20 @@ const api = new MockAPI();
 
 
 router.get("/vista", async (req, res) => {
-
   try {
     if (!req.user.contador) {
       req.user.contador = 0
     }
-    // const products = await productoDB.listar();
     res.status(200).render('vista', {
       active: "vista",
-      // products: products,
       user: req.user,
     });
     req.user.contador++
   } catch (error) {
     console.log(error)
   }
-
 });
-
 router.get("/vista/:id", async (req, res) => {
-
   try {
     const { id } = req.params;
     const currentProduct = await productoDB.listarPorId(id);
@@ -44,12 +38,10 @@ router.get("/vista/:id", async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-
 });
 router.get("/vista-test/:cant?", async (req, res) => {
     console.log(req.params.cant);
     if (req.params) {
-  
       api.popular(req.params.cant);
       // res.json(api.obtenerPorId(req.params.id))
       const products = api.obtenerTodos();;
@@ -57,11 +49,7 @@ router.get("/vista-test/:cant?", async (req, res) => {
         active: "vista",
         products: products
       });
-  
-  
-  
     } else {
-  
       api.popular();
       const products = api.obtenerTodos();
       res.render('vista', {
@@ -73,8 +61,6 @@ router.get("/vista-test/:cant?", async (req, res) => {
           error: "no hay productos cargados",
         });
       }
-  
-  
     }
 });
 router.get('/nuevo-producto', async (req, res) => {
@@ -87,7 +73,6 @@ router.get('/nuevo-producto', async (req, res) => {
     })
 })
 router.post("/vista", async (req, res) => {
-
   try {
     const data = req.body;
     let products = await productoDB.listar();
@@ -106,8 +91,31 @@ router.post("/vista", async (req, res) => {
   } catch (error) {
     console.log(error)
   }
-
 });
+router.put("/vista/:id", async (req, res) => {
+  try {
+    const data = req.body;
+    const { id } = req.params;
+    if(await productoDB.actualizarPorId(id, data)) {
+      res.status(200).json(data);
+    }
+    res.status(400).send();
+  } catch (error) {
+    console.log(error)
+  }
+});
+router.delete("/vista/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const currentProduct = await productoDB.borrarPorId(id);
+    res.status(200).json(currentProduct);
+  } catch (error) {
+    console.log(error)
+  }
+});
+
+
+
 
 
 var schema = buildSchema(`
@@ -128,12 +136,10 @@ var schema = buildSchema(`
 `);
 
 let productsData = productoDB.listar();
-// console.log(productsData)
 
 var getProductos = function() {
   return productsData
 }
-
 var updateProductTopic = function({id, topic}) {
   productsData.map(product => {
       if (product.id === id) {
@@ -143,7 +149,6 @@ var updateProductTopic = function({id, topic}) {
   });
   return productsData.filter(product => product.id === id) [0];
 }
-
 //funcion para POST 
 var agregarProductoGraphql = async function({title, price, thumbnail}, res) {
 
@@ -162,9 +167,6 @@ var agregarProductoGraphql = async function({title, price, thumbnail}, res) {
   return products;
 }
 
-
-
-
 // Root resolver
 var root = {
   agregarProductoGraphql: agregarProductoGraphql,
@@ -178,36 +180,5 @@ router.use('/graphql', graphqlHTTP({
   rootValue: root,
   graphiql: true
 }));
-
-
-
-router.put("/vista/:id", async (req, res) => {
-
-  try {
-    const data = req.body;
-    const { id } = req.params;
-    if(await productoDB.actualizarPorId(id, data)) {
-      res.status(200).json(data);
-    }
-    res.status(400).send();
-  } catch (error) {
-    console.log(error)
-  }
-
-
-});
-router.delete("/vista/:id", async (req, res) => {
-
-  try {
-    const { id } = req.params;
-    const currentProduct = await productoDB.borrarPorId(id);
-    res.status(200).json(currentProduct);
-  } catch (error) {
-    console.log(error)
-  }
-
-});
-
-
 
 module.exports = router;
