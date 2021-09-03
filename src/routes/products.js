@@ -72,26 +72,26 @@ router.get('/nuevo-producto', async (req, res) => {
         user: req.user
     })
 })
-router.post("/vista", async (req, res) => {
-  try {
-    const data = req.body;
-    let products = await productoDB.listar();
-    data.id = products.length + 1;
-    products.push({
-      id: data.id,
-      title: data.title,
-      price: parseInt(data.price),
-      thumbnail: data.thumbnail,
-    })
-    if(await productoDB.insertar(products)) {
-      // if (data.form === "1") return res.redirect('http://localhost:8080/nuevo-producto');
-      res.status(200).redirect('http://localhost:8080/producto/nuevo-producto').status(201).json(data);
-    }
-    res.status(400).send();
-  } catch (error) {
-    console.log(error)
-  }
-});
+// router.post("/vista", async (req, res) => {
+//   try {
+//     const data = req.body;
+//     let products = await productoDB.listar();
+//     data.id = products.length + 1;
+//     products.push({
+//       id: data.id,
+//       title: data.title,
+//       price: parseInt(data.price),
+//       thumbnail: data.thumbnail,
+//     })
+//     if(await productoDB.insertar(products)) {
+//       // if (data.form === "1") return res.redirect('http://localhost:8080/nuevo-producto');
+//       res.status(200).redirect('http://localhost:8080/producto/nuevo-producto').status(201).json(data);
+//     }
+//     res.status(400).send();
+//   } catch (error) {
+//     console.log(error)
+//   }
+// });
 router.put("/vista/:id", async (req, res) => {
   try {
     const data = req.body;
@@ -121,10 +121,9 @@ router.delete("/vista/:id", async (req, res) => {
 var schema = buildSchema(`
     type Query {
         productos: [Product]
-        productos2: [Product]
     },
     type Mutation {
-        updateProductTopic(id: Int!, topic: String!): Product
+        updateProductTopic(id: Int!, title: String!, price: String!, thumbnail: String! ): Product
         agregarProductoGraphql(title: String!, price: String!, thumbnail: String!): [Product]
     },
     type Product {
@@ -140,10 +139,12 @@ let productsData = productoDB.listar();
 var getProductos = function() {
   return productsData
 }
-var updateProductTopic = function({id, topic}) {
+var updateProductTopic = function({id, title, price, thumbnail}) {
   productsData.map(product => {
       if (product.id === id) {
-          product.topic = topic;
+          product.title = title;
+          product.price = price;
+          product.thumbnail = thumbnail;
           return product;
       }
   });
@@ -171,7 +172,6 @@ var agregarProductoGraphql = async function({title, price, thumbnail}, res) {
 var root = {
   agregarProductoGraphql: agregarProductoGraphql,
   productos: getProductos,
-  productos2: () => productsData,
   updateProductTopic: updateProductTopic
 };
 
