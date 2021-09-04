@@ -41,18 +41,18 @@ passport.use(new FacebookStrategy({
       return done(null, user);
     }
   
-  }));
+}));
   
-  passport.serializeUser(function (user, done) {
+passport.serializeUser(function (user, done) {
     done(null, user.username);
-  });
+});
   
-  passport.deserializeUser(async function (username, done) {
+passport.deserializeUser(async function (username, done) {
     let usuarios = await usuarioDB.listar();
     const usuario = usuarios.find(usuario => usuario.username == username)
     done(null, usuario);
-  });
+});
 
-  module.exports = {
-    passport
-  };
+module.exports = {
+  passport
+};

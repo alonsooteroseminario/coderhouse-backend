@@ -92,7 +92,7 @@ function addMessage(e) {
     return false;
 }
 
-var query = `{ productos2 {
+var query = `{ productos {
     id
     title
     price

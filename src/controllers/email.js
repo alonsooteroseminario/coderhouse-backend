@@ -8,16 +8,16 @@ const transporter = nodemailer.createTransport({
         user: 'kadin.bernier77@ethereal.email',
         pass: 'Z5v8vjwSJjhsbUkyQQ'
     }
-  });
-  const transporterGmail = nodemailer.createTransport({
+});
+const transporterGmail = nodemailer.createTransport({
     service: 'gmail',
     auth: {
         user: 'alonsooteroseminario@gmail.com',
         pass: process.env.GMAIL_PASSWORD.toString()
     }
-  });
+});
 
-  module.exports = {
+module.exports = {
     transporter,
     transporterGmail
-  };
+};
