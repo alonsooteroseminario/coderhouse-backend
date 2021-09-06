@@ -58,62 +58,6 @@ router.get('/nuevo-producto', async (req, res) => {
         user: req.user
     })
 })
-// router.get("/vista/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const currentProduct = await productoDB.listarPorId(id);
-//     if (currentProduct) {
-//       return res.status(200).json(currentProduct);
-//     }
-//     res.status(404).json({
-//       error: "producto no encontrado",
-//     });
-//   } catch (error) {
-//     console.log(error)
-//   }
-// });
-// router.post("/vista", async (req, res) => {
-//   try {
-//     const data = req.body;
-//     let products = await productoDB.listar();
-//     data.id = products.length + 1;
-//     products.push({
-//       id: data.id,
-//       title: data.title,
-//       price: parseInt(data.price),
-//       thumbnail: data.thumbnail,
-//     })
-//     if(await productoDB.insertar(products)) {
-//       // if (data.form === "1") return res.redirect('http://localhost:8080/nuevo-producto');
-//       res.status(200).redirect('http://localhost:8080/producto/nuevo-producto').status(201).json(data);
-//     }
-//     res.status(400).send();
-//   } catch (error) {
-//     console.log(error)
-//   }
-// });
-// router.put("/vista/:id", async (req, res) => {
-//   try {
-//     const data = req.body;
-//     const { id } = req.params;
-//     if(await productoDB.actualizarPorId(id, data)) {
-//       res.status(200).json(data);
-//     }
-//     res.status(400).send();
-//   } catch (error) {
-//     console.log(error)
-//   }
-// });
-// router.delete("/vista/:id", async (req, res) => {
-//   try {
-//     const { id } = req.params;
-//     const currentProduct = await productoDB.borrarPorId(id);
-//     res.status(200).json(currentProduct);
-//   } catch (error) {
-//     console.log(error)
-//   }
-// });
-
 
 var schema = buildSchema(`
     type Query {
@@ -122,6 +66,8 @@ var schema = buildSchema(`
     type Mutation {
         updateProductTopic(id: Int!, title: String!, price: String!, thumbnail: String! ): Product
         agregarProductoGraphql(title: String!, price: String!, thumbnail: String!): [Product]
+        deleteProductGraphql(id: Int!): Product
+        listarProductIdGraphql(id: Int!): Product
     },
     type Product {
         id: Int
