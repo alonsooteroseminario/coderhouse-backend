@@ -86,7 +86,7 @@
 
 {{/if}}
 
-    {{!-- <form action="/productos/vista" method="post" role="form"> --}}
+    <form action="http://localhost:1337/products" method="post" role="form">
         <div class="form-group">
             <label for="name">Title</label>
             <input id="input-title" class="form-control" type="text" name="title">
@@ -99,9 +99,9 @@
             <label for="name">Image</label>
             <input id="input-thumbnail" class="form-control" type="text" name="thumbnail">
         </div>
-        <input type="hidden" name="form" value="1" />
+        {{!-- <input type="hidden" name="form" value="1" /> --}}
         <button id ='miBoton' type="submit" class="btn btn-default">ENVIAR</button>
-    {{!-- </form> --}}
+    </form>
 
 
 

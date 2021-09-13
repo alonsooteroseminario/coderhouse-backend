@@ -10,7 +10,6 @@ const productoDB = factory;
 const MockAPI = require('../controllers/mockAPI');
 const api = new MockAPI();
 
-
 router.get("/vista", async (req, res) => {
   try {
     if (!req.user.contador) {

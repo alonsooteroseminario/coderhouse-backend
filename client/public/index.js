@@ -145,10 +145,6 @@ const fetchData = async () => {
 };
 document.addEventListener('DOMContentLoaded', e => { fetchData() });
 
-
-
-
-
 // getElementById
 let newTitle = document.getElementById('input-title');
 let newPrice = document.getElementById('input-price');
