@@ -6,11 +6,13 @@ faker.locale = 'es'
 const router = express.Router();
 const factory = require('../DB/factory');
 const productoDB = factory;
+const axios = require('axios');
 
 const MockAPI = require('../controllers/mockAPI');
 const api = new MockAPI();
 
 router.get("/vista", async (req, res) => {
+  const products = await axios.get('http://localhost:1337/products');
   try {
     if (!req.user.contador) {
       req.user.contador = 0
@@ -18,6 +20,7 @@ router.get("/vista", async (req, res) => {
     res.status(200).render('vista', {
       active: "vista",
       user: req.user,
+      products: products.data
     });
     req.user.contador++
   } catch (error) {
@@ -56,6 +59,9 @@ router.get('/nuevo-producto', async (req, res) => {
         active: 'nuevo-producto',
         user: req.user
     })
+})
+router.post('http://localhost:1337/products', (req, res) => {
+  res.redirect('http://localhost:8080/producto/nuevo-producto');
 })
 
 var schema = buildSchema(`

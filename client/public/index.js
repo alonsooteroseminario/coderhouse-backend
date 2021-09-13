@@ -96,54 +96,54 @@ var query = `{ productos {
     thumbnail
 }}`
 var variables = {}
-let verProdHtml = (data) => {
+// let verProdHtml = (data) => {
 
-    const headHtmlTable = `<table id="tbodyGraphql" class="table">
-                                <thead>
-                                    <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">title</th>
-                                    <th scope="col">price</th>
-                                    <th scope="col">thumbnail</th>
-                                    </tr>
-                                </thead>
-                                <tbody>`                            
-    let html = Object.values(Object.values(data)[0])[0].map(producto => {
+//     const headHtmlTable = `<table id="tbodyGraphql" class="table">
+//                                 <thead>
+//                                     <tr>
+//                                     <th scope="col">#</th>
+//                                     <th scope="col">title</th>
+//                                     <th scope="col">price</th>
+//                                     <th scope="col">thumbnail</th>
+//                                     </tr>
+//                                 </thead>
+//                                 <tbody>`                            
+//     let html = Object.values(Object.values(data)[0])[0].map(producto => {
 
-        return(`
-                                    <tr>
+//         return(`
+//                                     <tr>
 
-                                        <th scope="row">${producto.id}</th>
-                                        <td>${producto.title}</td>
-                                        <td>${producto.price}</td>
-                                        <td>
-                                            <img class="img-thumbnail" src="${producto.thumbnail}" alt="" />
-                                        </td>
+//                                         <th scope="row">${producto.id}</th>
+//                                         <td>${producto.title}</td>
+//                                         <td>${producto.price}</td>
+//                                         <td>
+//                                             <img class="img-thumbnail" src="${producto.thumbnail}" alt="" />
+//                                         </td>
 
-                                    </tr>
-            `)
-    })
-    const finalHtmlTable = `    </tbody>
-                            </table>` 
-    document.getElementById('tableGraphql').innerHTML = headHtmlTable + html + finalHtmlTable;
+//                                     </tr>
+//             `)
+//     })
+//     const finalHtmlTable = `    </tbody>
+//                             </table>` 
+//     document.getElementById('tableGraphql').innerHTML = headHtmlTable + html + finalHtmlTable;
 
-};
-const fetchData = async () => {
-    const res = await fetch('http://localhost:8080/productos/graphql', {
-        method: 'POST',
-        headers:{
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-        body: JSON.stringify({
-                    query,
-                    variables 
-                })
-    });
-    const data = await res.json();
-    verProdHtml(data);
-};
-document.addEventListener('DOMContentLoaded', e => { fetchData() });
+// };
+// const fetchData = async () => {
+//     const res = await fetch('http://localhost:8080/productos/graphql', {
+//         method: 'POST',
+//         headers:{
+//                     'Content-Type': 'application/json',
+//                     'Accept': 'application/json',
+//                 },
+//         body: JSON.stringify({
+//                     query,
+//                     variables 
+//                 })
+//     });
+//     const data = await res.json();
+//     verProdHtml(data);
+// };
+// document.addEventListener('DOMContentLoaded', e => { fetchData() });
 
 // getElementById
 let newTitle = document.getElementById('input-title');
@@ -158,23 +158,23 @@ var mutation = `mutation{
       thumbnail
     }
 }`
-const fetchPOSTdata = async () => {
-    const res = await fetch('http://localhost:8080/productos/graphql', {
-        method: 'POST',
-        headers:{
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-        body: JSON.stringify({
-                    mutation,
-                    variables 
-                })
-    });
-    // const data = await res.json();
-}
-// event listener, ejecutar  funcion() para traer info del formulario
-let botonProductoNuevo = document.getElementById('miBoton');
-botonProductoNuevo.addEventListener('click', () => { fetchPOSTdata() });
+// const fetchPOSTdata = async () => {
+//     const res = await fetch('http://localhost:8080/productos/graphql', {
+//         method: 'POST',
+//         headers:{
+//                     'Content-Type': 'application/json',
+//                     'Accept': 'application/json',
+//                 },
+//         body: JSON.stringify({
+//                     mutation,
+//                     variables 
+//                 })
+//     });
+//     // const data = await res.json();
+// }
+// // event listener, ejecutar  funcion() para traer info del formulario
+// let botonProductoNuevo = document.getElementById('miBoton');
+// botonProductoNuevo.addEventListener('click', () => { fetchPOSTdata() });
 
 
 
