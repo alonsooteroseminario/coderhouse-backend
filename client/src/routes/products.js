@@ -12,7 +12,7 @@ const MockAPI = require('../controllers/mockAPI');
 const api = new MockAPI();
 
 router.get("/vista", async (req, res) => {
-  const products = await axios.get('http://localhost:1337/products');
+  const products = await axios.get('http://127.0.0.1:3333/products');
   try {
     if (!req.user.contador) {
       req.user.contador = 0
