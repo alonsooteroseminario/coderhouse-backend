@@ -1,37 +1,35 @@
 {
-  "name": "server",
-  "private": true,
-  "version": "0.0.0",
-  "description": "a Sails application",
-  "keywords": [],
-  "dependencies": {
-    "@sailshq/connect-redis": "^3.2.1",
-    "@sailshq/lodash": "^3.10.3",
-    "@sailshq/socket.io-redis": "^5.2.0",
-    "grunt": "1.0.4",
-    "sails": "^1.4.4",
-    "sails-hook-grunt": "^4.0.0",
-    "sails-hook-orm": "^3.0.2",
-    "sails-hook-sockets": "^2.0.0",
-    "sails-mongo": "^2.0.0"
-  },
-  "devDependencies": {
-    "eslint": "5.16.0"
-  },
+  "name": "adonis-fullstack-app",
+  "version": "4.1.0",
+  "adonis-version": "4.1.0",
+  "description": "The fullstack application boilerplate for Adonisjs",
+  "main": "index.js",
   "scripts": {
-    "start": "NODE_ENV=production node app.js",
-    "test": "npm run lint && npm run custom-tests && echo 'Done.'",
-    "lint": "./node_modules/eslint/bin/eslint.js . --max-warnings=0 --report-unused-disable-directives && echo '✔  Your .js files look good.'",
-    "custom-tests": "echo \"(No other custom tests yet.)\" && echo"
+    "start": "node server.js",
+    "test": "node ace test"
   },
-  "main": "app.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/alonsooteroseminario/server.git"
+  "keywords": [
+    "adonisjs",
+    "adonis-app"
+  ],
+  "author": "",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@adonisjs/ace": "^5.0.8",
+    "@adonisjs/auth": "^3.0.7",
+    "@adonisjs/bodyparser": "~2.0.9",
+    "@adonisjs/cors": "^1.0.7",
+    "@adonisjs/fold": "^4.0.9",
+    "@adonisjs/framework": "^5.0.9",
+    "@adonisjs/ignitor": "^2.0.8",
+    "@adonisjs/lucid": "^6.1.3",
+    "@adonisjs/session": "^1.0.27",
+    "@adonisjs/shield": "^1.0.8",
+    "mysql": "^2.18.1"
   },
-  "author": "alonsooteroseminario",
-  "license": "",
-  "engines": {
-    "node": "^12.22"
+  "devDependencies": {},
+  "autoload": {
+    "App": "./app"
   }
 }
