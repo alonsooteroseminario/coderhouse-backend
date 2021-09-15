@@ -1,0 +1,7 @@
+{
+  "scripts": {
+    "start": {
+      "cmd": "deno run --allow-net desafio47.tsx"
+    }
+  }
+}
